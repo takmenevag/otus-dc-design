@@ -1,5 +1,5 @@
 # Домашнее задание №1. Проектирование адресного пространства
-
+[**Вернуться назад**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
 ## Задачи
 - Собрать схему CLOS
 - Распределить адресное пространство
@@ -67,3 +67,4 @@
 ```
 листинг
 ```
+[**Вернуться назад**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
