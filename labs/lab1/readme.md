@@ -9,26 +9,22 @@
 ![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1.PNG "Схема стенда")
 
 ### Таблица IP-адресации
-|Сетевое имя	|Интерфейс	|IP-адрес	|Примечание|
+|Оборудование	|Интерфейс	|IP-адрес	|Назначение|
 |:-|:-|:-|:-|
 |dc1-spine-1	|Loopback0	|10.1.1.0/32	||
 |dc1-spine-1	|Eth1	|10.10.101.0/31	|sp1-le101|
 |dc1-spine-1	|Eth2	|10.10.102.0/31	|sp1-le102|
 |dc1-spine-1	|Eth3	|10.10.103.0/31	|sp1-le103|
-|||||
 |dc1-spine-2	|Loopback0	|10.1.2.0/32 ||	
 |dc1-spine-2	|Eth1	|10.10.201.0/31	|sp2-le101|
 |dc1-spine-2	|Eth2	|10.10.202.0/31	|sp2-le102|
 |dc1-spine-2	|Eth3	|10.10.203.0/31	|sp2-le103|
-|||||		
 |dc1-leaf-101	|Loopback0	|10.1.101.0/32 ||
 |dc1-leaf-101	|Eth1	|10.10.101.1/31	|sp1-le101|
 |dc1-leaf-101	|Eth2	|10.10.201.1/31	|sp2-le101|
-|||||		
 |dc1-leaf-102	|Loopback0	|10.1.102.0/32 ||	
 |dc1-leaf-102	|Eth1	|10.10.102.1/31	|sp1-le102|
-|dc1-leaf-102	|Eth2	|10.10.202.1/31	|sp2-le102|
-|||||		
+|dc1-leaf-102	|Eth2	|10.10.202.1/31	|sp2-le102|	
 |dc1-leaf-103	|Loopback0	|10.1.103.0/32 ||	
 |dc1-leaf-103	|Eth1	|10.10.103.1/31	|sp1-le103|
 |dc1-leaf-103	|Eth2	|10.10.203.1/31	|sp2-le103|
@@ -36,11 +32,55 @@
 ### Конфигурация
 - Spine-1
 ```
-листинг
+hostname dc1-spine-1
+!
+interface Ethernet1
+   description ### sp1-le101 ###
+   no switchport
+   ip address 10.10.101.0/31
+!
+interface Ethernet2
+   description ### sp1-le102 ###
+   no switchport
+   ip address 10.10.102.0/31
+!
+interface Ethernet3
+   description ### sp1-le103 ###
+   no switchport
+   ip address 10.10.103.0/31
+!
+interface Loopback0
+   ip address 10.1.1.0/32
+!
+ip routing
+!
+end
 ```
 - Spine-2
 ```
-листинг
+hostname dc1-spine-2
+!
+interface Ethernet1
+   description ### sp2-le101 ###
+   no switchport
+   ip address 10.10.201.0/31
+!
+interface Ethernet2
+   description ### sp2-le102 ###
+   no switchport
+   ip address 10.10.202.0/31
+!
+interface Ethernet3
+   description ### sp2-le103 ###
+   no switchport
+   ip address 10.10.203.0/31
+!
+interface Loopback0
+   ip address 10.1.2.0/32
+!
+ip routing
+!
+end
 ```
 - Leaf-1
 ```
