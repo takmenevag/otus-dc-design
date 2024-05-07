@@ -1,0 +1,65 @@
+dc1-leaf-101#sh run
+! Command: show running-config
+! device: dc1-leaf-101 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc1-leaf-101
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-le101 ###
+   no switchport
+   ip address 10.10.101.1/31
+!
+interface Ethernet2
+   description ### sp2-le101 ###
+   no switchport
+   ip address 10.10.201.1/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.1.101.0/32
+!
+interface Management1
+!
+ip routing
+!
+end
+dc1-leaf-101#   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
