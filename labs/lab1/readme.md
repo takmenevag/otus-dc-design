@@ -286,6 +286,7 @@ dc1-leaf-102#
 
 <details>
   <summary>от Leaf-3 к Spine-1 и Spine-2</summary>
+  
 ```
 dc1-leaf-103#ping 10.10.103.0
 PING 10.10.103.0 (10.10.103.0) 72(100) bytes of data.
@@ -332,7 +333,6 @@ Gateway of last resort is not set
  C        10.1.103.0/32 is directly connected, Loopback0
  C        10.10.103.0/31 is directly connected, Ethernet1
  C        10.10.203.0/31 is directly connected, Ethernet2
-
 ```
 ```
 dc1-leaf-103#sh lldp nei
@@ -346,8 +346,6 @@ Port          Neighbor Device ID       Neighbor Port ID    TTL
 ---------- ------------------------ ---------------------- ---
 Et1           dc1-spine-1              Ethernet3           120
 Et2           dc1-spine-2              Ethernet3           120
-
-dc1-leaf-103#
 ```
 </details>
 
