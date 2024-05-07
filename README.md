@@ -1,3 +1,3 @@
 ### Дизайн сетей ЦОД в OTUS
-* labs - лабораторные работы по данному курсу
+* [**Лабораторные работы по курсу**](https://github.com/takmenevag/otus-dc-design/tree/main/labs)
 * project - итогова работа по курсу
