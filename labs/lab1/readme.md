@@ -349,4 +349,11 @@ Et2           dc1-spine-2              Ethernet3           120
 ```
 </details>
 
+### Итоговые конфигурации оборудования
+[dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-spine-1.txt)
+[dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-spine-2.txt)
+[dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-101.txt)
+[dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-102.txt)
+[dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-103.txt)
+
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
