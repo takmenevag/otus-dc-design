@@ -1,7 +1,7 @@
 # Домашнее задание №2. Underlay.OSPF
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
 ## Задачи
-- Настроить OSPF для Underlay сети
+- Настроить OSPF для Underlay-сети
 
 ## Решение
 ### Логика распределения IP-адресации
