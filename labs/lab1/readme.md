@@ -5,7 +5,7 @@
 - Распределить адресное пространство
 
 ## Решение
-### Логика распределения IP-адресации
+### Распределение адресного пространства
 - spine-X, leaf-10Y
 - блок 10.**1**.0.0/16 - loopback \
   _третий октет - коммутатор, четвертый - номер loopback_
@@ -13,7 +13,7 @@
   - loopback**0** leaf - 10.1.10Y.**0**/32
 - блок 10.**10**.0.0/16 - transport \
  _третий октет - первая цифра это spine, последняя - leaf,  четвертый октет ниже_ \
-_с учетом того, что в 1 POD будет только два spine должно хватить_ 
+_с учетом того, что в 1 POD будет только два spine должно хватить_ \
   - transport spine - 10.10.X0Y.**0**/31
   - transport leaf - 10.10.X0Y.**1**/31
 ### Cхема сети
@@ -366,7 +366,5 @@ Et2           dc1-spine-2              Ethernet3           120
 - [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-101.txt)
 - [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-102.txt)
 - [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-103.txt)
-
 ---
-
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
