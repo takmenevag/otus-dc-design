@@ -6,13 +6,13 @@
 
 ## Решение
 ### Логика распределения IP-адресации
-- блок 10.1.0.0/16 - loopback
-- блок 10.10.0.0/16 - transport
 - spine-X, leaf-10Y
-- loopback0 spine - 10.1.X.0/32
-- loopback0 leaf - 10.1.10Y.0/32
-- transport spine - 10.10.X0Y.0/31
-- transport leaf - 10.10.X0Y.1/31
+- блок 10.**1**.0.0/16 - loopback
+  - loopback**0** spine - 10.1.X.**0**/32
+  - loopback**0** leaf - 10.1.10Y.**0**/32
+- блок 10.**10**.0.0/16 - transport
+  - transport spine - 10.10.X0Y.**0**/31
+  - transport leaf - 10.10.X0Y.**1**/31
 ### Cхема сети
 ![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1.PNG "Схема стенда")
 
