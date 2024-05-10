@@ -47,15 +47,7 @@ interface Management1
 ip routing
 !
 end
-dc1-spine-1# 
-
-
-
-
-
-
-
-
+dc1-spine-1#
 
 
 
