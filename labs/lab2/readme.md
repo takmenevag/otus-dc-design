@@ -6,10 +6,12 @@
 ## Решение
 ### Логика распределения IP-адресации
 - spine-X, leaf-10Y
-- loopback0 spine - 10.1.X.0/32
-- loopback0 leaf - 10.1.10Y.0/32
-- transport spine - 10.10.X0Y.0/31
-- transport leaf - 10.10.X0Y.1/31
+- блок 10.**1**.0.0/16 - loopback
+  - loopback**0** spine - 10.1.X.**0**/32
+  - loopback**0** leaf - 10.1.10Y.**0**/32
+- блок 10.**10**.0.0/16 - transport
+  - transport spine - 10.10.X0Y.**0**/31
+  - transport leaf - 10.10.X0Y.**1**/31
 
 ### Описание решения
 В решении используется протокол маршрутизации OSPF со следующими параметрами:
