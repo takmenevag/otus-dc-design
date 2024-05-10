@@ -6,6 +6,8 @@
 
 ## Решение
 ### Логика распределения IP-адресации
+- блок 10.1.0.0/16 - loopback
+- блок 10.10.0.0/16 - transport
 - spine-X, leaf-10Y
 - loopback0 spine - 10.1.X.0/32
 - loopback0 leaf - 10.1.10Y.0/32
