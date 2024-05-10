@@ -44,9 +44,7 @@ interface Management1
 ip routing
 !
 end
-dc1-leaf-102#  
-
-
+dc1-leaf-102#
 
 
 
