@@ -94,7 +94,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Leaf-1
+- Leaf-101
 ```
 hostname dc1-leaf-101
 !
@@ -113,7 +113,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Leaf-2
+- Leaf-102
 ```
 hostname dc1-leaf-102
 !
@@ -132,7 +132,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Leaf-3
+- Leaf-103
 ```
 hostname dc1-leaf-103
 !
@@ -155,7 +155,7 @@ ip routing
 
 ### Проверка взаимодействия
 <details>
-  <summary>от Leaf-1 к Spine-1 и Spine-2</summary>
+  <summary>от Leaf-101 к Spine-1 и Spine-2</summary>
 
 ```
 dc1-leaf-101#ping 10.1.1.0
@@ -220,7 +220,7 @@ Et2           dc1-spine-2              Ethernet1           120
 </details>
 
 <details>
-  <summary>от Leaf-2 к Spine-1 и Spine-2</summary>
+  <summary>от Leaf-102 к Spine-1 и Spine-2</summary>
  
 ```
 dc1-leaf-102#ping 10.1.1.2
@@ -286,7 +286,7 @@ Et2           dc1-spine-2              Ethernet2           120
 </details>
 
 <details>
-  <summary>от Leaf-3 к Spine-1 и Spine-2</summary>
+  <summary>от Leaf-103 к Spine-1 и Spine-2</summary>
   
 ```
 dc1-leaf-103#ping 10.1.1.4
