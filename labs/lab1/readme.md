@@ -53,24 +53,22 @@ hostname dc1-spine-1
 interface Ethernet1
    description ### sp1-le101 ###
    no switchport
-   ip address 10.10.101.0/31
+   ip address 10.1.1.0/31
 !
 interface Ethernet2
    description ### sp1-le102 ###
    no switchport
-   ip address 10.10.102.0/31
+   ip address 10.1.1.2/31
 !
 interface Ethernet3
    description ### sp1-le103 ###
    no switchport
-   ip address 10.10.103.0/31
+   ip address 10.1.1.4/31
 !
 interface Loopback0
-   ip address 10.1.1.0/32
+   ip address 10.0.1.0/32
 !
 ip routing
-!
-end
 ```
 - Spine-2
 ```
@@ -79,24 +77,22 @@ hostname dc1-spine-2
 interface Ethernet1
    description ### sp2-le101 ###
    no switchport
-   ip address 10.10.201.0/31
+   ip address 10.1.2.0/31
 !
 interface Ethernet2
    description ### sp2-le102 ###
    no switchport
-   ip address 10.10.202.0/31
+   ip address 10.1.2.2/31
 !
 interface Ethernet3
    description ### sp2-le103 ###
    no switchport
-   ip address 10.10.203.0/31
+   ip address 10.1.2.4/31
 !
 interface Loopback0
-   ip address 10.1.2.0/32
+   ip address 10.0.2.0/32
 !
 ip routing
-!
-end
 ```
 - Leaf-1
 ```
@@ -105,19 +101,17 @@ hostname dc1-leaf-101
 interface Ethernet1
    description ### sp1-le101 ###
    no switchport
-   ip address 10.10.101.1/31
+   ip address 10.1.1.1/31
 !
 interface Ethernet2
    description ### sp2-le101 ###
    no switchport
-   ip address 10.10.201.1/31
+   ip address 10.1.2.1/31
 !
 interface Loopback0
-   ip address 10.1.101.0/32
+   ip address 10.0.101.0/32
 !
 ip routing
-!
-end
 ```
 - Leaf-2
 ```
@@ -126,19 +120,17 @@ hostname dc1-leaf-102
 interface Ethernet1
    description ### sp1-le102 ###
    no switchport
-   ip address 10.10.102.1/31
+   ip address 10.1.1.3/31
 !
 interface Ethernet2
    description ### sp2-le102 ###
    no switchport
-   ip address 10.10.202.1/31
+   ip address 10.1.2.3/31
 !
 interface Loopback0
-   ip address 10.1.102.0/32
+   ip address 10.0.102.0/32
 !
 ip routing
-!
-end
 ```
 - Leaf-3
 ```
@@ -147,19 +139,17 @@ hostname dc1-leaf-103
 interface Ethernet1
    description ### sp1-le103 ###
    no switchport
-   ip address 10.10.103.1/31
+   ip address 10.1.1.5/31
 !
 interface Ethernet2
    description ### sp2-le103 ###
    no switchport
-   ip address 10.10.203.1/31
+   ip address 10.1.2.5/31
 !
 interface Loopback0
-   ip address 10.1.103.0/32
+   ip address 10.0.103.0/32
 !
 ip routing
-!
-end
 ```
 </details>
 
