@@ -46,7 +46,7 @@
 <details>
   <summary>Команды для настройки </summary>
 
-- Spine-1
+- spine-1
 ```
 hostname dc1-spine-1
 !
@@ -70,7 +70,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Spine-2
+- spine-2
 ```
 hostname dc1-spine-2
 !
@@ -94,7 +94,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Leaf-101
+- leaf-101
 ```
 hostname dc1-leaf-101
 !
@@ -113,7 +113,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Leaf-102
+- leaf-102
 ```
 hostname dc1-leaf-102
 !
@@ -132,7 +132,7 @@ interface Loopback0
 !
 ip routing
 ```
-- Leaf-103
+- leaf-103
 ```
 hostname dc1-leaf-103
 !
@@ -155,7 +155,7 @@ ip routing
 
 ### Проверка взаимодействия
 <details>
-  <summary>от Leaf-101 к Spine-1 и Spine-2</summary>
+  <summary>от leaf-101 к spine-1 и spine-2</summary>
 
 ```
 dc1-leaf-101#ping 10.1.1.0
@@ -169,6 +169,7 @@ PING 10.1.1.0 (10.1.1.0) 72(100) bytes of data.
 --- 10.1.1.0 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 45ms
 rtt min/avg/max/mdev = 64.334/75.865/89.421/8.509 ms, pipe 5, ipg/ewma 11.449/82.056 ms
+dc1-leaf-101#
 dc1-leaf-101#ping 10.1.2.0
 PING 10.1.2.0 (10.1.2.0) 72(100) bytes of data.
 80 bytes from 10.1.2.0: icmp_seq=1 ttl=64 time=66.8 ms
@@ -220,7 +221,7 @@ Et2           dc1-spine-2              Ethernet1           120
 </details>
 
 <details>
-  <summary>от Leaf-102 к Spine-1 и Spine-2</summary>
+  <summary>от leaf-102 к spine-1 и spine-2</summary>
  
 ```
 dc1-leaf-102#ping 10.1.1.2
@@ -286,7 +287,7 @@ Et2           dc1-spine-2              Ethernet2           120
 </details>
 
 <details>
-  <summary>от Leaf-103 к Spine-1 и Spine-2</summary>
+  <summary>от leaf-103 к spine-1 и spine-2</summary>
   
 ```
 dc1-leaf-103#ping 10.1.1.4
