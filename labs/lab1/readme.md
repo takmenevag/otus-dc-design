@@ -158,32 +158,32 @@ ip routing
   <summary>от Leaf-1 к Spine-1 и Spine-2</summary>
 
 ```
-dc1-leaf-101#ping 10.10.101.0
-PING 10.10.101.0 (10.10.101.0) 72(100) bytes of data.
-80 bytes from 10.10.101.0: icmp_seq=1 ttl=64 time=36.7 ms
-80 bytes from 10.10.101.0: icmp_seq=2 ttl=64 time=30.6 ms
-80 bytes from 10.10.101.0: icmp_seq=3 ttl=64 time=26.3 ms
-80 bytes from 10.10.101.0: icmp_seq=4 ttl=64 time=8.84 ms
-80 bytes from 10.10.101.0: icmp_seq=5 ttl=64 time=9.57 ms
+dc1-leaf-101#ping 10.1.1.0
+PING 10.1.1.0 (10.1.1.0) 72(100) bytes of data.
+80 bytes from 10.1.1.0: icmp_seq=1 ttl=64 time=89.4 ms
+80 bytes from 10.1.1.0: icmp_seq=2 ttl=64 time=79.9 ms
+80 bytes from 10.1.1.0: icmp_seq=3 ttl=64 time=74.9 ms
+80 bytes from 10.1.1.0: icmp_seq=4 ttl=64 time=70.6 ms
+80 bytes from 10.1.1.0: icmp_seq=5 ttl=64 time=64.3 ms
 
---- 10.10.101.0 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 96ms
-rtt min/avg/max/mdev = 8.847/22.428/36.730/11.286 ms, pipe 3, ipg/ewma 24.073/28.782 ms
+--- 10.1.1.0 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 45ms
+rtt min/avg/max/mdev = 64.334/75.865/89.421/8.509 ms, pipe 5, ipg/ewma 11.449/82.056 ms
+dc1-leaf-101#ping 10.1.2.0
+PING 10.1.2.0 (10.1.2.0) 72(100) bytes of data.
+80 bytes from 10.1.2.0: icmp_seq=1 ttl=64 time=66.8 ms
+80 bytes from 10.1.2.0: icmp_seq=2 ttl=64 time=61.2 ms
+80 bytes from 10.1.2.0: icmp_seq=3 ttl=64 time=58.2 ms
+80 bytes from 10.1.2.0: icmp_seq=4 ttl=64 time=52.0 ms
+80 bytes from 10.1.2.0: icmp_seq=5 ttl=64 time=45.7 ms
+
+--- 10.1.2.0 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 42ms
+rtt min/avg/max/mdev = 45.702/56.812/66.808/7.322 ms, pipe 5, ipg/ewma 10.554/61.271 ms
 dc1-leaf-101#
-dc1-leaf-101#ping 10.10.201.0
-PING 10.10.201.0 (10.10.201.0) 72(100) bytes of data.
-80 bytes from 10.10.201.0: icmp_seq=1 ttl=64 time=20.8 ms
-80 bytes from 10.10.201.0: icmp_seq=2 ttl=64 time=15.1 ms
-80 bytes from 10.10.201.0: icmp_seq=3 ttl=64 time=11.6 ms
-80 bytes from 10.10.201.0: icmp_seq=4 ttl=64 time=7.78 ms
-80 bytes from 10.10.201.0: icmp_seq=5 ttl=64 time=10.8 ms
-
---- 10.10.201.0 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 69ms
-rtt min/avg/max/mdev = 7.783/13.260/20.817/4.453 ms, pipe 2, ipg/ewma 17.304/16.799 ms
 ```
 ```
-dc1-leaf-101#sh ip route
+dc1-leaf-101#show ip route
 
 VRF: default
 Codes: C - connected, S - static, K - kernel, 
@@ -200,13 +200,13 @@ Codes: C - connected, S - static, K - kernel,
 
 Gateway of last resort is not set
 
- C        10.1.101.0/32 is directly connected, Loopback0
- C        10.10.101.0/31 is directly connected, Ethernet1
- C        10.10.201.0/31 is directly connected, Ethernet2
+ C        10.0.101.0/32 is directly connected, Loopback0
+ C        10.1.1.0/31 is directly connected, Ethernet1
+ C        10.1.2.0/31 is directly connected, Ethernet2
 ```
 ```
-dc1-leaf-101#show lldp nei
-Last table change time   : 0:43:13 ago
+dc1-leaf-101#show lldp neighbors 
+Last table change time   : 0:03:35 ago
 Number of table inserts  : 2
 Number of table deletes  : 0
 Number of table drops    : 0
@@ -216,7 +216,6 @@ Port          Neighbor Device ID       Neighbor Port ID    TTL
 ---------- ------------------------ ---------------------- ---
 Et1           dc1-spine-1              Ethernet1           120
 Et2           dc1-spine-2              Ethernet1           120
-dc1-leaf-101#
 ```
 </details>
 
@@ -224,32 +223,33 @@ dc1-leaf-101#
   <summary>от Leaf-2 к Spine-1 и Spine-2</summary>
  
 ```
-dc1-leaf-102#ping 10.10.102.0
-PING 10.10.102.0 (10.10.102.0) 72(100) bytes of data.
-80 bytes from 10.10.102.0: icmp_seq=1 ttl=64 time=66.5 ms
-80 bytes from 10.10.102.0: icmp_seq=2 ttl=64 time=60.0 ms
-80 bytes from 10.10.102.0: icmp_seq=3 ttl=64 time=51.6 ms
-80 bytes from 10.10.102.0: icmp_seq=4 ttl=64 time=52.4 ms
-80 bytes from 10.10.102.0: icmp_seq=5 ttl=64 time=53.5 ms
+dc1-leaf-102#ping 10.1.1.2
+PING 10.1.1.2 (10.1.1.2) 72(100) bytes of data.
+80 bytes from 10.1.1.2: icmp_seq=1 ttl=64 time=65.8 ms
+80 bytes from 10.1.1.2: icmp_seq=2 ttl=64 time=60.9 ms
+80 bytes from 10.1.1.2: icmp_seq=3 ttl=64 time=55.2 ms
+80 bytes from 10.1.1.2: icmp_seq=4 ttl=64 time=50.1 ms
+80 bytes from 10.1.1.2: icmp_seq=5 ttl=64 time=44.7 ms
 
---- 10.10.102.0 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 43ms
-rtt min/avg/max/mdev = 51.666/56.855/66.528/5.672 ms, pipe 5, ipg/ewma 10.989/61.405 ms
+--- 10.1.1.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 44ms
+rtt min/avg/max/mdev = 44.737/55.376/65.834/7.497 ms, pipe 5, ipg/ewma 11.118/60.055 ms
 dc1-leaf-102#
-dc1-leaf-102#ping 10.10.202.0
-PING 10.10.202.0 (10.10.202.0) 72(100) bytes of data.
-80 bytes from 10.10.202.0: icmp_seq=1 ttl=64 time=10.4 ms
-80 bytes from 10.10.202.0: icmp_seq=2 ttl=64 time=22.4 ms
-80 bytes from 10.10.202.0: icmp_seq=3 ttl=64 time=19.0 ms
-80 bytes from 10.10.202.0: icmp_seq=4 ttl=64 time=9.80 ms
-80 bytes from 10.10.202.0: icmp_seq=5 ttl=64 time=6.59 ms
+dc1-leaf-102#ping 10.1.2.2
+PING 10.1.2.2 (10.1.2.2) 72(100) bytes of data.
+80 bytes from 10.1.2.2: icmp_seq=1 ttl=64 time=42.9 ms
+80 bytes from 10.1.2.2: icmp_seq=2 ttl=64 time=22.3 ms
+80 bytes from 10.1.2.2: icmp_seq=3 ttl=64 time=18.1 ms
+80 bytes from 10.1.2.2: icmp_seq=4 ttl=64 time=6.75 ms
+80 bytes from 10.1.2.2: icmp_seq=5 ttl=64 time=8.08 ms
 
---- 10.10.202.0 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 63ms
-rtt min/avg/max/mdev = 6.591/13.668/22.456/6.028 ms, pipe 2, ipg/ewma 15.893/11.717 ms
+--- 10.1.2.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 109ms
+rtt min/avg/max/mdev = 6.753/19.652/42.928/13.049 ms, pipe 3, ipg/ewma 27.284/30.521 ms
+dc1-leaf-102#
 ```
 ```
-dc1-leaf-102#sh ip route
+dc1-leaf-102#show ip route
 
 VRF: default
 Codes: C - connected, S - static, K - kernel, 
@@ -266,13 +266,13 @@ Codes: C - connected, S - static, K - kernel,
 
 Gateway of last resort is not set
 
- C        10.1.102.0/32 is directly connected, Loopback0
- C        10.10.102.0/31 is directly connected, Ethernet1
- C        10.10.202.0/31 is directly connected, Ethernet2
+ C        10.0.102.0/32 is directly connected, Loopback0
+ C        10.1.1.2/31 is directly connected, Ethernet1
+ C        10.1.2.2/31 is directly connected, Ethernet2
 ```
 ```
-dc1-leaf-102#show lldp nei
-Last table change time   : 0:43:53 ago
+dc1-leaf-102#show lldp neighbors
+Last table change time   : 0:04:33 ago
 Number of table inserts  : 2
 Number of table deletes  : 0
 Number of table drops    : 0
@@ -282,8 +282,6 @@ Port          Neighbor Device ID       Neighbor Port ID    TTL
 ---------- ------------------------ ---------------------- ---
 Et1           dc1-spine-1              Ethernet2           120
 Et2           dc1-spine-2              Ethernet2           120
-
-dc1-leaf-102#
 ```
 </details>
 
@@ -291,32 +289,32 @@ dc1-leaf-102#
   <summary>от Leaf-3 к Spine-1 и Spine-2</summary>
   
 ```
-dc1-leaf-103#ping 10.10.103.0
-PING 10.10.103.0 (10.10.103.0) 72(100) bytes of data.
-80 bytes from 10.10.103.0: icmp_seq=1 ttl=64 time=66.5 ms
-80 bytes from 10.10.103.0: icmp_seq=2 ttl=64 time=57.7 ms
-80 bytes from 10.10.103.0: icmp_seq=3 ttl=64 time=53.0 ms
-80 bytes from 10.10.103.0: icmp_seq=4 ttl=64 time=48.7 ms
-80 bytes from 10.10.103.0: icmp_seq=5 ttl=64 time=44.7 ms
+dc1-leaf-103#ping 10.1.1.4
+PING 10.1.1.4 (10.1.1.4) 72(100) bytes of data.
+80 bytes from 10.1.1.4: icmp_seq=1 ttl=64 time=90.1 ms
+80 bytes from 10.1.1.4: icmp_seq=2 ttl=64 time=84.7 ms
+80 bytes from 10.1.1.4: icmp_seq=3 ttl=64 time=71.9 ms
+80 bytes from 10.1.1.4: icmp_seq=4 ttl=64 time=63.2 ms
+80 bytes from 10.1.1.4: icmp_seq=5 ttl=64 time=58.0 ms
 
---- 10.10.103.0 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 49ms
-rtt min/avg/max/mdev = 44.778/54.182/66.580/7.563 ms, pipe 5, ipg/ewma 12.255/59.870 ms
+--- 10.1.1.4 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 55ms
+rtt min/avg/max/mdev = 58.080/73.621/90.111/12.227 ms, pipe 5, ipg/ewma 13.867/80.979 ms
 dc1-leaf-103#
-dc1-leaf-103#ping 10.10.203.0
-PING 10.10.203.0 (10.10.203.0) 72(100) bytes of data.
-80 bytes from 10.10.203.0: icmp_seq=1 ttl=64 time=8.88 ms
-80 bytes from 10.10.203.0: icmp_seq=2 ttl=64 time=7.79 ms
-80 bytes from 10.10.203.0: icmp_seq=3 ttl=64 time=6.11 ms
-80 bytes from 10.10.203.0: icmp_seq=4 ttl=64 time=6.04 ms
-80 bytes from 10.10.203.0: icmp_seq=5 ttl=64 time=8.13 ms
+dc1-leaf-103#ping 10.1.2.4
+PING 10.1.2.4 (10.1.2.4) 72(100) bytes of data.
+80 bytes from 10.1.2.4: icmp_seq=1 ttl=64 time=53.7 ms
+80 bytes from 10.1.2.4: icmp_seq=2 ttl=64 time=39.4 ms
+80 bytes from 10.1.2.4: icmp_seq=3 ttl=64 time=30.6 ms
+80 bytes from 10.1.2.4: icmp_seq=4 ttl=64 time=21.9 ms
+80 bytes from 10.1.2.4: icmp_seq=5 ttl=64 time=9.87 ms
 
---- 10.10.203.0 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 43ms
-rtt min/avg/max/mdev = 6.044/7.394/8.883/1.133 ms, ipg/ewma 10.843/8.123 ms
+--- 10.1.2.4 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 90ms
+rtt min/avg/max/mdev = 9.879/31.128/53.714/14.925 ms, pipe 4, ipg/ewma 22.746/41.359 ms
 ```
 ```
-dc1-leaf-103#sh ip route
+dc1-leaf-103#show ip route
 
 VRF: default
 Codes: C - connected, S - static, K - kernel, 
@@ -333,13 +331,13 @@ Codes: C - connected, S - static, K - kernel,
 
 Gateway of last resort is not set
 
- C        10.1.103.0/32 is directly connected, Loopback0
- C        10.10.103.0/31 is directly connected, Ethernet1
- C        10.10.203.0/31 is directly connected, Ethernet2
+ C        10.0.103.0/32 is directly connected, Loopback0
+ C        10.1.1.4/31 is directly connected, Ethernet1
+ C        10.1.2.4/31 is directly connected, Ethernet2
 ```
 ```
-dc1-leaf-103#sh lldp nei
-Last table change time   : 0:44:48 ago
+dc1-leaf-103#show lldp neighbors 
+Last table change time   : 0:05:46 ago
 Number of table inserts  : 2
 Number of table deletes  : 0
 Number of table drops    : 0
