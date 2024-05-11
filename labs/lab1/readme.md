@@ -7,38 +7,39 @@
 ## Решение
 ### Распределение адресного пространства
 - spine-X, leaf-10Y
-- блок 10.**1**.0.0/16 - loopback \
+- блок 10.**0**.0.0/16 - loopback \
   _третий октет - коммутатор, четвертый - номер loopback_
   - loopback**0** spine - 10.1.X.**0**/32
   - loopback**0** leaf - 10.1.10Y.**0**/32
-- блок 10.**10**.0.0/16 - transport \
- _третий октет - первая цифра это spine, последняя - leaf,  четвертый октет ниже_ \
-_с учетом того, что в 1 POD будет только два spine должно хватить_ \
-  - transport spine - 10.10.X0Y.**0**/31
-  - transport leaf - 10.10.X0Y.**1**/31
+- блок 10.**1**.0.0/16 - transport \
+ _третий октет - spine, четвертый октет сети по /31_ \
+  - transport spine-X - 10.10.X.<сеть>/31
+- блок 10.**2**.0.0/16 - сервисы \
+- блок 10.**3**.0.0/16 - резерв \
+
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1.PNG "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1-scheme.PNG "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
 |:-|:-|:-|:-|
-|dc1-spine-1	|Loopback0	|10.1.1.0/32	|-|
-|dc1-spine-1	|Eth1	|10.10.101.0/31	|sp1-le101|
-|dc1-spine-1	|Eth2	|10.10.102.0/31	|sp1-le102|
-|dc1-spine-1	|Eth3	|10.10.103.0/31	|sp1-le103|
+|dc1-spine-1	|Loopback0	|10.0.1.0/32	|-|
+|dc1-spine-1	|Eth1	|10.1.1.0/31	|sp1-le101|
+|dc1-spine-1	|Eth2	|10.1.1.2/31	|sp1-le102|
+|dc1-spine-1	|Eth3	|10.1.1.4/31	|sp1-le103|
 |dc1-spine-2	|Loopback0	|10.1.2.0/32 |-|	
-|dc1-spine-2	|Eth1	|10.10.201.0/31	|sp2-le101|
-|dc1-spine-2	|Eth2	|10.10.202.0/31	|sp2-le102|
-|dc1-spine-2	|Eth3	|10.10.203.0/31	|sp2-le103|
-|dc1-leaf-101	|Loopback0	|10.1.101.0/32 |-|
-|dc1-leaf-101	|Eth1	|10.10.101.1/31	|sp1-le101|
-|dc1-leaf-101	|Eth2	|10.10.201.1/31	|sp2-le101|
-|dc1-leaf-102	|Loopback0	|10.1.102.0/32 |-|	
-|dc1-leaf-102	|Eth1	|10.10.102.1/31	|sp1-le102|
-|dc1-leaf-102	|Eth2	|10.10.202.1/31	|sp2-le102|	
-|dc1-leaf-103	|Loopback0	|10.1.103.0/32 |-|	
-|dc1-leaf-103	|Eth1	|10.10.103.1/31	|sp1-le103|
-|dc1-leaf-103	|Eth2	|10.10.203.1/31	|sp2-le103|
+|dc1-spine-2	|Eth1	|10.1.2.0/31	|sp2-le101|
+|dc1-spine-2	|Eth2	|10.1.2.2/31	|sp2-le102|
+|dc1-spine-2	|Eth3	|10.1.2.4/31	|sp2-le103|
+|dc1-leaf-101	|Loopback0	|10.0.101.0/32 |-|
+|dc1-leaf-101	|Eth1	|10.1.1.1/31	|sp1-le101|
+|dc1-leaf-101	|Eth2	|10.1.2.1/31	|sp2-le101|
+|dc1-leaf-102	|Loopback0	|10.0.102.0/32 |-|	
+|dc1-leaf-102	|Eth1	|10.1.1.3/31	|sp1-le102|
+|dc1-leaf-102	|Eth2	|10.1.2.3/31	|sp2-le102|	
+|dc1-leaf-103	|Loopback0	|10.0.103.0/32 |-|	
+|dc1-leaf-103	|Eth1	|10.1.1.5/31	|sp1-le103|
+|dc1-leaf-103	|Eth2	|10.1.2.5/31	|sp2-le103|
 
 ### Настройка оборудования
 <details>
