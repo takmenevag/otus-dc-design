@@ -17,8 +17,18 @@
 - блок 10.**2**.0.0/16 - сервисы
 - блок 10.**3**.0.0/16 - резерв
 
+### Описание решения
+В решении используется протокол маршрутизации OSPF со следующими параметрами:
+- все коммутаторы размещены в  area 0
+- используется номер процеcса  1
+- настроены hello-интервал 1 сек, dead-интервал 4 сек.
+- используется  тип сети point-to-point
+- отключено установление соседства на не транзитных интерфейсах 
+- включена md5-аутентификация
+- настроено взаимодействие с протоколом bfd для улучшения сходимости сети
+
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1-scheme.png "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/scheme/lab2-scheme.png "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
@@ -45,116 +55,31 @@
 <details>
   <summary>Команды для настройки </summary>
 
-- Spine-1
+- spine-1
 ```
-hostname dc1-spine-1
-!
-interface Ethernet1
-   description ### sp1-le101 ###
-   no switchport
-   ip address 10.1.1.0/31
-!
-interface Ethernet2
-   description ### sp1-le102 ###
-   no switchport
-   ip address 10.1.1.2/31
-!
-interface Ethernet3
-   description ### sp1-le103 ###
-   no switchport
-   ip address 10.1.1.4/31
-!
-interface Loopback0
-   ip address 10.0.1.0/32
-!
 ip routing
 ```
-- Spine-2
+- spine-2
 ```
 hostname dc1-spine-2
-!
-interface Ethernet1
-   description ### sp2-le101 ###
-   no switchport
-   ip address 10.1.2.0/31
-!
-interface Ethernet2
-   description ### sp2-le102 ###
-   no switchport
-   ip address 10.1.2.2/31
-!
-interface Ethernet3
-   description ### sp2-le103 ###
-   no switchport
-   ip address 10.1.2.4/31
-!
-interface Loopback0
-   ip address 10.0.2.0/32
-!
-ip routing
 ```
-- Leaf-101
+- leaf-101
 ```
 hostname dc1-leaf-101
-!
-interface Ethernet1
-   description ### sp1-le101 ###
-   no switchport
-   ip address 10.1.1.1/31
-!
-interface Ethernet2
-   description ### sp2-le101 ###
-   no switchport
-   ip address 10.1.2.1/31
-!
-interface Loopback0
-   ip address 10.0.101.0/32
-!
-ip routing
 ```
-- Leaf-102
+- leaf-102
 ```
 hostname dc1-leaf-102
-!
-interface Ethernet1
-   description ### sp1-le102 ###
-   no switchport
-   ip address 10.1.1.3/31
-!
-interface Ethernet2
-   description ### sp2-le102 ###
-   no switchport
-   ip address 10.1.2.3/31
-!
-interface Loopback0
-   ip address 10.0.102.0/32
-!
-ip routing
 ```
-- Leaf-103
+- leaf-103
 ```
 hostname dc1-leaf-103
-!
-interface Ethernet1
-   description ### sp1-le103 ###
-   no switchport
-   ip address 10.1.1.5/31
-!
-interface Ethernet2
-   description ### sp2-le103 ###
-   no switchport
-   ip address 10.1.2.5/31
-!
-interface Loopback0
-   ip address 10.0.103.0/32
-!
-ip routing
 ```
 </details>
 
 ### Проверка взаимодействия
 <details>
-  <summary>от Leaf-101 к Spine-1 и Spine-2</summary>
+  <summary>проверки leaf-101</summary>
 
 ```
 dc1-leaf-101#ping 10.1.1.0
@@ -219,7 +144,7 @@ Et2           dc1-spine-2              Ethernet1           120
 </details>
 
 <details>
-  <summary>от Leaf-102 к Spine-1 и Spine-2</summary>
+  <summary>проверки leaf-102</summary>
  
 ```
 dc1-leaf-102#ping 10.1.1.2
@@ -285,7 +210,7 @@ Et2           dc1-spine-2              Ethernet2           120
 </details>
 
 <details>
-  <summary>от Leaf-103 к Spine-1 и Spine-2</summary>
+  <summary>проверки leaf-103</summary>
   
 ```
 dc1-leaf-103#ping 10.1.1.4
