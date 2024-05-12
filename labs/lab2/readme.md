@@ -28,7 +28,7 @@
 - настроено взаимодействие с протоколом bfd для улучшения сходимости сети
 
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/scheme/lab2-scheme.png "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/scheme/lab2_scheme.png "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
