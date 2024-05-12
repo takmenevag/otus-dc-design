@@ -19,7 +19,7 @@
 - блок 10.**3**.0.0/16 - резерв
 
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1-scheme.png "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/scheme/lab1_scheme.png "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
