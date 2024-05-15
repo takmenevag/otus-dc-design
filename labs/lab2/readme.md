@@ -1,4 +1,4 @@
-# Домашнее задание №2. Underlay.OSPF.черновик
+# Домашнее задание №2. Underlay.OSPF
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
 ## Задачи
 - Настроить OSPF для Underlay сети
