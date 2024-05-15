@@ -138,8 +138,6 @@ hostname dc1-leaf-103
 ```
 </details>
 
-
-
 ### Итоговые конфигурации оборудования
 - [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-spine-1.txt)
 - [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-spine-2.txt)
