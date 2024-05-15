@@ -95,6 +95,7 @@ hostname dc1-leaf-103
 ```
 </details>
 
+
 <details>
   <summary>проверки spine-2</summary>
   
@@ -104,6 +105,7 @@ hostname dc1-leaf-103
 ```
 ```
 ```
+</details>
 
 <details>
   <summary>проверки leaf-101</summary>
@@ -145,4 +147,5 @@ hostname dc1-leaf-103
 - [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-102.txt)
 - [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-103.txt)
 ---
+
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
