@@ -1,7 +1,7 @@
 # Домашнее задание №3. Underlay.IS-IS
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
 ## Задачи
-- Настроить OSPF для Underlay сети
+- Настроить IS-IS для Underlay сети
 
 ## Решение
 ### Распределение адресного пространства
