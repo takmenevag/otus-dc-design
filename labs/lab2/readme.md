@@ -729,11 +729,11 @@ rtt min/avg/max/mdev = 31.586/42.224/60.885/9.966 ms, pipe 3, ipg/ewma 24.816/37
 </details>
 
 ### Итоговые конфигурации оборудования
-- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-spine-1.txt)
-- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-spine-2.txt)
-- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-101.txt)
-- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-102.txt)
-- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab1/config/dc1-leaf-103.txt)
+- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/config/dc1-spine-1.txt)
+- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/config/dc1-spine-2.txt)
+- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/config/dc1-leaf-101.txt)
+- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/config/dc1-leaf-102.txt)
+- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab2/config/dc1-leaf-103.txt)
 ---
 
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
