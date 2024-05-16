@@ -346,7 +346,7 @@ Gateway of last resort is not set
  O        10.1.2.2/31 [110/800] via 10.1.1.3, Ethernet2
  O        10.1.2.4/31 [110/800] via 10.1.1.5, Ethernet3
 ```
-Ping spine-2, leaf-101, leaf-102, leaf-103
+_Ping spine-2, leaf-101, leaf-102, leaf-103_
 ```
 dc1-spine-1#ping 10.0.2.0 source loopback 0
 PING 10.0.2.0 (10.0.2.0) from 10.0.1.0 : 72(100) bytes of data.
@@ -451,7 +451,7 @@ Gateway of last resort is not set
  C        10.1.2.2/31 is directly connected, Ethernet2
  C        10.1.2.4/31 is directly connected, Ethernet3
 ```
-Ping spine-1, leaf-101, leaf-102, leaf-103
+_Ping spine-1, leaf-101, leaf-102, leaf-103_
 ```
 dc1-spine-2#ping 10.0.1.0 source loopback 0
 PING 10.0.1.0 (10.0.1.0) from 10.0.2.0 : 72(100) bytes of data.
@@ -547,7 +547,7 @@ Gateway of last resort is not set
  O        10.1.2.2/31 [110/800] via 10.1.2.0, Ethernet2
  O        10.1.2.4/31 [110/800] via 10.1.2.0, Ethernet2
 ```
-Ping leaf-102, leaf-103
+_Ping leaf-102, leaf-103_
 ```
 dc1-leaf-101#ping 10.0.102.0 source loopback 0
 PING 10.0.102.0 (10.0.102.0) from 10.0.101.0 : 72(100) bytes of data.
@@ -624,7 +624,7 @@ Gateway of last resort is not set
  C        10.1.2.2/31 is directly connected, Ethernet2
  O        10.1.2.4/31 [110/800] via 10.1.2.2, Ethernet2
 ```
-Ping leaf-101, leaf-103
+_Ping leaf-101, leaf-103_
 ```
 dc1-leaf-102#ping 10.0.101.0 source loopback 0 
 PING 10.0.101.0 (10.0.101.0) from 10.0.102.0 : 72(100) bytes of data.
@@ -700,7 +700,7 @@ Gateway of last resort is not set
  O        10.1.2.2/31 [110/800] via 10.1.2.4, Ethernet2
  C        10.1.2.4/31 is directly connected, Ethernet2
 ```
-Ping leaf-101, leaf-102
+_Ping leaf-101, leaf-102_
 ```
 dc1-leaf-103#ping 10.0.101.0 source loopback 0 
 PING 10.0.101.0 (10.0.101.0) from 10.0.103.0 : 72(100) bytes of data.
