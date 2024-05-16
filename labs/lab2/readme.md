@@ -60,28 +60,235 @@ _В EVE на Arista порты по 1G, поэтому cost получится �
 |dc1-leaf-103	|Eth2	|10.1.2.5/31	|sp2-le103|
 
 ### Настройка оборудования
+_Команды hostname и no switchport не показаны для облегчения восприятия настроек_
 <details>
   <summary>Команды для настройки </summary>
 
 - spine-1
 ```
+interface Ethernet1
+   description ### sp1-le101 ###
+   ip address 10.1.1.0/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 LpyMIOE5MPsSRq6pTPawmA==
+!
+interface Ethernet2
+   description ### sp1-le102 ###
+   ip address 10.1.1.2/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Ethernet3
+   description ### sp1-le103 ###
+   ip address 10.1.1.4/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Loopback0
+   ip address 10.0.1.0/32
+   ip ospf area 0.0.0.0
+!
 ip routing
+!
+router ospf 1
+   router-id 10.0.1.0
+   auto-cost reference-bandwidth 400000
+   passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   no passive-interface Ethernet3
+   max-lsa 12000
 ```
 - spine-2
 ```
-hostname dc1-spine-2
+interface Ethernet1
+   description ### sp2-le101 ###
+   ip address 10.1.2.0/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 LpyMIOE5MPsSRq6pTPawmA==
+!
+interface Ethernet2
+   description ### sp2-le102 ###
+   ip address 10.1.2.2/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Ethernet3
+   description ### sp2-le103 ###
+   ip address 10.1.2.4/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Loopback0
+   ip address 10.0.2.0/32
+   ip ospf area 0.0.0.0
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.2.0
+   auto-cost reference-bandwidth 400000
+   passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   no passive-interface Ethernet3
+   max-lsa 12000
 ```
 - leaf-101
 ```
-hostname dc1-leaf-101
+interface Ethernet1
+   description ### sp1-le101 ###
+   ip address 10.1.1.1/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 LpyMIOE5MPsSRq6pTPawmA==
+!
+interface Ethernet2
+   description ### sp2-le101 ###
+   ip address 10.1.2.1/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Loopback0
+   ip address 10.0.101.0/32
+   ip ospf area 0.0.0.0
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.101.0
+   auto-cost reference-bandwidth 400000
+   passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   max-lsa 12000
 ```
 - leaf-102
 ```
-hostname dc1-leaf-102
+interface Ethernet1
+   description ### sp1-le102 ###
+   ip address 10.1.1.3/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 LpyMIOE5MPsSRq6pTPawmA==
+!
+interface Ethernet2
+   description ### sp2-le102 ###
+   ip address 10.1.2.3/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Loopback0
+   ip address 10.0.102.0/32
+   ip ospf area 0.0.0.0
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.102.0
+   auto-cost reference-bandwidth 400000
+   passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   max-lsa 12000
 ```
 - leaf-103
 ```
-hostname dc1-leaf-103
+interface Ethernet1
+   description ### sp1-le103 ###
+   ip address 10.1.1.5/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 LpyMIOE5MPsSRq6pTPawmA==
+!
+interface Ethernet2
+   description ### sp2-le103 ###
+   ip address 10.1.2.5/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Loopback0
+   ip address 10.0.103.0/32
+   ip ospf area 0.0.0.0
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.103.0
+   auto-cost reference-bandwidth 400000
+   passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   max-lsa 12000
 ```
 </details>
 
