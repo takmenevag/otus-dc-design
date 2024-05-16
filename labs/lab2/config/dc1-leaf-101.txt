@@ -1,0 +1,71 @@
+dc1-leaf-101#sh run
+! Command: show running-config
+! device: dc1-leaf-101 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc1-leaf-101
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-le101 ###
+   no switchport
+   ip address 10.1.1.1/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 LpyMIOE5MPsSRq6pTPawmA==
+!
+interface Ethernet2
+   description ### sp2-le101 ###
+   no switchport
+   ip address 10.1.2.1/31
+   bfd interval 250 min-rx 250 multiplier 3
+   ip ospf neighbor bfd
+   ip ospf dead-interval 4
+   ip ospf hello-interval 1
+   ip ospf network point-to-point
+   ip ospf authentication message-digest
+   ip ospf area 0.0.0.0
+   ip ospf message-digest-key 1 md5 7 lIjV8sEai21iNsPCdcUksQ==
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.0.101.0/32
+   ip ospf area 0.0.0.0
+!
+interface Management1
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.101.0
+   auto-cost reference-bandwidth 400000
+   passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   max-lsa 12000
+!
+end
