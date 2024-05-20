@@ -300,18 +300,33 @@ router ospf 1
 ```
 dc1-spine-1#show ip ospf neighbor 
 Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.0.103.0      1        default  0   FULL                   00:00:02    10.1.1.5        Ethernet3
 10.0.101.0      1        default  0   FULL                   00:00:02    10.1.1.1        Ethernet1
 10.0.102.0      1        default  0   FULL                   00:00:02    10.1.1.3        Ethernet2
-10.0.103.0      1        default  0   FULL                   00:00:02    10.1.1.5        Ethernet3
-
+```
+```
 dc1-spine-1#show ip ospf interface brief 
    Interface          Instance VRF        Area            IP Address         Cost  State      Nbrs
    Lo0                1        default    0.0.0.0         10.0.1.0/32        10    DR         0
-   Et1                1        default    0.0.0.0         10.1.1.0/31        400   P2P        1
-   Et2                1        default    0.0.0.0         10.1.1.2/31        400   P2P        1
    Et3                1        default    0.0.0.0         10.1.1.4/31        400   P2P        1
+   Et1                1        default    0.0.0.0         10.1.1.0/31        400   P2P        1
+   Et2                1        default    0.0.0.0         10.1.1.2/31        400   P2P        0
 ```
 ```
+dc1-spine-1#show ip ospf database
+
+            OSPF Router with ID(10.0.1.0) (Instance ID 1) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age         Seq#         Checksum Link count
+10.0.2.0        10.0.2.0        6           0x80000023   0x8ce9   7
+10.0.102.0      10.0.102.0      5           0x8000001b   0xf8f0   5
+10.0.103.0      10.0.103.0      7           0x8000000d   0xa547   5
+10.0.101.0      10.0.101.0      11          0x8000001f   0xf0ff   5
+10.0.1.0        10.0.1.0        4           0x80000021   0xd2ae   7
+
 ```
 ```
 dc1-spine-1#show bfd peer
@@ -319,9 +334,9 @@ VRF name: default
 -----------------
 DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp 
 --------- ----------- ----------- -------------------- ------- ----------------
-10.1.1.1  3852238044  4147203893        Ethernet1(14)  normal   05/16/24 11:18 
-10.1.1.3  2734906866  2699289538        Ethernet2(15)  normal   05/16/24 11:17 
-10.1.1.5  2774733977  2844371976        Ethernet3(16)  normal   05/16/24 11:16 
+10.1.1.1  1426561075   644946650        Ethernet1(14)  normal   05/20/24 12:43 
+10.1.1.3   812253344   158381281        Ethernet2(15)  normal   05/20/24 12:44 
+10.1.1.5  3710183206  2564673643        Ethernet3(16)  normal   05/20/24 12:44 
 
    LastDown            LastDiag    State
 -------------- ------------------- -----
@@ -347,7 +362,8 @@ Gateway of last resort is not set
  O        10.1.2.0/31 [110/800] via 10.1.1.1, Ethernet1
  O        10.1.2.2/31 [110/800] via 10.1.1.3, Ethernet2
  O        10.1.2.4/31 [110/800] via 10.1.1.5, Ethernet3
-```
+ ```
+
 _Ping spine-2, leaf-101, leaf-102, leaf-103_
 ```
 dc1-spine-1#ping 10.0.2.0 source loopback 0
@@ -408,18 +424,32 @@ dc1-spine-1#
 ```
 dc1-spine-2#show ip ospf neighbor 
 Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
-10.0.101.0      1        default  0   FULL                   00:00:02    10.1.2.1        Ethernet1
 10.0.103.0      1        default  0   FULL                   00:00:02    10.1.2.5        Ethernet3
 10.0.102.0      1        default  0   FULL                   00:00:02    10.1.2.3        Ethernet2
-
+10.0.101.0      1        default  0   FULL                   00:00:02    10.1.2.1        Ethernet1
+```
+```
 dc1-spine-2#show ip ospf interface brief 
    Interface          Instance VRF        Area            IP Address         Cost  State      Nbrs
    Lo0                1        default    0.0.0.0         10.0.2.0/32        10    DR         0
-   Et1                1        default    0.0.0.0         10.1.2.0/31        400   P2P        1
    Et3                1        default    0.0.0.0         10.1.2.4/31        400   P2P        1
    Et2                1        default    0.0.0.0         10.1.2.2/31        400   P2P        1
+   Et1                1        default    0.0.0.0         10.1.2.0/31        400   P2P        1
 ```
 ```
+dc1-spine-2#show ip ospf database
+
+            OSPF Router with ID(10.0.2.0) (Instance ID 1) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age         Seq#         Checksum Link count
+10.0.101.0      10.0.101.0      13          0x8000001f   0xf0ff   5
+10.0.102.0      10.0.102.0      5           0x8000001b   0xf8f0   5
+10.0.2.0        10.0.2.0        4           0x80000023   0x8ce9   7
+10.0.103.0      10.0.103.0      9           0x8000000d   0xa547   5
+10.0.1.0        10.0.1.0        7           0x80000020   0x554b   6
 ```
 ```
 dc1-spine-2#show bfd peer
@@ -427,9 +457,9 @@ VRF name: default
 -----------------
 DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp 
 --------- ----------- ----------- -------------------- ------- ----------------
-10.1.2.1  4124771023  1764870607        Ethernet1(14)  normal   05/16/24 11:22 
-10.1.2.3   515090752  2077637238        Ethernet2(15)  normal   05/16/24 11:22 
-10.1.2.5  1510447651  4080486105        Ethernet3(16)  normal   05/16/24 11:22 
+10.1.2.1  3947754606  1514724038        Ethernet1(14)  normal   05/20/24 12:44 
+10.1.2.3  1005009396  2416640142        Ethernet2(15)  normal   05/20/24 12:44 
+10.1.2.5  3447378322  2070755319        Ethernet3(16)  normal   05/20/24 12:44 
 
    LastDown            LastDiag    State
 -------------- ------------------- -----
@@ -439,6 +469,7 @@ DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
 ```
 ```
 dc1-spine-2#show ip route
+
 Gateway of last resort is not set
 
  O        10.0.1.0/32 [110/810] via 10.1.2.1, Ethernet1
@@ -511,7 +542,8 @@ dc1-leaf-101#show ip ospf neighbor
 Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
 10.0.1.0        1        default  0   FULL                   00:00:02    10.1.1.0        Ethernet1
 10.0.2.0        1        default  0   FULL                   00:00:02    10.1.2.0        Ethernet2
-
+```
+```
 dc1-leaf-101#show ip ospf interface brief 
    Interface          Instance VRF        Area            IP Address         Cost  State      Nbrs
    Lo0                1        default    0.0.0.0         10.0.101.0/32      10    DR         0
@@ -519,6 +551,19 @@ dc1-leaf-101#show ip ospf interface brief
    Et2                1        default    0.0.0.0         10.1.2.1/31        400   P2P        1
 ```
 ```
+dc1-leaf-101#show ip ospf database
+
+            OSPF Router with ID(10.0.101.0) (Instance ID 1) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age         Seq#         Checksum Link count
+10.0.2.0        10.0.2.0        5           0x80000023   0x8ce9   7
+10.0.102.0      10.0.102.0      6           0x8000001b   0xf8f0   5
+10.0.103.0      10.0.103.0      8           0x8000000d   0xa547   5
+10.0.1.0        10.0.1.0        6           0x80000020   0x554b   6
+10.0.101.0      10.0.101.0      10          0x8000001f   0xf0ff   5
 ```
 ```
 dc1-leaf-101#show bfd peer
@@ -526,8 +571,8 @@ VRF name: default
 -----------------
 DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp 
 --------- ----------- ----------- -------------------- ------- ----------------
-10.1.1.0  4147203893  3852238044        Ethernet1(14)  normal   05/16/24 11:18 
-10.1.2.0  2562776883  3497327111        Ethernet2(15)  normal   05/16/24 11:18 
+10.1.1.0   644946650  1426561075        Ethernet1(14)  normal   05/20/24 12:43 
+10.1.2.0  1514724038  3947754606        Ethernet2(15)  normal   05/20/24 12:44 
 
    LastDown            LastDiag    State
 -------------- ------------------- -----
@@ -588,16 +633,30 @@ dc1-leaf-101#
 ```
 dc1-leaf-102#show ip ospf neighbor 
 Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
-10.0.1.0        1        default  0   FULL                   00:00:02    10.1.1.2        Ethernet1
 10.0.2.0        1        default  0   FULL                   00:00:02    10.1.2.2        Ethernet2
-
+10.0.1.0        1        default  0   FULL                   00:00:02    10.1.1.2        Ethernet1
+```
+```
 dc1-leaf-102#show ip ospf interface brief 
    Interface          Instance VRF        Area            IP Address         Cost  State      Nbrs
    Lo0                1        default    0.0.0.0         10.0.102.0/32      10    DR         0
-   Et1                1        default    0.0.0.0         10.1.1.3/31        400   P2P        1
    Et2                1        default    0.0.0.0         10.1.2.3/31        400   P2P        1
+   Et1                1        default    0.0.0.0         10.1.1.3/31        400   P2P        1
 ```
 ```
+dc1-leaf-102#show ip ospf database
+
+            OSPF Router with ID(10.0.102.0) (Instance ID 1) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age         Seq#         Checksum Link count
+10.0.101.0      10.0.101.0      12          0x8000001f   0xf0ff   5
+10.0.2.0        10.0.2.0        13          0x80000022   0x2f67   6
+10.0.102.0      10.0.102.0      4           0x8000001b   0xf8f0   5
+10.0.103.0      10.0.103.0      8           0x8000000d   0xa547   5
+10.0.1.0        10.0.1.0        7           0x80000020   0x554b   6
 ```
 ```
 dc1-leaf-102#show bfd peer
@@ -605,8 +664,8 @@ VRF name: default
 -----------------
 DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp 
 --------- ----------- ----------- -------------------- ------- ----------------
-10.1.1.2  2699289538  2734906866        Ethernet1(14)  normal   05/16/24 11:17 
-10.1.2.2   524993160   205108505        Ethernet2(15)  normal   05/16/24 11:15 
+10.1.1.2   158381281   812253344        Ethernet1(14)  normal   05/20/24 12:44 
+10.1.2.2  2416640142  1005009396        Ethernet2(15)  normal   05/20/24 12:44 
 
    LastDown            LastDiag    State
 -------------- ------------------- -----
@@ -665,17 +724,32 @@ rtt min/avg/max/mdev = 14.075/18.426/21.606/2.629 ms, pipe 2, ipg/ewma 20.451/20
   
 ```
 dc1-leaf-103#show ip ospf neighbor 
-Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
-10.0.2.0        1        default  0   FULL                   00:00:02    10.1.2.4        Ethernet2
-10.0.1.0        1        default  0   FULL                   00:00:02    10.1.1.4        Ethernet1
 
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.0.1.0        1        default  0   FULL                   00:00:02    10.1.1.4        Ethernet1
+10.0.2.0        1        default  0   FULL                   00:00:02    10.1.2.4        Ethernet2
+```
+```
 dc1-leaf-103#show ip ospf interface brief 
    Interface          Instance VRF        Area            IP Address         Cost  State      Nbrs
    Lo0                1        default    0.0.0.0         10.0.103.0/32      10    DR         0
-   Et2                1        default    0.0.0.0         10.1.2.5/31        400   P2P        1
    Et1                1        default    0.0.0.0         10.1.1.5/31        400   P2P        1
+   Et2                1        default    0.0.0.0         10.1.2.5/31        400   P2P        1
 ```
 ```
+dc1-leaf-103#show ip ospf database
+
+            OSPF Router with ID(10.0.103.0) (Instance ID 1) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age         Seq#         Checksum Link count
+10.0.2.0        10.0.2.0        5           0x80000023   0x8ce9   7
+10.0.102.0      10.0.102.0      6           0x8000001b   0xf8f0   5
+10.0.101.0      10.0.101.0      12          0x8000001f   0xf0ff   5
+10.0.1.0        10.0.1.0        6           0x80000020   0x554b   6
+10.0.103.0      10.0.103.0      6           0x8000000d   0xa547   5
 ```
 ```
 dc1-leaf-103#show bfd peer
@@ -683,8 +757,8 @@ VRF name: default
 -----------------
 DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp 
 --------- ----------- ----------- -------------------- ------- ----------------
-10.1.1.4  2844371976  2774733977        Ethernet1(14)  normal   05/16/24 11:16 
-10.1.2.4   686881338  2714916868        Ethernet2(15)  normal   05/16/24 11:15 
+10.1.1.4  2564673643  3710183206        Ethernet1(14)  normal   05/20/24 12:44 
+10.1.2.4  2070755319  3447378322        Ethernet2(15)  normal   05/20/24 12:44 
 
    LastDown            LastDiag    State
 -------------- ------------------- -----
