@@ -312,6 +312,8 @@ dc1-spine-1#show ip ospf interface brief
    Et3                1        default    0.0.0.0         10.1.1.4/31        400   P2P        1
 ```
 ```
+```
+```
 dc1-spine-1#show bfd peer
 VRF name: default
 -----------------
@@ -418,6 +420,8 @@ dc1-spine-2#show ip ospf interface brief
    Et2                1        default    0.0.0.0         10.1.2.2/31        400   P2P        1
 ```
 ```
+```
+```
 dc1-spine-2#show bfd peer
 VRF name: default
 -----------------
@@ -515,6 +519,8 @@ dc1-leaf-101#show ip ospf interface brief
    Et2                1        default    0.0.0.0         10.1.2.1/31        400   P2P        1
 ```
 ```
+```
+```
 dc1-leaf-101#show bfd peer
 VRF name: default
 -----------------
@@ -592,6 +598,8 @@ dc1-leaf-102#show ip ospf interface brief
    Et2                1        default    0.0.0.0         10.1.2.3/31        400   P2P        1
 ```
 ```
+```
+```
 dc1-leaf-102#show bfd peer
 VRF name: default
 -----------------
@@ -666,6 +674,8 @@ dc1-leaf-103#show ip ospf interface brief
    Lo0                1        default    0.0.0.0         10.0.103.0/32      10    DR         0
    Et2                1        default    0.0.0.0         10.1.2.5/31        400   P2P        1
    Et1                1        default    0.0.0.0         10.1.1.5/31        400   P2P        1
+```
+```
 ```
 ```
 dc1-leaf-103#show bfd peer
