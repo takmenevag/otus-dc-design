@@ -1,0 +1,78 @@
+
+dc1-leaf-103#show run
+! Command: show running-config
+! device: dc1-leaf-103 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc1-leaf-103
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-le103 ###
+   no switchport
+   ip address 10.1.1.5/31
+   bfd interval 350 min-rx 350 multiplier 3
+   isis enable DC1
+   isis bfd
+   isis hello-interval 1
+   isis hello-multiplier 4
+   isis metric 4
+   isis network point-to-point
+   isis authentication mode md5
+   isis authentication key 7 ey9fC1FQ4GLmnrqR+QpX7Q==
+!
+interface Ethernet2
+   description ### sp2-le103 ###
+   no switchport
+   ip address 10.1.2.5/31
+   bfd interval 350 min-rx 350 multiplier 3
+   isis enable DC1
+   isis bfd
+   isis hello-interval 1
+   isis hello-multiplier 4
+   isis metric 4
+   isis network point-to-point
+   isis authentication mode md5
+   isis authentication key 7 ey9fC1FQ4GLmnrqR+QpX7Q==
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.0.103.0/32
+   isis enable DC1
+   isis passive
+!
+interface Management1
+!
+ip routing
+!
+router isis DC1
+   net 49.0001.0000.0000.0000.0000.0000.0000.0000.0103.00
+   is-type level-1
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 ey9fC1FQ4GLmnrqR+QpX7Q==
+   !
+   address-family ipv4 unicast
+      metric 400
+!
+end
+dc1-leaf-103#
