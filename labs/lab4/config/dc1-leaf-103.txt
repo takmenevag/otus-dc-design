@@ -1,0 +1,72 @@
+
+dc1-leaf-103#show run
+! Command: show running-config
+! device: dc1-leaf-103 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname dc1-leaf-103
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-le103 ###
+   no switchport
+   ip address 10.1.1.5/31
+   bfd interval 350 min-rx 350 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-le103 ###
+   no switchport
+   ip address 10.1.2.5/31
+   bfd interval 350 min-rx 350 multiplier 3
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.0.103.0/32
+!
+interface Management1
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65103
+   router-id 10.0.101.0
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65100
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor 10.1.1.4 peer group DC1-SPINE
+   neighbor 10.1.1.4 description ### dc1-spine-1 ###
+   neighbor 10.1.2.4 peer group DC1-SPINE
+   neighbor 10.1.2.4 description ### dc1-spine-2 ###
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+!
+end
+dc1-leaf-103#
