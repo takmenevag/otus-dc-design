@@ -39,7 +39,7 @@ _Если необходимо вспомнить или ознакомитьс�
 - таймеры bfd выбраны такие, чтобы сессии в EVE-NG флапали реже
 
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab3/scheme/lab3_scheme.PNG "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/scheme/lab4_scheme.PNG "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
@@ -783,11 +783,11 @@ dc1-leaf-103#
 </details>
 
 ### Итоговые конфигурации оборудования
-- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab3/config/dc1-spine-1.txt)
-- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab3/config/dc1-spine-2.txt)
-- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab3/config/dc1-leaf-101.txt)
-- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab3/config/dc1-leaf-102.txt)
-- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab3/config/dc1-leaf-103.txt)
+- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/config/dc1-spine-1.txt)
+- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/config/dc1-spine-2.txt)
+- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/config/dc1-leaf-101.txt)
+- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/config/dc1-leaf-102.txt)
+- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/config/dc1-leaf-103.txt)
 ---
 
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
