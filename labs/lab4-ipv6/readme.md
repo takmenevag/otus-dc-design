@@ -45,7 +45,7 @@
 - время жизни записи в кэша NDP (тайм-аут) установлено 1200 секунд (20 минут)
 
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/scheme/lab4_scheme.PNG "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4-ipv6/scheme/lab4_ipv6_scheme.PNG "Схема стенд")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
