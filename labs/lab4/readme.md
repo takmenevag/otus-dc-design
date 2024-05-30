@@ -344,7 +344,7 @@ Gateway of last resort is not set
 ```
 
 _Ping spine-2, leaf-101, leaf-102, leaf-103_ \
-_spine-2 не доступе со spine-1 т.к. они в одной AS и BGP update (NLRI) не принимается из-за наличия локальной AS в AS_PATH_
+_spine-2 не доступен со spine-1 т.к. они в одной AS и BGP update (NLRI) не принимается из-за наличия локальной AS в AS_PATH_
 ```
 dc1-spine-1#ping 10.0.2.0 source loopback 0
 PING 10.0.2.0 (10.0.2.0) from 10.0.1.0 : 72(100) bytes of data.
@@ -457,7 +457,8 @@ Gateway of last resort is not set
  C        10.1.2.4/31 is directly connected, Ethernet3
 ```
 
-_Ping spine-1, leaf-101, leaf-102, leaf-103_
+_Ping spine-1, leaf-101, leaf-102, leaf-103_ \
+_spine-1 не доступен со spine-2 т.к. они в одной AS и BGP update (NLRI) не принимается из-за наличия локальной AS в AS_PATH_
 ```
 dc1-spine-2#ping 10.0.1.0 source loopback 0 
 PING 10.0.1.0 (10.0.1.0) from 10.0.2.0 : 72(100) bytes of data.
