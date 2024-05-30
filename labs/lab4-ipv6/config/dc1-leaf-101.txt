@@ -1,0 +1,76 @@
+
+dc1-leaf-101#show run
+! Command: show running-config
+! device: dc1-leaf-101 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname dc1-leaf-101
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-le101 ###
+   no switchport
+   ipv6 nd cache expire 1200
+   ipv6 nd cache dynamic capacity 100
+   bfd interval 350 min-rx 350 multiplier 3
+   ipv6 enable
+   ipv6 address fe80::101:1/64 link-local
+!
+interface Ethernet2
+   description ### sp2-le101 ###
+   no switchport
+   ipv6 nd cache expire 1200
+   ipv6 nd cache dynamic capacity 100
+   bfd interval 350 min-rx 350 multiplier 3
+   ipv6 enable
+   ipv6 address fe80::101:2/64 link-local
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.0.101.0/32
+!
+interface Management1
+!
+ip routing ipv6 interfaces 
+!
+ipv6 unicast-routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65101
+   router-id 10.0.101.0
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor interface Et1-2 peer-group DC1-SPINE remote-as 65100
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      neighbor DC1-SPINE next-hop address-family ipv6 originate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+!
+end
