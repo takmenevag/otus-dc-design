@@ -1,4 +1,4 @@
-# Домашнее задание №4. Underlay.eBGP
+# Домашнее задание №4. Underlay.eBGP (IPv4)
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
 ## Задачи
 - Настроить eBGP для Underlay сети
