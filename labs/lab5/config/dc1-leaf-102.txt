@@ -1,0 +1,90 @@
+dc1-leaf-102#show run
+! Command: show running-config
+! device: dc1-leaf-102 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname dc1-leaf-102
+!
+spanning-tree mode mstp
+!
+vlan 10
+   name NET-10
+!
+interface Ethernet1
+   description ### sp1-le102 ###
+   no switchport
+   ip address 10.1.1.3/31
+   bfd interval 800 min-rx 800 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-le102 ###
+   no switchport
+   ip address 10.1.2.3/31
+   bfd interval 800 min-rx 800 multiplier 3
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+   switchport access vlan 10
+!
+interface Ethernet8
+   switchport access vlan 10
+!
+interface Loopback0
+   ip address 10.0.102.0/32
+!
+interface Management1
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65102
+   router-id 10.0.102.0
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65100
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor 10.1.1.2 peer group DC1-SPINE
+   neighbor 10.1.1.2 description ### dc1-spine-1 ###
+   neighbor 10.1.2.2 peer group DC1-SPINE
+   neighbor 10.1.2.2 description ### dc1-spine-2 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 65500:10010
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+!
+end
+dc1-leaf-102#
