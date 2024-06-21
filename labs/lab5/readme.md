@@ -54,7 +54,7 @@ _Если необходимо вспомнить или ознакомитьс�
 </details>
 
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab4/scheme/lab4_scheme.PNG "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab5/scheme/lab5_scheme.PNG "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
@@ -523,7 +523,7 @@ Neighbor Status Codes: m - Under maintenance
   ### dc1-spine-2 ###      10.1.2.0 4 65100           7135      7155    0    0 00:09:34 Estab   5      5
 
 ```
-_Вывод команд по отдельности show bgp evpn route-type mac-ip или imet не стал выкладывать, там тоже самое_
+_Вывод команд по отдельности show bgp evpn route-type < mac-ip | imet > не стал выкладывать, там тоже самое_
 ```
 dc1-leaf-101#show bgp evpn
 BGP routing table information for VRF default
@@ -620,7 +620,7 @@ VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
   10  0050.7966.680a  EVPN      Vx1  10.0.103.0       1       0:03:35 ago
 Total Remote Mac Addresses for this criterion: 3
 ```
-_Вывод для всех mac не стал выкладывать, но он есть_
+_Вывод для всех MAC не стал выкладывать, но он есть_
 ```
 dc1-leaf-101#show bgp evpn route-type mac-ip 0050.7966.6807 detail 
 BGP routing table information for VRF default
@@ -852,6 +852,8 @@ Vxlan1 is up, line protocol is up (connected)
   Headend replication flood vtep list is:
     10 10.0.102.0      10.0.101.0     
   Shared Router MAC is 0000.0000.0000
+```
+```
 dc1-leaf-103#show vxlan vtep
 Remote VTEPS for Vxlan1:
 
