@@ -1077,7 +1077,7 @@ client-104> ping 10.2.10.104
 - [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab5/config/dc1-leaf-101.txt)
 - [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab5/config/dc1-leaf-102.txt)
 - [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab5/config/dc1-leaf-103.txt)
-- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab5/config/dc1-clients.txt)
+- [dc1-clients](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab5/config/dc1-clients.txt)
 ---
 
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
