@@ -82,7 +82,8 @@ _Если необходимо вспомнить или ознакомитьс�
 |dc1-client-104	|Eth0	|10.2.10.104/24	|Клиентская сеть, VLAN 10|
 
 ### Настройка оборудования
-_Команды hostname и no switchport не показаны для облегчения восприятия настроек_
+_Команды hostname и no switchport не показаны для облегчения восприятия настроек_ \
+_Порты 7,8 в vlan 10 настроены на всех leaf для едиообразия, по факту используется только на leaf-103_
 <details>
   <summary>Команды для настройки </summary>
 
@@ -206,6 +207,9 @@ interface Ethernet2
 interface Ethernet7
    switchport access vlan 10
 !
+interface Ethernet8
+   switchport access vlan 10
+!
 interface Loopback0
    ip address 10.0.101.0/32
 !
@@ -265,6 +269,9 @@ interface Ethernet2
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet7
+   switchport access vlan 10
+!
+interface Ethernet8
    switchport access vlan 10
 !
 interface Loopback0
@@ -578,6 +585,19 @@ Vxlan1 is up, line protocol is up (connected)
   Shared Router MAC is 0000.0000.0000
 ```
 ```
+dc1-leaf-101#sh vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface       802.1Q Tag
+----------- ---------- ------------ --------------- ----------
+10010       10         static       Ethernet7       untagged  
+                                    Ethernet8       untagged  
+                                    Vxlan1          10        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI       VLAN       VRF       Source       
+--------- ---------- --------- ------------ 
+```
+```
 dc1-leaf-101#show vxlan vtep
 Remote VTEPS for Vxlan1:
 
@@ -718,6 +738,19 @@ Vxlan1 is up, line protocol is up (connected)
   Shared Router MAC is 0000.0000.0000
 ```
 ```
+dc1-leaf-102#sh vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface       802.1Q Tag
+----------- ---------- ------------ --------------- ----------
+10010       10         static       Ethernet7       untagged  
+                                    Ethernet8       untagged  
+                                    Vxlan1          10        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI       VLAN       VRF       Source       
+--------- ---------- --------- ------------ 
+```
+```
 dc1-leaf-102#show vxlan vtep
 Remote VTEPS for Vxlan1:
 
@@ -852,6 +885,19 @@ Vxlan1 is up, line protocol is up (connected)
   Headend replication flood vtep list is:
     10 10.0.102.0      10.0.101.0     
   Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-leaf-103#sh vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface       802.1Q Tag
+----------- ---------- ------------ --------------- ----------
+10010       10         static       Ethernet7       untagged  
+                                    Ethernet8       untagged  
+                                    Vxlan1          10        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI       VLAN       VRF       Source       
+--------- ---------- --------- ------------ 
 ```
 ```
 dc1-leaf-103#show vxlan vtep
