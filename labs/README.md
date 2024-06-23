@@ -6,4 +6,4 @@
 + [**Задание №4. Underlay. eBGP (IPv4)**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/lab4)
 + [**Задание №4. Underlay. eBGP (IPv6)**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/lab4-ipv6)
 + [**Задание №5. VxLAN. L2 VNI**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/lab5)
-+ [**Задание №5. VxLAN. L3 VNI**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/lab6)
++ [**Задание №6. VxLAN. L3 VNI**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/lab6)
