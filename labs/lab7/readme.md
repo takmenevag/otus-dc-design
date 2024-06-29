@@ -739,7 +739,8 @@ Neighbor Status Codes: m - Under maintenance
   10.1.1.1 4 65101            230       221    0    0 00:08:20 Estab   1      1
   10.1.1.3 4 65102            228       217    0    0 00:08:20 Estab   1      1
   10.1.1.5 4 65103            234       223    0    0 00:08:20 Estab   1      1
-
+```
+```
 dc1-spine-1#show bgp evpn summary
 BGP summary information for VRF default
 Router identifier 10.0.1.0, local AS number 65100
@@ -765,7 +766,8 @@ Neighbor Status Codes: m - Under maintenance
   10.1.2.1 4 65101            572       563    0    0 00:22:42 Estab   1      1
   10.1.2.3 4 65102            577       555    0    0 00:22:42 Estab   1      1
   10.1.2.5 4 65103            579       560    0    0 00:22:42 Estab   1      1
-
+```
+```
 dc1-spine-2#show bgp evpn summary
 BGP summary information for VRF default
 Router identifier 10.0.2.0, local AS number 65100
@@ -774,7 +776,6 @@ Neighbor Status Codes: m - Under maintenance
   10.1.2.1 4 65101            575       566    0    0 00:22:50 Estab   15     15
   10.1.2.3 4 65102            580       558    0    0 00:22:50 Estab   14     14
   10.1.2.5 4 65103            582       563    0    0 00:22:50 Estab   6      6
-
 ```
 </details>
 
