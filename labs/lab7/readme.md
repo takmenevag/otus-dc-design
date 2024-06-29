@@ -87,7 +87,7 @@ _Если необходимо вспомнить или ознакомитьс�
 </details>
 
 ### Cхема сети
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab6/scheme/lab6_scheme.PNG "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/scheme/lab7_scheme.PNG "Схема стенда")
 
 ### Таблица IP-адресации
 |Оборудование	|Интерфейс	|IP-адрес	|Назначение|
@@ -680,6 +680,11 @@ Vlan10 is up, line protocol is up (connected)
   Hardware is Vlan, address is 5000.0045.abdf (bia 5000.0045.abdf)
   Internet address is 10.2.10.101/24
   Broadcast address is 255.255.255.255
+
+client-101#show ip arp
+Address         Age (sec)  Hardware Addr   Interface
+10.2.10.201       2:53:12  5000.0088.fe27  Vlan10, Port-Channel8
+10.2.10.254       0:19:33  0000.0000.cafe  Vlan10, Port-Channel8
 ```
 ```
 client-102> show ip all
@@ -703,10 +708,21 @@ Vlan10 is up, line protocol is up (connected)
   Hardware is Vlan, address is 5000.0088.fe27 (bia 5000.0088.fe27)
   Internet address is 10.2.10.201/24
   Broadcast address is 255.255.255.255
+
 Vlan20 is up, line protocol is up (connected)
   Hardware is Vlan, address is 5000.0088.fe27 (bia 5000.0088.fe27)
   Internet address is 10.2.20.201/24
   Broadcast address is 255.255.255.255
+
+server-201#show ip arp vrf vlan-10
+Address         Age (sec)  Hardware Addr   Interface
+10.2.10.101       1:11:14  5000.0045.abdf  Vlan10, Port-Channel7
+10.2.10.254       2:52:05  0000.0000.cafe  Vlan10, Port-Channel7
+
+server-201#show ip arp vrf vlan-20
+Address         Age (sec)  Hardware Addr   Interface
+10.2.20.102       2:18:30  0050.7966.6808  Vlan20, Port-Channel7
+10.2.20.254       3:25:43  0000.0000.cafe  Vlan20, Port-Channel7
 ```
 
 </details>
