@@ -2213,10 +2213,10 @@ rtt min/avg/max/mdev = 155.856/166.806/180.064/8.322 ms, pipe 5, ipg/ewma 12.357
 - [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-leaf-101.txt)
 - [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-leaf-102.txt)
 - [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-leaf-103.txt)
-- [dc1-clients](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-101.txt)
-- [dc1-clients](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-102.txt)
-- [dc1-clients](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-103.txt)
-- [dc1-clients](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-server-201.txt)
+- [dc1-client-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-101.txt)
+- [dc1-clients-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-102.txt)
+- [dc1-clients-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-103.txt)
+- [dc1-clients-104](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-server-201.txt)
 ---
 
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
