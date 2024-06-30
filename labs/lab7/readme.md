@@ -479,7 +479,7 @@ router bgp 65102
       redistribute connected route-map RM-CONNECTED-TO-BGP
    !
    vrf tenant-1
-      rd 10.0.101.0:4001
+      rd 10.0.102.0:4001
       route-target import evpn 4001:4001
       route-target export evpn 4001:4001
 ```
