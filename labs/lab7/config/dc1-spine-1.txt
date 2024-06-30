@@ -1,0 +1,80 @@
+
+dc1-spine-1#sh run
+! Command: show running-config
+! device: dc1-spine-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname dc1-spine-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-le101 ###
+   no switchport
+   ip address 10.1.1.0/31
+   bfd interval 800 min-rx 800 multiplier 3
+!
+interface Ethernet2
+   description ### sp1-le102 ###
+   no switchport
+   ip address 10.1.1.2/31
+   bfd interval 800 min-rx 800 multiplier 3
+!
+interface Ethernet3
+   description ### sp1-le103 ###
+   no switchport
+   ip address 10.1.1.4/31
+   bfd interval 800 min-rx 800 multiplier 3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.0.1.0/32
+!
+interface Management1
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+peer-filter PF-DC1-LEAF
+   10 match as-range 65101-65199 result accept
+!
+router bgp 65100
+   router-id 10.0.1.0
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   bgp listen range 10.1.1.0/24 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
+   neighbor DC1-LEAF peer group
+   neighbor DC1-LEAF bfd
+   neighbor DC1-LEAF timers 3 9
+   neighbor DC1-LEAF password 7 IS09sfEdsucPgvWfPXx0cQ==
+   neighbor DC1-LEAF send-community extended
+   !
+   address-family evpn
+      neighbor DC1-LEAF activate
+      neighbor DC1-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC1-LEAF activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+!
+end
+dc1-spine-1#
