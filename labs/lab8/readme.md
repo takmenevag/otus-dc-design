@@ -3232,7 +3232,7 @@ rtt min/avg/max/mdev = 135.350/143.151/152.341/5.823 ms, pipe 5, ipg/ewma 12.042
 <details>
   <summary>трассировка между VRF</summary>
 
-_из VRF tenant-1 в VRF tenant-2_ \
+- из VRF tenant-1 в VRF tenant-2 \
 _client-102 подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199_
 ```
 client-102> trace 10.2.30.103 - client-103
@@ -3243,7 +3243,7 @@ trace to 10.2.30.103, 8 hops max, press Ctrl+C to stop
  4   *10.2.30.103   50.223 ms (ICMP type:3, code:3, Destination port unreachable) - client-103
 ```
 
-_из VRF tenant-2 в VRF tenant-2_ \
+- из VRF tenant-2 в VRF tenant-2 \
 _client-104 подключен к leaf-101, поэтому в трассировке еще leaf-103_
 ```
 client-104#traceroute 10.2.20.102  - client-102    
