@@ -997,7 +997,8 @@ Neighbor Status Codes: m - Under maintenance
   10.1.1.1 4 65101           4098      4083    0    0 02:49:22 Estab   1      1
   10.1.1.3 4 65102           2437      2437    0    0 01:42:37 Estab   1      1
   10.1.1.5 4 65103           3674      3728    0    0 02:33:37 Estab   1      1
-
+```
+```
 dc1-spine-1#show bgp evpn summary
 BGP summary information for VRF default
 Router identifier 10.0.1.0, local AS number 65100
@@ -1022,7 +1023,8 @@ Neighbor Status Codes: m - Under maintenance
   10.1.2.1 4 65101           4123      4088    0    0 02:49:22 Estab   1      1
   10.1.2.3 4 65102           2456      2438    0    0 01:42:37 Estab   1      1
   10.1.2.5 4 65103           3710      3723    0    0 02:33:37 Estab   1      1
-
+```
+```
 dc1-spine-2#show bgp evpn summary
 BGP summary information for VRF default
 Router identifier 10.0.2.0, local AS number 65100
@@ -2922,20 +2924,11 @@ client-102> ping 10.0.199.0
 84 bytes from 10.0.199.0 icmp_seq=4 ttl=63 time=25.196 ms
 84 bytes from 10.0.199.0 icmp_seq=5 ttl=63 time=24.349 ms
 ```
-```
-подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199
-client-102> trace 10.2.30.103
-trace to 10.2.30.103, 8 hops max, press Ctrl+C to stop
- 1   10.2.20.254   7.846 ms  5.423 ms  5.018 ms - leaf-103
- 2   10.1.103.244   21.003 ms  20.361 ms  19.515 ms - fw-199
- 3   10.1.103.249   32.576 ms  39.130 ms  38.124 ms - leaf-103
- 4   *10.2.30.103   50.223 ms (ICMP type:3, code:3, Destination port unreachable) - client-103
-```
-
 </details>
 
 <details>
   <summary>проверки с client-103</summary>
+  
 ```
 client-103> ping 10.2.10.201
 84 bytes from 10.2.10.201 icmp_seq=1 ttl=60 time=147.347 ms
@@ -3098,20 +3091,11 @@ PING 10.0.199.0 (10.0.199.0) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 46ms
 rtt min/avg/max/mdev = 122.869/128.146/132.005/3.075 ms, pipe 5, ipg/ewma 11.531/130.024 ms
 ```
-```
-client-104#traceroute 10.2.20.102        
-traceroute to 10.2.20.102 (10.2.20.102), 30 hops max, 60 byte packets
- 1  _gateway (10.2.40.254)  138.553 ms  161.096 ms  168.617 ms - leaf-101/102
- 2  10.2.30.254 (10.2.30.254)  175.692 ms  188.585 ms  194.125 ms - leaf-103 (видимо)
- 3  10.1.103.252 (10.1.103.252)  230.832 ms  241.484 ms  257.261 ms - fw-199
- 4  10.1.103.241 (10.1.103.241)  438.936 ms  435.455 ms  454.067 ms - leaf-103
- 5  10.2.20.102 (10.2.20.102)  465.384 ms  509.310 ms  546.384 ms - client-102
-```
 </details>
 
 
 <details>
-  <summary>проверки с server</summary>
+  <summary>проверки с server-201</summary>
   
 ```
 server-201#show port-channel dense 
@@ -3242,6 +3226,33 @@ PING 10.0.199.0 (10.0.199.0) 72(100) bytes of data.
 --- 10.0.199.0 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 48ms
 rtt min/avg/max/mdev = 135.350/143.151/152.341/5.823 ms, pipe 5, ipg/ewma 12.042/147.344 ms
+```
+</details>
+
+<details>
+  <summary>трассировка между VRF</summary>
+
+_из VRF tenant-1 в VRF tenant-2_ \
+_client-102 подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199_
+```
+client-102> trace 10.2.30.103 - client-103
+trace to 10.2.30.103, 8 hops max, press Ctrl+C to stop
+ 1   10.2.20.254   7.846 ms  5.423 ms  5.018 ms - leaf-103
+ 2   10.1.103.244   21.003 ms  20.361 ms  19.515 ms - fw-199
+ 3   10.1.103.249   32.576 ms  39.130 ms  38.124 ms - leaf-103
+ 4   *10.2.30.103   50.223 ms (ICMP type:3, code:3, Destination port unreachable) - client-103
+```
+
+_из VRF tenant-2 в VRF tenant-2_ \
+_client-104 подключен к leaf-101, поэтому в трассировке еще leaf-103_
+```
+client-104#traceroute 10.2.20.102  - client-102    
+traceroute to 10.2.20.102 (10.2.20.102), 30 hops max, 60 byte packets
+ 1  _gateway (10.2.40.254)  138.553 ms  161.096 ms  168.617 ms - leaf-101/102
+ 2  10.2.30.254 (10.2.30.254)  175.692 ms  188.585 ms  194.125 ms - leaf-103 (видимо)
+ 3  10.1.103.252 (10.1.103.252)  230.832 ms  241.484 ms  257.261 ms - fw-199
+ 4  10.1.103.241 (10.1.103.241)  438.936 ms  435.455 ms  454.067 ms - leaf-103
+ 5  10.2.20.102 (10.2.20.102)  465.384 ms  509.310 ms  546.384 ms - client-102
 ```
 </details>
 
