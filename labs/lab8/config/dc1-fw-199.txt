@@ -1,0 +1,77 @@
+
+dc1-fw-199#sh run
+! Command: show running-config
+! device: dc1-fw-199 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc1-fw-199
+!
+spanning-tree mode mstp
+!
+vlan 4081
+   name tenant-1
+!
+vlan 4082
+   name tenant-2
+!
+interface Port-Channel1
+   description ### leaf-103 ###
+   switchport mode trunk
+!
+interface Ethernet1
+   description ### leaf-103 ###
+   channel-group 1 mode active
+!
+interface Ethernet2
+   description ### leaf-103 ###
+   channel-group 1 mode active
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.0.199.0/32
+!
+interface Management1
+!
+interface Vlan4081
+   description ### tenant-1 ###
+   ip address 10.1.103.244/29
+!
+interface Vlan4082
+   description ### tenant-2 ###
+   ip address 10.1.103.252/29
+!
+ip routing
+!
+router bgp 65199
+   router-id 10.0.199.0
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-LEAF-103 peer group
+   neighbor DC1-LEAF-103 remote-as 65103
+   neighbor DC1-LEAF-103 timers 3 9
+   neighbor DC1-LEAF-103 password 7 G6bJhHqcFTKz3Im1mSWygg==
+   neighbor DC1-LEAF-103 default-originate always
+   neighbor 10.1.103.241 peer group DC1-LEAF-103
+   neighbor 10.1.103.241 description ### dc1-leaf-103 tenant-1 ###
+   neighbor 10.1.103.249 peer group DC1-LEAF-103
+   neighbor 10.1.103.249 description ### dc1-leaf-103 tenant-2 ###
+!
+end

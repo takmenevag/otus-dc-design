@@ -1,0 +1,83 @@
+
+server-201#sh run
+! Command: show running-config
+! device: server-201 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname server-201
+!
+spanning-tree mode mstp
+!
+vlan 10
+   name NET-10.2.10.0/24
+!
+vlan 20
+   name NET-10.2.20.0/24
+!
+vlan 30
+   name NET-10.2.30.0/24
+!
+vrf instance vlan-10
+!
+vrf instance vlan-20
+!
+vrf instance vlan-30
+!
+interface Port-Channel7
+   description ### uplink ###
+   switchport trunk allowed vlan 10,20,30
+   switchport mode trunk
+!
+interface Ethernet1
+   channel-group 7 mode active
+!
+interface Ethernet2
+   channel-group 7 mode active
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Management1
+!
+interface Vlan10
+   description ### server-201 ###
+   vrf vlan-10
+   ip address 10.2.10.201/24
+!
+interface Vlan20
+   description ### server-201 ###
+   vrf vlan-20
+   ip address 10.2.20.201/24
+!
+interface Vlan30
+   description ### server-201 ###
+   vrf vlan-30
+   ip address 10.2.30.201/24
+!
+ip routing
+ip routing vrf vlan-10
+ip routing vrf vlan-20
+ip routing vrf vlan-30
+!
+ip route vrf vlan-10 0.0.0.0/0 10.2.10.254
+ip route vrf vlan-20 0.0.0.0/0 10.2.20.254
+ip route vrf vlan-30 0.0.0.0/0 10.2.30.254
+!
+end
+server-201#
