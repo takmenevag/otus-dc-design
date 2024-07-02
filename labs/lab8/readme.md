@@ -3257,16 +3257,16 @@ traceroute to 10.2.20.102 (10.2.20.102), 30 hops max, 60 byte packets
 </details>
 
 ### Итоговые конфигурации оборудования
-- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-spine-1.txt)
-- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-spine-2.txt)
-- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-leaf-101.txt)
-- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-leaf-102.txt)
-- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-leaf-103.txt)
-- [dc1-fw-199](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-fw-199.txt)
-- [dc1-client-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-102.txt)
-- [dc1-client-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-103.txt)
-- [dc1-client-104](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-client-104.txt)
-- [dc1-server-201](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-server-201.txt)
+- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-1.txt)
+- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-2.txt)
+- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-101.txt)
+- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-102.txt)
+- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-103.txt)
+- [dc1-fw-199](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-fw-199.txt)
+- [dc1-client-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-102.txt)
+- [dc1-client-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-103.txt)
+- [dc1-client-104](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-104.txt)
+- [dc1-server-201](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-server-201.txt)
 ---
 
 [**Вернуться к списку домашних заданий**](https://github.com/takmenevag/otus-dc-design/tree/main/labs/)
