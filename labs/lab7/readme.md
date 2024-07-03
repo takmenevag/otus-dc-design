@@ -2208,6 +2208,153 @@ rtt min/avg/max/mdev = 155.856/166.806/180.064/8.322 ms, pipe 5, ipg/ewma 12.357
 ```
 </details>
 
+<details>
+  <summary>проверки отказоустойчивости </summary>
+
+- client-101 \
+_ping от client-102 до client-101 ходит через оба линка (запрос через один, ответ через другой). смотрел в wireshark_
+```
+client-101#show port-channel dense 
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 1
+Number of aggregators: 1
+
+   Port-Channel       Protocol    Ports             
+------------------ -------------- ------------------
+   Po8(U)             LACP(a)     Et1(PG+) Et2(PG+) 
+```
+
+_отключаем один из физических портов_
+```
+client-101#conf t
+client-101(config)#int e1
+client-101(config-if-Et1)#shut
+client-101(config-if-Et1)#
+client-101#show port-channel dense
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 1
+Number of aggregators: 1
+
+   Port-Channel       Protocol    Ports           
+------------------ -------------- ----------------
+   Po8(U)             LACP(a)     Et1(D) Et2(PG+) 
+```
+_IP-адрес у client-101 такой_
+```
+client-101#sh ip int br | e una
+                                                                        Address
+Interface       IP Address          Status      Protocol         MTU    Owner  
+--------------- ------------------- ----------- ------------- --------- -------
+Vlan10          10.2.10.101/24      up          up              1500           
+```
+
+- client-102 \
+_с client-102 запущен ping до сбора команд с client-101_ \
+_вывод собран уже после отключения линка_
+```
+client-102> ping 10.2.10.101 -c 1000
+84 bytes from 10.2.10.101 icmp_seq=1 ttl=62 time=67.459 ms
+84 bytes from 10.2.10.101 icmp_seq=2 ttl=62 time=50.883 ms
+84 bytes from 10.2.10.101 icmp_seq=3 ttl=62 time=49.859 ms
+84 bytes from 10.2.10.101 icmp_seq=4 ttl=62 time=63.397 ms
+84 bytes from 10.2.10.101 icmp_seq=5 ttl=62 time=69.685 ms
+84 bytes from 10.2.10.101 icmp_seq=6 ttl=62 time=72.390 ms
+84 bytes from 10.2.10.101 icmp_seq=7 ttl=62 time=140.864 ms
+84 bytes from 10.2.10.101 icmp_seq=8 ttl=62 time=53.299 ms
+84 bytes from 10.2.10.101 icmp_seq=9 ttl=62 time=101.063 ms
+84 bytes from 10.2.10.101 icmp_seq=10 ttl=62 time=66.207 ms
+84 bytes from 10.2.10.101 icmp_seq=11 ttl=62 time=108.541 ms
+84 bytes from 10.2.10.101 icmp_seq=12 ttl=62 time=55.402 ms
+84 bytes from 10.2.10.101 icmp_seq=13 ttl=62 time=69.757 ms
+84 bytes from 10.2.10.101 icmp_seq=14 ttl=62 time=76.108 ms
+84 bytes from 10.2.10.101 icmp_seq=15 ttl=62 time=63.018 ms
+84 bytes from 10.2.10.101 icmp_seq=16 ttl=62 time=83.523 ms
+84 bytes from 10.2.10.101 icmp_seq=17 ttl=62 time=93.908 ms
+84 bytes from 10.2.10.101 icmp_seq=18 ttl=62 time=55.433 ms
+84 bytes from 10.2.10.101 icmp_seq=19 ttl=62 time=72.260 ms
+84 bytes from 10.2.10.101 icmp_seq=20 ttl=62 time=152.764 ms
+84 bytes from 10.2.10.101 icmp_seq=21 ttl=62 time=61.172 ms
+84 bytes from 10.2.10.101 icmp_seq=22 ttl=62 time=588.613 ms
+84 bytes from 10.2.10.101 icmp_seq=23 ttl=62 time=80.256 ms
+84 bytes from 10.2.10.101 icmp_seq=24 ttl=62 time=112.685 ms
+84 bytes from 10.2.10.101 icmp_seq=25 ttl=62 time=130.282 ms
+84 bytes from 10.2.10.101 icmp_seq=26 ttl=62 time=106.695 ms
+84 bytes from 10.2.10.101 icmp_seq=27 ttl=62 time=133.463 ms
+84 bytes from 10.2.10.101 icmp_seq=28 ttl=62 time=84.401 ms
+84 bytes from 10.2.10.101 icmp_seq=29 ttl=62 time=102.893 ms
+84 bytes from 10.2.10.101 icmp_seq=30 ttl=62 time=106.071 ms
+84 bytes from 10.2.10.101 icmp_seq=31 ttl=62 time=87.315 ms
+84 bytes from 10.2.10.101 icmp_seq=32 ttl=62 time=56.277 ms
+84 bytes from 10.2.10.101 icmp_seq=33 ttl=62 time=113.009 ms
+84 bytes from 10.2.10.101 icmp_seq=34 ttl=62 time=57.895 ms
+84 bytes from 10.2.10.101 icmp_seq=35 ttl=62 time=74.848 ms
+84 bytes from 10.2.10.101 icmp_seq=36 ttl=62 time=77.545 ms
+84 bytes from 10.2.10.101 icmp_seq=37 ttl=62 time=51.713 ms
+84 bytes from 10.2.10.101 icmp_seq=38 ttl=62 time=57.883 ms
+84 bytes from 10.2.10.101 icmp_seq=39 ttl=62 time=53.345 ms
+84 bytes from 10.2.10.101 icmp_seq=40 ttl=62 time=70.149 ms
+84 bytes from 10.2.10.101 icmp_seq=41 ttl=62 time=93.380 ms
+84 bytes from 10.2.10.101 icmp_seq=42 ttl=62 time=71.605 ms
+84 bytes from 10.2.10.101 icmp_seq=43 ttl=62 time=79.124 ms
+84 bytes from 10.2.10.101 icmp_seq=44 ttl=62 time=58.796 ms
+84 bytes from 10.2.10.101 icmp_seq=45 ttl=62 time=58.184 ms
+84 bytes from 10.2.10.101 icmp_seq=46 ttl=62 time=43.417 ms
+84 bytes from 10.2.10.101 icmp_seq=47 ttl=62 time=67.669 ms
+^C
+client-102> 
+```
+_после подключении порта обратно на сlient-101 потери были_
+```
+client-102> ping 10.2.10.101 -c 1000
+84 bytes from 10.2.10.101 icmp_seq=1 ttl=62 time=222.890 ms
+84 bytes from 10.2.10.101 icmp_seq=2 ttl=62 time=72.397 ms
+84 bytes from 10.2.10.101 icmp_seq=3 ttl=62 time=41.655 ms
+84 bytes from 10.2.10.101 icmp_seq=4 ttl=62 time=71.013 ms
+84 bytes from 10.2.10.101 icmp_seq=5 ttl=62 time=61.903 ms
+84 bytes from 10.2.10.101 icmp_seq=6 ttl=62 time=93.879 ms
+84 bytes from 10.2.10.101 icmp_seq=7 ttl=62 time=67.906 ms
+84 bytes from 10.2.10.101 icmp_seq=8 ttl=62 time=68.320 ms
+10.2.10.101 icmp_seq=9 timeout --- тут включил порт eth1 на сlient-101 
+10.2.10.101 icmp_seq=10 timeout
+10.2.10.101 icmp_seq=11 timeout
+10.2.10.101 icmp_seq=12 timeout
+10.2.10.101 icmp_seq=13 timeout
+10.2.10.101 icmp_seq=14 timeout
+10.2.10.101 icmp_seq=15 timeout
+10.2.10.101 icmp_seq=16 timeout
+10.2.10.101 icmp_seq=17 timeout
+10.2.10.101 icmp_seq=18 timeout
+10.2.10.101 icmp_seq=19 timeout
+84 bytes from 10.2.10.101 icmp_seq=20 ttl=62 time=145.004 ms
+84 bytes from 10.2.10.101 icmp_seq=21 ttl=62 time=67.851 ms
+84 bytes from 10.2.10.101 icmp_seq=22 ttl=62 time=72.961 ms
+84 bytes from 10.2.10.101 icmp_seq=23 ttl=62 time=54.705 ms
+84 bytes from 10.2.10.101 icmp_seq=24 ttl=62 time=93.027 ms
+84 bytes from 10.2.10.101 icmp_seq=25 ttl=62 time=68.211 ms
+84 bytes from 10.2.10.101 icmp_seq=26 ttl=62 time=113.257 ms
+84 bytes from 10.2.10.101 icmp_seq=27 ttl=62 time=67.722 ms
+```
+</details>
 
 ### Итоговые конфигурации оборудования
 - [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab7/config/dc1-spine-1.txt)
