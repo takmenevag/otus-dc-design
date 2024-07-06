@@ -7,13 +7,61 @@
 ### Распределение адресного пространства
 <details>
   <summary>Распределение IP-адресов </summary>
- 
+  
+_Таблица IP-подсетей_
+|Блок IP	|Назначение|
+|:-		|:-| 
+|**IP-блоки**||
+|10.0.0.0/8	|Блок сетей|
+|10.0.0.0/12	|DCI|
+|10.16.0.0/12	|DC1|
+|10.32.0.0/12	|DC2|
+|10.48.0.0/12	|DC |резерв|
+|10.64.0.0/12	|DC |резерв|
+|10.80.0.0/12	|DC |резерв|
+|10.96.0.0/12	|DC |резерв|
+|10.112.0.0/12	|DC |резерв|
+|10.128.0.0/12	|резерв|
+|...		|...|
+|10.240.0.0/12	|резерв|
+|**IP-блоки DCI**||
+|10.0.0.0/12	|DCI|
+|10.0.0.0/16	|транспорт|
+|10.1.0.0/16	|резерв транспорт|
+|10.2.0.0/15	|резерв|
+|10.4.0.0/14	|резерв|
+|10.8.0.0/14	|сервисы DC-независимые|
+|10.12.0.0/14	|резерв сервисы|
+|||
+|10.8.0.0/14	|DCI сервисы|
+|10.8.0.0/16	|сервисы|
+|10.9.0.0/16	|резерв|
+|10.10.0.0/15	|резерв|
+|||	
+|10.8.0.0/16	|DCI сервисы|
+|10.8.10.0/24	|vlan10|
+|10.8.20.0/24	|vlan20|
+|10.8.30.0/24	|vlan30|
+|10.8.40.0/24	|vlan40|
+|**IP-блоки DC1**||
+|10.16.0.0/12	|DC1|
+|10.16.0.0/14	|POD1|
+|10.20.0.0/14	|POD2|
+|10.24.0.0/14	|резерв|
+|10.28.0.0/14	|резерв|
+|||
+|10.16.0.0/14	|POD1
+|10.16.0.0/16	|Cеть|
+|10.17.0.0/16	|ТШ зависимо+резевр|
+|10.18.0.0/15	|ТШ независимо+сервисы|
+</details>
+  
 Блок IP-адресов 10.0.0.0/14 для DC1
 - spine-X, leaf-1YY
 - блок 10.**0**.0.0/16 - loopback \
   _третий октет - коммутатор, четвертый - номер loopback_
   - loopback**0** spine - 10.1.X.**0**/32
-  - loopback**0** leaf - 10.1.1YY.**0**/32
+  - loopback**0** leaf - 10.16.250YY.**0**/32
 - блок 10.**1**.0.0/16 - транспорт \
  _третий октет - spine, leaf, четвертый октет сети по /31_
   - transport spine-**X** - 10.1.**X**.<сеть>/31
@@ -22,7 +70,6 @@
  _третий октет - номер VLAN, сети по /24_
  - 10.2.**VLAN**.0/24
 - блок 10.**3**.0.0/16 - резерв
-</details>
 
 ### Описание решения VXLAN
 <details>
@@ -206,26 +253,46 @@ _В лабе подписи интерфейсов для облегчения �
 |Оборудование		|Интерфейс	|IP-адрес			|Назначение|
 |:-					|:-			|:-					|:-|
 |dc1-p1-r002-sp-1	|Loopback0	|10.16.254.1/32		|-|
-|dc1-p1-r002-sp-1	|Eth1		|10.1.1.0/31		|sp1-lf1|
-|dc1-p1-r002-sp-1	|Eth2		|10.1.1.2/31		|sp1-lf2|
-|dc1-p1-r002-sp-1	|Eth3		|10.1.1.4/31		|sp1-lf3|
-|dc1-p1-r002-sp-1	|Eth3		|10.1.1.4/31		|sp1-lf4|
-|dc1-p1-r012-sp-1	|Loopback0	|10.16.254.2/32 	|-|
-|dc1-p1-r012-sp-1	|Eth1		|10.1.2.0/31		|sp2-lf1|
-|dc1-p1-r012-sp-1	|Eth2		|10.1.2.2/31		|sp2-lf2|
-|dc1-p1-r012-sp-1	|Eth3		|10.1.2.4/31		|sp2-lf3|
-|dc1-p1-r012-sp-1	|Eth4		|10.1.2.4/31		|sp2-lf4|
-|dc1-p1-r003-lf-1	|Loopback0	|10.16.254.11/32 	|-|
-|dc1-p1-r003-lf-1	|Eth1		|10.1.1.1/31		|sp1-lf1|
-|dc1-p1-r003-lf-1	|Eth2		|10.1.2.1/31		|sp2-lf1|
-|dc1-p1-r003-lf-2	|Loopback0	|10.16.254.12/32 	|-|
-|dc1-p1-r003-lf-2	|Eth1		|10.1.1.1/31		|sp1-lf1|
-|dc1-p1-r003-lf-2	|Eth2		|10.1.2.1/31		|sp2-lf1|
+|dc1-p1-r002-sp-1	|Eth1		|10.16.250.0/31		|sp1-lf1|
+|dc1-p1-r002-sp-1	|Eth2		|10.16.250.2/31		|sp1-lf2|
+|dc1-p1-r002-sp-1	|Eth3		|10.16.250.4/31		|sp1-lf3|
+|dc1-p1-r002-sp-1	|Eth4		|10.16.250.6/31		|sp1-lf4|
+|dc1-p1-r002-sp-1	|Eth5		|10.16.250.120/31	|sp1-blf1|
+|dc1-p1-r002-sp-1	|Eth6		|10.16.250.122/31	|sp1-blf2|
 | | | | |
-|dc1-lfaf-101	|Po7	|10.2.10.254/24	|Клиентская сеть, VLAN 10|
-|dc1-lfaf-101	|Po8	|10.2.20.254/24	|Клиентская сеть, VLAN 20|
-|dc1-lfaf-102	|Po7	|10.2.10.254/24	|Клиентская сеть, VLAN 10|
-|dc1-lfaf-102	|Po8	|10.2.20.254/24	|Клиентская сеть, VLAN 20|
+|dc1-p1-r012-sp-1	|Loopback0	|10.16.254.2/32 	|-|
+|dc1-p1-r012-sp-1	|Eth1		|10.16.251.0/31		|sp2-lf1|
+|dc1-p1-r012-sp-1	|Eth2		|10.16.251.2/31		|sp2-lf2|
+|dc1-p1-r012-sp-1	|Eth3		|10.16.251.4/31		|sp2-lf3|
+|dc1-p1-r012-sp-1	|Eth4		|10.16.251.6/31		|sp2-lf4|
+|dc1-p1-r012-sp-1	|Eth5		|10.16.251.120/31	|sp2-blf1|
+|dc1-p1-r012-sp-1	|Eth6		|10.16.251.122/31	|sp2-blf2|
+| | | | |
+|dc1-p1-r003-lf-1	|Loopback0	|10.16.254.11/32 	|-|
+|dc1-p1-r003-lf-1	|Eth1		|10.16.250.1/31		|sp1-lf1|
+|dc1-p1-r003-lf-1	|Eth2		|10.16.251.1/31		|sp2-lf1|
+|dc1-p1-r003-lf-2	|Loopback0	|10.16.254.12/32 	|-|
+|dc1-p1-r003-lf-2	|Eth1		|10.16.250.1/31		|sp1-lf2|
+|dc1-p1-r003-lf-2	|Eth2		|10.16.251.1/31		|sp2-lf2|
+| | | | |
+|dc1-p1-r013-lf-1	|Loopback0	|10.16.254.13/32 	|-|
+|dc1-p1-r013-lf-1	|Eth1		|10.16.250.1/31		|sp1-lf3|
+|dc1-p1-r013-lf-1	|Eth2		|10.16.251.1/31		|sp2-lf3|
+|dc1-p1-r013-lf-2	|Loopback0	|10.16.254.14/32 	|-|
+|dc1-p1-r013-lf-2	|Eth1		|10.16.250.1/31		|sp1-lf4|
+|dc1-p1-r013-lf-2	|Eth2		|10.16.251.1/31		|sp2-lf4|
+| | | | |
+|dc1-p1-r002-blf-1	|Loopback0	|10.16.254.188/32 	|-|
+|dc1-p1-r002-blf-1	|Eth1		|10.16.250.121/31	|sp1-blf1|
+|dc1-p1-r002-blf-1	|Eth2		|10.16.251.121/31	|sp2-blf1|
+|dc1-p1-r012-blf-1	|Loopback0	|10.16.254.189/32 	|-|
+|dc1-p1-r012-blf-1	|Eth1		|10.16.250.123/31	|sp1-blf2|
+|dc1-p1-r012-blf-1	|Eth2		|10.16.251.123/31	|sp2-blf2|
+| | | | |
+|dc1-p1-r003-lf-1	|Po7		|10.2.10.254/24		|Клиентская сеть, VLAN 10|
+|dc1-p1-r003-lf-1	|Po8		|10.2.20.254/24		|Клиентская сеть, VLAN 20|
+|dc1-p1-r013-lf-1	|Po7		|10.2.10.254/24		|Клиентская сеть, VLAN 10|
+|dc1-p1-r013-lf-1	|Po8		|10.2.20.254/24		|Клиентская сеть, VLAN 20|
 |dc1-lfaf-103	|Eth7	|10.2.20.254/24	|Клиентская сеть, VLAN 20|
 |dc1-lfaf-103	|Eth8	|10.2.30.254/24	|Клиентская сеть, VLAN 30|
 | | | | |
@@ -266,17 +333,17 @@ service routing protocols model multi-agent
 !
 interface Ethernet1
    description ### sp1-le101 ###
-   ip address 10.1.1.0/31
+   ip address 10.16.250.0/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet2
    description ### sp1-le102 ###
-   ip address 10.1.1.2/31
+   ip address 10.16.250.2/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet3
    description ### sp1-le103 ###
-   ip address 10.1.1.4/31
+   ip address 10.16.250.4/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Loopback0
@@ -295,7 +362,7 @@ router bgp 65100
    no bgp default ipv4-unicast
    distance bgp 20 200 200
    maximum-paths 8
-   bgp listen range 10.1.1.0/24 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
+   bgp listen range 10.16.250.0/24 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
    neighbor DC1-LEAF peer group
    neighbor DC1-LEAF bfd
    neighbor DC1-LEAF timers 3 9
@@ -316,17 +383,17 @@ service routing protocols model multi-agent
 !
 interface Ethernet1
    description ### sp2-le101 ###
-   ip address 10.1.2.0/31
+   ip address 10.16.251.0/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet2
    description ### sp2-le102 ###
-   ip address 10.1.2.2/31
+   ip address 10.16.251.2/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet3
    description ### sp2-le103 ###
-   ip address 10.1.2.4/31
+   ip address 10.16.251.4/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Loopback0
@@ -345,7 +412,7 @@ router bgp 65100
    no bgp default ipv4-unicast
    distance bgp 20 200 200
    maximum-paths 8
-   bgp listen range 10.1.2.0/24 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
+   bgp listen range 10.16.251.0/24 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
    neighbor DC1-LEAF peer group
    neighbor DC1-LEAF bfd
    neighbor DC1-LEAF timers 3 9
@@ -406,13 +473,13 @@ interface Port-Channel8
 interface Ethernet1
    description ### sp1-le101 ###
    no switchport
-   ip address 10.1.1.1/31
+   ip address 10.16.250.1/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet2
    description ### sp2-le101 ###
    no switchport
-   ip address 10.1.2.1/31
+   ip address 10.16.251.1/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet7
@@ -480,10 +547,10 @@ router bgp 65101
    neighbor DC1-SPINE timers 3 9
    neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
    neighbor DC1-SPINE send-community extended
-   neighbor 10.1.1.0 peer group DC1-SPINE
-   neighbor 10.1.1.0 description ### dc1-spine-1 ###
-   neighbor 10.1.2.0 peer group DC1-SPINE
-   neighbor 10.1.2.0 description ### dc1-spine-2 ###
+   neighbor 10.16.250.0 peer group DC1-SPINE
+   neighbor 10.16.250.0 description ### dc1-spine-1 ###
+   neighbor 10.16.251.0 peer group DC1-SPINE
+   neighbor 10.16.251.0 description ### dc1-spine-2 ###
    !
    vlan 10
       rd auto
@@ -568,13 +635,13 @@ interface Port-Channel8
 interface Ethernet1
    description ### sp1-le102 ###
    no switchport
-   ip address 10.1.1.3/31
+   ip address 10.16.250.3/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet2
    description ### sp2-le102 ###
    no switchport
-   ip address 10.1.2.3/31
+   ip address 10.16.251.3/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet7
@@ -642,10 +709,10 @@ router bgp 65102
    neighbor DC1-SPINE timers 3 9
    neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
    neighbor DC1-SPINE send-community extended
-   neighbor 10.1.1.2 peer group DC1-SPINE
-   neighbor 10.1.1.2 description ### dc1-spine-1 ###
-   neighbor 10.1.2.2 peer group DC1-SPINE
-   neighbor 10.1.2.2 description ### dc1-spine-2 ###
+   neighbor 10.16.250.2 peer group DC1-SPINE
+   neighbor 10.16.250.2 description ### dc1-spine-1 ###
+   neighbor 10.16.251.2 peer group DC1-SPINE
+   neighbor 10.16.251.2 description ### dc1-spine-2 ###
    !
    vlan 10
       rd auto
@@ -714,13 +781,13 @@ interface Port-Channel5
 interface Ethernet1
    description ### sp1-le103 ###
    no switchport
-   ip address 10.1.1.5/31
+   ip address 10.16.250.5/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet2
    description ### sp2-le103 ###
    no switchport
-   ip address 10.1.2.5/31
+   ip address 10.16.251.5/31
    bfd interval 800 min-rx 800 multiplier 3
 !
 interface Ethernet5
@@ -757,12 +824,12 @@ interface Vlan30
 interface Vlan4081
    description ### tenant-1 ###
    vrf tenant-1
-   ip address 10.1.103.241/29
+   ip address 10.16.25003.241/29
 !
 interface Vlan4082
    description ### tenant-2 ###
    vrf tenant-2
-   ip address 10.1.103.249/29
+   ip address 10.16.25003.249/29
 !
 interface Vxlan1
    vxlan source-interface Loopback0
@@ -801,10 +868,10 @@ router bgp 65103
    neighbor DC1-SPINE timers 3 9
    neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
    neighbor DC1-SPINE send-community extended
-   neighbor 10.1.1.4 peer group DC1-SPINE
-   neighbor 10.1.1.4 description ### dc1-spine-1 ###
-   neighbor 10.1.2.4 peer group DC1-SPINE
-   neighbor 10.1.2.4 description ### dc1-spine-2 ###
+   neighbor 10.16.250.4 peer group DC1-SPINE
+   neighbor 10.16.250.4 description ### dc1-spine-1 ###
+   neighbor 10.16.251.4 peer group DC1-SPINE
+   neighbor 10.16.251.4 description ### dc1-spine-2 ###
    !
    vlan 20
       rd auto
@@ -828,18 +895,18 @@ router bgp 65103
       rd 10.0.103.0:4001
       route-target import evpn 4001:4001
       route-target export evpn 4001:4001
-      neighbor 10.1.103.244 peer group DC1-FW
-      neighbor 10.1.103.244 description ### dc1-fw-199 tenant-1 ###
-      neighbor 10.1.103.244 route-map RM-VXLAN-FW-OUT out
+      neighbor 10.16.25003.244 peer group DC1-FW
+      neighbor 10.16.25003.244 description ### dc1-fw-199 tenant-1 ###
+      neighbor 10.16.25003.244 route-map RM-VXLAN-FW-OUT out
       redistribute connected
    !
    vrf tenant-2
       rd 10.0.103.0:4002
       route-target import evpn 4002:4002
       route-target export evpn 4002:4002
-      neighbor 10.1.103.252 peer group DC1-FW
-      neighbor 10.1.103.252 description ### dc1-fw-199 tenant-2 ###
-      neighbor 10.1.103.252 route-map RM-VXLAN-FW-OUT out
+      neighbor 10.16.25003.252 peer group DC1-FW
+      neighbor 10.16.25003.252 description ### dc1-fw-199 tenant-2 ###
+      neighbor 10.16.25003.252 route-map RM-VXLAN-FW-OUT out
       redistribute connected
 ```
 
@@ -870,11 +937,11 @@ interface Loopback0
 !
 interface Vlan4081
    description ### tenant-1 ###
-   ip address 10.1.103.244/29
+   ip address 10.16.25003.244/29
 !
 interface Vlan4082
    description ### tenant-2 ###
-   ip address 10.1.103.252/29
+   ip address 10.16.25003.252/29
 !
 ip routing
 !
@@ -887,10 +954,10 @@ router bgp 65199
    neighbor DC1-LEAF-103 timers 3 9
    neighbor DC1-LEAF-103 password 7 G6bJhHqcFTKz3Im1mSWygg==
    neighbor DC1-LEAF-103 default-originate always
-   neighbor 10.1.103.241 peer group DC1-LEAF-103
-   neighbor 10.1.103.241 description ### dc1-leaf-103 tenant-1 ###
-   neighbor 10.1.103.249 peer group DC1-LEAF-103
-   neighbor 10.1.103.249 description ### dc1-leaf-103 tenant-2 ###
+   neighbor 10.16.25003.241 peer group DC1-LEAF-103
+   neighbor 10.16.25003.241 description ### dc1-leaf-103 tenant-1 ###
+   neighbor 10.16.25003.249 peer group DC1-LEAF-103
+   neighbor 10.16.25003.249 description ### dc1-leaf-103 tenant-2 ###
 ```
 
 - server
@@ -1064,17 +1131,17 @@ Address         Age (sec)  Hardware Addr   Interface
 dc1-fw-199#show interfaces | i address|Vlan
 Vlan4081 is up, line protocol is up (connected)
   Hardware is Vlan, address is 5000.00ae.f703 (bia 5000.00ae.f703)
-  Internet address is 10.1.103.244/29
+  Internet address is 10.16.25003.244/29
   Broadcast address is 255.255.255.255
 Vlan4082 is up, line protocol is up (connected)
   Hardware is Vlan, address is 5000.00ae.f703 (bia 5000.00ae.f703)
-  Internet address is 10.1.103.252/29
+  Internet address is 10.16.25003.252/29
   Broadcast address is 255.255.255.255
 
 dc1-fw-199#show ip arp
 Address         Age (sec)  Hardware Addr   Interface
-10.1.103.241      0:00:01  5000.0003.3766  Vlan4081, Port-Channel1
-10.1.103.249      0:00:02  5000.0003.3766  Vlan4082, Port-Channel1
+10.16.25003.241      0:00:01  5000.0003.3766  Vlan4081, Port-Channel1
+10.16.25003.249      0:00:02  5000.0003.3766  Vlan4082, Port-Channel1
 ```
 
 </details>
@@ -1088,9 +1155,9 @@ BGP summary information for VRF default
 Router identifier 10.0.1.0, local AS number 65100
 Neighbor Status Codes: m - Under maintenance
   Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  10.1.1.1 4 65101           4098      4083    0    0 02:49:22 Estab   1      1
-  10.1.1.3 4 65102           2437      2437    0    0 01:42:37 Estab   1      1
-  10.1.1.5 4 65103           3674      3728    0    0 02:33:37 Estab   1      1
+  10.16.250.1 4 65101           4098      4083    0    0 02:49:22 Estab   1      1
+  10.16.250.3 4 65102           2437      2437    0    0 01:42:37 Estab   1      1
+  10.16.250.5 4 65103           3674      3728    0    0 02:33:37 Estab   1      1
 ```
 ```
 dc1-spine-1#show bgp evpn summary
@@ -1098,9 +1165,9 @@ BGP summary information for VRF default
 Router identifier 10.0.1.0, local AS number 65100
 Neighbor Status Codes: m - Under maintenance
   Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  10.1.1.1 4 65101           4101      4086    0    0 02:49:30 Estab   21     21
-  10.1.1.3 4 65102           2439      2440    0    0 01:42:45 Estab   23     23
-  10.1.1.5 4 65103           3677      3731    0    0 02:33:44 Estab   12     12
+  10.16.250.1 4 65101           4101      4086    0    0 02:49:30 Estab   21     21
+  10.16.250.3 4 65102           2439      2440    0    0 01:42:45 Estab   23     23
+  10.16.250.5 4 65103           3677      3731    0    0 02:33:44 Estab   12     12
 ```
 </details>
 
@@ -1114,9 +1181,9 @@ BGP summary information for VRF default
 Router identifier 10.0.2.0, local AS number 65100
 Neighbor Status Codes: m - Under maintenance
   Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  10.1.2.1 4 65101           4123      4088    0    0 02:49:22 Estab   1      1
-  10.1.2.3 4 65102           2456      2438    0    0 01:42:37 Estab   1      1
-  10.1.2.5 4 65103           3710      3723    0    0 02:33:37 Estab   1      1
+  10.16.251.1 4 65101           4123      4088    0    0 02:49:22 Estab   1      1
+  10.16.251.3 4 65102           2456      2438    0    0 01:42:37 Estab   1      1
+  10.16.251.5 4 65103           3710      3723    0    0 02:33:37 Estab   1      1
 ```
 ```
 dc1-spine-2#show bgp evpn summary
@@ -1124,9 +1191,9 @@ BGP summary information for VRF default
 Router identifier 10.0.2.0, local AS number 65100
 Neighbor Status Codes: m - Under maintenance
   Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  10.1.2.1 4 65101           4126      4091    0    0 02:49:30 Estab   21     21
-  10.1.2.3 4 65102           2459      2441    0    0 01:42:45 Estab   23     23
-  10.1.2.5 4 65103           3713      3726    0    0 02:33:44 Estab   12     12
+  10.16.251.1 4 65101           4126      4091    0    0 02:49:30 Estab   21     21
+  10.16.251.3 4 65102           2459      2441    0    0 01:42:45 Estab   23     23
+  10.16.251.5 4 65103           3713      3726    0    0 02:33:44 Estab   12     12
 ```
 </details>
 
@@ -1139,8 +1206,8 @@ BGP summary information for VRF default
 Router identifier 10.0.101.0, local AS number 65101
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-spine-1 ###      10.1.1.0 4 65100          74055     75074    0    0 02:49:22 Estab   3      3
-  ### dc1-spine-2 ###      10.1.2.0 4 65100          73654     74343    0    0 02:49:22 Estab   3      3
+  ### dc1-spine-1 ###      10.16.250.0 4 65100          74055     75074    0    0 02:49:22 Estab   3      3
+  ### dc1-spine-2 ###      10.16.251.0 4 65100          73654     74343    0    0 02:49:22 Estab   3      3
 ```
 ```
 dc1-leaf-101#show bgp evpn summary
@@ -1148,8 +1215,8 @@ BGP summary information for VRF default
 Router identifier 10.0.101.0, local AS number 65101
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-spine-1 ###      10.1.1.0 4 65100          74059     75077    0    0 02:49:30 Estab   35     35
-  ### dc1-spine-2 ###      10.1.2.0 4 65100          73657     74346    0    0 02:49:30 Estab   35     35
+  ### dc1-spine-1 ###      10.16.250.0 4 65100          74059     75077    0    0 02:49:30 Estab   35     35
+  ### dc1-spine-2 ###      10.16.251.0 4 65100          73657     74346    0    0 02:49:30 Estab   35     35
 ```
 ```
 dc1-leaf-101#show ip bgp vrf all
@@ -1163,13 +1230,13 @@ RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
 AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
- * >      10.0.1.0/32            10.1.1.0              0       -          100     0       65100 i
- * >      10.0.2.0/32            10.1.2.0              0       -          100     0       65100 i
+ * >      10.0.1.0/32            10.16.250.0              0       -          100     0       65100 i
+ * >      10.0.2.0/32            10.16.251.0              0       -          100     0       65100 i
  * >      10.0.101.0/32          -                     -       -          -       0       i
- * >Ec    10.0.102.0/32          10.1.1.0              0       -          100     0       65100 65102 i
- *  ec    10.0.102.0/32          10.1.2.0              0       -          100     0       65100 65102 i
- * >Ec    10.0.103.0/32          10.1.2.0              0       -          100     0       65100 65103 i
- *  ec    10.0.103.0/32          10.1.1.0              0       -          100     0       65100 65103 i
+ * >Ec    10.0.102.0/32          10.16.250.0              0       -          100     0       65100 65102 i
+ *  ec    10.0.102.0/32          10.16.251.0              0       -          100     0       65100 65102 i
+ * >Ec    10.0.103.0/32          10.16.251.0              0       -          100     0       65100 65103 i
+ *  ec    10.0.103.0/32          10.16.250.0              0       -          100     0       65100 65103 i
 BGP routing table information for VRF tenant-1
 Router identifier 10.2.20.254, local AS number 65101
 Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
@@ -1182,8 +1249,8 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
  * >Ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
  *  ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
- * >Ec    10.1.103.240/29        10.0.103.0            0       -          100     0       65100 65103 i
- *  ec    10.1.103.240/29        10.0.103.0            0       -          100     0       65100 65103 i
+ * >Ec    10.16.25003.240/29        10.0.103.0            0       -          100     0       65100 65103 i
+ *  ec    10.16.25003.240/29        10.0.103.0            0       -          100     0       65100 65103 i
  * >      10.2.10.0/24           -                     -       -          -       0       i
  *  Ec    10.2.10.0/24           10.0.102.0            0       -          100     0       65100 65102 i
  *  ec    10.2.10.0/24           10.0.102.0            0       -          100     0       65100 65102 i
@@ -1210,8 +1277,8 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
  * >Ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
  *  ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
- * >Ec    10.1.103.248/29        10.0.103.0            0       -          100     0       65100 65103 i
- *  ec    10.1.103.248/29        10.0.103.0            0       -          100     0       65100 65103 i
+ * >Ec    10.16.25003.248/29        10.0.103.0            0       -          100     0       65100 65103 i
+ *  ec    10.16.25003.248/29        10.0.103.0            0       -          100     0       65100 65103 i
  * >      10.2.30.0/24           -                     -       -          -       0       i
  *  Ec    10.2.30.0/24           10.0.103.0            0       -          100     0       65100 65103 i
  *  ec    10.2.30.0/24           10.0.103.0            0       -          100     0       65100 65103 i
@@ -1303,7 +1370,7 @@ Codes: C - connected, S - static, K - kernel,
 Gateway of last resort:
  B E      0.0.0.0/0 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
 
- B E      10.1.103.240/29 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.16.25003.240/29 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  C        10.2.10.0/24 is directly connected, Vlan10
  B E      10.2.20.102/32 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  C        10.2.20.0/24 is directly connected, Vlan20
@@ -1327,7 +1394,7 @@ Codes: C - connected, S - static, K - kernel,
 Gateway of last resort:
  B E      0.0.0.0/0 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
 
- B E      10.1.103.248/29 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.16.25003.248/29 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  B E      10.2.30.103/32 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  C        10.2.30.0/24 is directly connected, Vlan30
  C        10.2.40.0/24 is directly connected, Vlan40
@@ -1528,13 +1595,13 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.0.103.0            -       100     0       65100 65103 65199 ?
  *  ec    RD: 10.0.103.0:4002 ip-prefix 0.0.0.0/0
                                  10.0.103.0            -       100     0       65100 65103 65199 ?
- * >Ec    RD: 10.0.103.0:4001 ip-prefix 10.1.103.240/29
+ * >Ec    RD: 10.0.103.0:4001 ip-prefix 10.16.25003.240/29
                                  10.0.103.0            -       100     0       65100 65103 i
- *  ec    RD: 10.0.103.0:4001 ip-prefix 10.1.103.240/29
+ *  ec    RD: 10.0.103.0:4001 ip-prefix 10.16.25003.240/29
                                  10.0.103.0            -       100     0       65100 65103 i
- * >Ec    RD: 10.0.103.0:4002 ip-prefix 10.1.103.248/29
+ * >Ec    RD: 10.0.103.0:4002 ip-prefix 10.16.25003.248/29
                                  10.0.103.0            -       100     0       65100 65103 i
- *  ec    RD: 10.0.103.0:4002 ip-prefix 10.1.103.248/29
+ *  ec    RD: 10.0.103.0:4002 ip-prefix 10.16.25003.248/29
                                  10.0.103.0            -       100     0       65100 65103 i
  * >      RD: 10.0.101.0:4001 ip-prefix 10.2.10.0/24
                                  -                     -       -       0       i
@@ -1738,8 +1805,8 @@ BGP summary information for VRF default
 Router identifier 10.0.102.0, local AS number 65102
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-spine-1 ###      10.1.1.2 4 65100          73957     74674    0    0 01:42:37 Estab   3      3
-  ### dc1-spine-2 ###      10.1.2.2 4 65100          73504     73964    0    0 01:42:37 Estab   3      3
+  ### dc1-spine-1 ###      10.16.250.2 4 65100          73957     74674    0    0 01:42:37 Estab   3      3
+  ### dc1-spine-2 ###      10.16.251.2 4 65100          73504     73964    0    0 01:42:37 Estab   3      3
 ```
 ```
 dc1-leaf-102#show bgp evpn summary
@@ -1747,8 +1814,8 @@ BGP summary information for VRF default
 Router identifier 10.0.102.0, local AS number 65102
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-spine-1 ###      10.1.1.2 4 65100          73960     74676    0    0 01:42:44 Estab   33     33
-  ### dc1-spine-2 ###      10.1.2.2 4 65100          73507     73967    0    0 01:42:44 Estab   33     33
+  ### dc1-spine-1 ###      10.16.250.2 4 65100          73960     74676    0    0 01:42:44 Estab   33     33
+  ### dc1-spine-2 ###      10.16.251.2 4 65100          73507     73967    0    0 01:42:44 Estab   33     33
 ```
 ```
 dc1-leaf-102#show ip bgp vrf all
@@ -1762,13 +1829,13 @@ RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
 AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
- * >      10.0.1.0/32            10.1.1.2              0       -          100     0       65100 i
- * >      10.0.2.0/32            10.1.2.2              0       -          100     0       65100 i
- * >Ec    10.0.101.0/32          10.1.1.2              0       -          100     0       65100 65101 i
- *  ec    10.0.101.0/32          10.1.2.2              0       -          100     0       65100 65101 i
+ * >      10.0.1.0/32            10.16.250.2              0       -          100     0       65100 i
+ * >      10.0.2.0/32            10.16.251.2              0       -          100     0       65100 i
+ * >Ec    10.0.101.0/32          10.16.250.2              0       -          100     0       65100 65101 i
+ *  ec    10.0.101.0/32          10.16.251.2              0       -          100     0       65100 65101 i
  * >      10.0.102.0/32          -                     -       -          -       0       i
- * >Ec    10.0.103.0/32          10.1.1.2              0       -          100     0       65100 65103 i
- *  ec    10.0.103.0/32          10.1.2.2              0       -          100     0       65100 65103 i
+ * >Ec    10.0.103.0/32          10.16.250.2              0       -          100     0       65100 65103 i
+ *  ec    10.0.103.0/32          10.16.251.2              0       -          100     0       65100 65103 i
 BGP routing table information for VRF tenant-1
 Router identifier 10.2.20.254, local AS number 65102
 Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
@@ -1781,8 +1848,8 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
  * >Ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
  *  ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
- * >Ec    10.1.103.240/29        10.0.103.0            0       -          100     0       65100 65103 i
- *  ec    10.1.103.240/29        10.0.103.0            0       -          100     0       65100 65103 i
+ * >Ec    10.16.25003.240/29        10.0.103.0            0       -          100     0       65100 65103 i
+ *  ec    10.16.25003.240/29        10.0.103.0            0       -          100     0       65100 65103 i
  * >      10.2.10.0/24           -                     -       -          -       0       i
  *  Ec    10.2.10.0/24           10.0.101.0            0       -          100     0       65100 65101 i
  *  ec    10.2.10.0/24           10.0.101.0            0       -          100     0       65100 65101 i
@@ -1809,8 +1876,8 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
  * >Ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
  *  ec    0.0.0.0/0              10.0.103.0            0       -          100     0       65100 65103 65199 ?
- * >Ec    10.1.103.248/29        10.0.103.0            0       -          100     0       65100 65103 i
- *  ec    10.1.103.248/29        10.0.103.0            0       -          100     0       65100 65103 i
+ * >Ec    10.16.25003.248/29        10.0.103.0            0       -          100     0       65100 65103 i
+ *  ec    10.16.25003.248/29        10.0.103.0            0       -          100     0       65100 65103 i
  * >      10.2.30.0/24           -                     -       -          -       0       i
  *  Ec    10.2.30.0/24           10.0.103.0            0       -          100     0       65100 65103 i
  *  ec    10.2.30.0/24           10.0.103.0            0       -          100     0       65100 65103 i
@@ -1902,7 +1969,7 @@ Codes: C - connected, S - static, K - kernel,
 Gateway of last resort:
  B E      0.0.0.0/0 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
 
- B E      10.1.103.240/29 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.16.25003.240/29 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  C        10.2.10.0/24 is directly connected, Vlan10
  B E      10.2.20.102/32 [20/0] via VTEP 10.0.103.0 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  C        10.2.20.0/24 is directly connected, Vlan20
@@ -1926,7 +1993,7 @@ Codes: C - connected, S - static, K - kernel,
 Gateway of last resort:
  B E      0.0.0.0/0 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
 
- B E      10.1.103.248/29 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.16.25003.248/29 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  B E      10.2.30.103/32 [20/0] via VTEP 10.0.103.0 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
  C        10.2.30.0/24 is directly connected, Vlan30
  C        10.2.40.0/24 is directly connected, Vlan40
@@ -2123,13 +2190,13 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.0.103.0            -       100     0       65100 65103 65199 ?
  *  ec    RD: 10.0.103.0:4002 ip-prefix 0.0.0.0/0
                                  10.0.103.0            -       100     0       65100 65103 65199 ?
- * >Ec    RD: 10.0.103.0:4001 ip-prefix 10.1.103.240/29
+ * >Ec    RD: 10.0.103.0:4001 ip-prefix 10.16.25003.240/29
                                  10.0.103.0            -       100     0       65100 65103 i
- *  ec    RD: 10.0.103.0:4001 ip-prefix 10.1.103.240/29
+ *  ec    RD: 10.0.103.0:4001 ip-prefix 10.16.25003.240/29
                                  10.0.103.0            -       100     0       65100 65103 i
- * >Ec    RD: 10.0.103.0:4002 ip-prefix 10.1.103.248/29
+ * >Ec    RD: 10.0.103.0:4002 ip-prefix 10.16.25003.248/29
                                  10.0.103.0            -       100     0       65100 65103 i
- *  ec    RD: 10.0.103.0:4002 ip-prefix 10.1.103.248/29
+ *  ec    RD: 10.0.103.0:4002 ip-prefix 10.16.25003.248/29
                                  10.0.103.0            -       100     0       65100 65103 i
  * >Ec    RD: 10.0.101.0:4001 ip-prefix 10.2.10.0/24
                                  10.0.101.0            -       100     0       65100 65101 i
@@ -2332,20 +2399,20 @@ BGP summary information for VRF default
 Router identifier 10.0.103.0, local AS number 65103
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-spine-1 ###      10.1.1.4 4 65100          36295     35904    0    0 02:50:16 Estab   3      3
-  ### dc1-spine-2 ###      10.1.2.4 4 65100          36095     35949    0    0 02:50:16 Estab   3      3
+  ### dc1-spine-1 ###      10.16.250.4 4 65100          36295     35904    0    0 02:50:16 Estab   3      3
+  ### dc1-spine-2 ###      10.16.251.4 4 65100          36095     35949    0    0 02:50:16 Estab   3      3
 
 BGP summary information for VRF tenant-1
 Router identifier 10.2.20.254, local AS number 65103
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor     V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-fw-199 tenant-1  10.1.103.244 4 65199          29412     34468    0    0 08:34:07 Estab   1      1
+  ### dc1-fw-199 tenant-1  10.16.25003.244 4 65199          29412     34468    0    0 08:34:07 Estab   1      1
 
 BGP summary information for VRF tenant-2
 Router identifier 10.2.30.254, local AS number 65103
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor     V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-fw-199 tenant-2  10.1.103.252 4 65199          29389     34460    0    0 08:34:08 Estab   1      1
+  ### dc1-fw-199 tenant-2  10.16.25003.252 4 65199          29389     34460    0    0 08:34:08 Estab   1      1
 ```
 ```
 dc1-leaf-103#show bgp evpn summary
@@ -2353,8 +2420,8 @@ BGP summary information for VRF default
 Router identifier 10.0.103.0, local AS number 65103
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-spine-1 ###      10.1.1.4 4 65100          35902     35519    0    0 02:33:44 Estab   44     44
-  ### dc1-spine-2 ###      10.1.2.4 4 65100          35703     35558    0    0 02:33:44 Estab   44     44
+  ### dc1-spine-1 ###      10.16.250.4 4 65100          35902     35519    0    0 02:33:44 Estab   44     44
+  ### dc1-spine-2 ###      10.16.251.4 4 65100          35703     35558    0    0 02:33:44 Estab   44     44
 ```
 ```
 dc1-leaf-103#show ip bgp vrf all
@@ -2368,12 +2435,12 @@ RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
 AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
- * >      10.0.1.0/32            10.1.1.4              0       -          100     0       65100 i
- * >      10.0.2.0/32            10.1.2.4              0       -          100     0       65100 i
- * >Ec    10.0.101.0/32          10.1.2.4              0       -          100     0       65100 65101 i
- *  ec    10.0.101.0/32          10.1.1.4              0       -          100     0       65100 65101 i
- * >Ec    10.0.102.0/32          10.1.1.4              0       -          100     0       65100 65102 i
- *  ec    10.0.102.0/32          10.1.2.4              0       -          100     0       65100 65102 i
+ * >      10.0.1.0/32            10.16.250.4              0       -          100     0       65100 i
+ * >      10.0.2.0/32            10.16.251.4              0       -          100     0       65100 i
+ * >Ec    10.0.101.0/32          10.16.251.4              0       -          100     0       65100 65101 i
+ *  ec    10.0.101.0/32          10.16.250.4              0       -          100     0       65100 65101 i
+ * >Ec    10.0.102.0/32          10.16.250.4              0       -          100     0       65100 65102 i
+ *  ec    10.0.102.0/32          10.16.251.4              0       -          100     0       65100 65102 i
  * >      10.0.103.0/32          -                     -       -          -       0       i
 BGP routing table information for VRF tenant-1
 Router identifier 10.2.20.254, local AS number 65103
@@ -2385,8 +2452,8 @@ RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
 AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
- * >      0.0.0.0/0              10.1.103.244          0       -          100     0       65199 ?
- * >      10.1.103.240/29        -                     -       -          -       0       i
+ * >      0.0.0.0/0              10.16.25003.244          0       -          100     0       65199 ?
+ * >      10.16.25003.240/29        -                     -       -          -       0       i
  * >Ec    10.2.10.0/24           10.0.101.0            0       -          100     0       65100 65101 i
  *  ec    10.2.10.0/24           10.0.101.0            0       -          100     0       65100 65101 i
  *  ec    10.2.10.0/24           10.0.102.0            0       -          100     0       65100 65102 i
@@ -2414,8 +2481,8 @@ RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
 AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
           Network                Next Hop              Metric  AIGP       LocPref Weight  Path
- * >      0.0.0.0/0              10.1.103.252          0       -          100     0       65199 ?
- * >      10.1.103.248/29        -                     -       -          -       0       i
+ * >      0.0.0.0/0              10.16.25003.252          0       -          100     0       65199 ?
+ * >      10.16.25003.248/29        -                     -       -          -       0       i
  * >      10.2.30.0/24           -                     -       -          -       0       i
  *  Ec    10.2.30.0/24           10.0.101.0            0       -          100     0       65100 65101 i
  *  ec    10.2.30.0/24           10.0.101.0            0       -          100     0       65100 65101 i
@@ -2503,9 +2570,9 @@ Codes: C - connected, S - static, K - kernel,
        G  - gRIBI, RC - Route Cache Route
 
 Gateway of last resort:
- B E      0.0.0.0/0 [20/0] via 10.1.103.244, Vlan4081
+ B E      0.0.0.0/0 [20/0] via 10.16.25003.244, Vlan4081
 
- C        10.1.103.240/29 is directly connected, Vlan4081
+ C        10.16.25003.240/29 is directly connected, Vlan4081
  B E      10.2.10.201/32 [20/0] via VTEP 10.0.101.0 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
                                 via VTEP 10.0.102.0 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
  B E      10.2.10.0/24 [20/0] via VTEP 10.0.101.0 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
@@ -2531,9 +2598,9 @@ Codes: C - connected, S - static, K - kernel,
        G  - gRIBI, RC - Route Cache Route
 
 Gateway of last resort:
- B E      0.0.0.0/0 [20/0] via 10.1.103.252, Vlan4082
+ B E      0.0.0.0/0 [20/0] via 10.16.25003.252, Vlan4082
 
- C        10.1.103.248/29 is directly connected, Vlan4082
+ C        10.16.25003.248/29 is directly connected, Vlan4082
  B E      10.2.30.201/32 [20/0] via VTEP 10.0.102.0 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
                                 via VTEP 10.0.101.0 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
  C        10.2.30.0/24 is directly connected, Vlan30
@@ -2756,9 +2823,9 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  -                     -       100     0       65199 ?
  * >      RD: 10.0.103.0:4002 ip-prefix 0.0.0.0/0
                                  -                     -       100     0       65199 ?
- * >      RD: 10.0.103.0:4001 ip-prefix 10.1.103.240/29
+ * >      RD: 10.0.103.0:4001 ip-prefix 10.16.25003.240/29
                                  -                     -       -       0       i
- * >      RD: 10.0.103.0:4002 ip-prefix 10.1.103.248/29
+ * >      RD: 10.0.103.0:4002 ip-prefix 10.16.25003.248/29
                                  -                     -       -       0       i
  * >Ec    RD: 10.0.101.0:4001 ip-prefix 10.2.10.0/24
                                  10.0.101.0            -       100     0       65100 65101 i
@@ -2870,14 +2937,14 @@ dc1-leaf-103#show ip arp vrf tenant-1
 Address         Age (sec)  Hardware Addr   Interface
 10.2.20.102       0:03:19  0050.7966.6808  Vlan20, Ethernet7
 10.2.20.201             -  5000.0088.fe27  Vlan20, Vxlan1
-10.1.103.244      0:00:02  5000.00ae.f703  Vlan4081, Port-Channel5
+10.16.25003.244      0:00:02  5000.00ae.f703  Vlan4081, Port-Channel5
 ```
 ```
 dc1-leaf-103#show ip arp vrf tenant-2
 Address         Age (sec)  Hardware Addr   Interface
 10.2.30.103       0:01:11  0050.7966.6809  Vlan30, Ethernet8
 10.2.30.201             -  5000.0088.fe27  Vlan30, Vxlan1
-10.1.103.252      0:00:02  5000.00ae.f703  Vlan4082, Port-Channel5
+10.16.25003.252      0:00:02  5000.00ae.f703  Vlan4082, Port-Channel5
 dc1-leaf-103#
 ```
 </details>
@@ -2912,8 +2979,8 @@ BGP summary information for VRF default
 Router identifier 10.0.199.0, local AS number 65199
 Neighbor Status Codes: m - Under maintenance
   Description              Neighbor         V  AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
-  ### dc1-leaf-103 tenant- 10.1.103.241     4  65103          34168     29163    0    0 08:21:32 Estab   2      2
-  ### dc1-leaf-103 tenant- 10.1.103.249     4  65103          34158     29139    0    0 08:21:32 Estab   2      2
+  ### dc1-leaf-103 tenant- 10.16.25003.241     4  65103          34168     29163    0    0 08:21:32 Estab   2      2
+  ### dc1-leaf-103 tenant- 10.16.25003.249     4  65103          34158     29139    0    0 08:21:32 Estab   2      2
 ```
 ```
 dc1-fw-199#show ip bgp
@@ -2925,10 +2992,10 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
          Network                Next Hop            Metric  LocPref Weight  Path
- * >     10.2.10.0/24           10.1.103.241          0       100     0       65103 65100 65101 i
- * >     10.2.20.0/24           10.1.103.241          0       100     0       65103 i
- * >     10.2.30.0/24           10.1.103.249          0       100     0       65103 i
- * >     10.2.40.0/24           10.1.103.249          0       100     0       65103 65100 65101 i
+ * >     10.2.10.0/24           10.16.25003.241          0       100     0       65103 65100 65101 i
+ * >     10.2.20.0/24           10.16.25003.241          0       100     0       65103 i
+ * >     10.2.30.0/24           10.16.25003.249          0       100     0       65103 i
+ * >     10.2.40.0/24           10.16.25003.249          0       100     0       65103 65100 65101 i
 ```
 ```
 dc1-fw-199#show ip route
@@ -2949,12 +3016,12 @@ Codes: C - connected, S - static, K - kernel,
 Gateway of last resort is not set
 
  C        10.0.199.0/32 is directly connected, Loopback0
- C        10.1.103.240/29 is directly connected, Vlan4081
- C        10.1.103.248/29 is directly connected, Vlan4082
- B E      10.2.10.0/24 [20/0] via 10.1.103.241, Vlan4081
- B E      10.2.20.0/24 [20/0] via 10.1.103.241, Vlan4081
- B E      10.2.30.0/24 [20/0] via 10.1.103.249, Vlan4082
- B E      10.2.40.0/24 [20/0] via 10.1.103.249, Vlan4082
+ C        10.16.25003.240/29 is directly connected, Vlan4081
+ C        10.16.25003.248/29 is directly connected, Vlan4082
+ B E      10.2.10.0/24 [20/0] via 10.16.25003.241, Vlan4081
+ B E      10.2.20.0/24 [20/0] via 10.16.25003.241, Vlan4081
+ B E      10.2.30.0/24 [20/0] via 10.16.25003.249, Vlan4082
+ B E      10.2.40.0/24 [20/0] via 10.16.25003.249, Vlan4082
 ```
 </details>
 
@@ -3332,8 +3399,8 @@ _client-102 подключен к leaf-103, поэтому в трассиров
 client-102> trace 10.2.30.103 - client-103
 trace to 10.2.30.103, 8 hops max, press Ctrl+C to stop
  1   10.2.20.254   7.846 ms  5.423 ms  5.018 ms - leaf-103
- 2   10.1.103.244   21.003 ms  20.361 ms  19.515 ms - fw-199
- 3   10.1.103.249   32.576 ms  39.130 ms  38.124 ms - leaf-103
+ 2   10.16.25003.244   21.003 ms  20.361 ms  19.515 ms - fw-199
+ 3   10.16.25003.249   32.576 ms  39.130 ms  38.124 ms - leaf-103
  4   *10.2.30.103   50.223 ms (ICMP type:3, code:3, Destination port unreachable) - client-103
 ```
 
@@ -3344,8 +3411,8 @@ client-104#traceroute 10.2.20.102  - client-102
 traceroute to 10.2.20.102 (10.2.20.102), 30 hops max, 60 byte packets
  1  _gateway (10.2.40.254)  138.553 ms  161.096 ms  168.617 ms - leaf-101/102
  2  10.2.30.254 (10.2.30.254)  175.692 ms  188.585 ms  194.125 ms - leaf-103 (видимо)
- 3  10.1.103.252 (10.1.103.252)  230.832 ms  241.484 ms  257.261 ms - fw-199
- 4  10.1.103.241 (10.1.103.241)  438.936 ms  435.455 ms  454.067 ms - leaf-103
+ 3  10.16.25003.252 (10.16.25003.252)  230.832 ms  241.484 ms  257.261 ms - fw-199
+ 4  10.16.25003.241 (10.16.25003.241)  438.936 ms  435.455 ms  454.067 ms - leaf-103
  5  10.2.20.102 (10.2.20.102)  465.384 ms  509.310 ms  546.384 ms - client-102
 ```
 </details>
