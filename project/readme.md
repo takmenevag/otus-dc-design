@@ -7,7 +7,7 @@
 
 ### Распределение адресного пространства
 <details>
-  <summary>Описапние распределения IP-адресов </summary>
+  <summary>Описание распределения IP-адресов </summary>
 
 #### Описание:
 - для площадки DC1, DC2 и DC**I** испольузется блок IP-адресов 10.Х.0.0/12
@@ -345,14 +345,19 @@ dcX-pX-rXXX-XX-X
 описание
 </details>
 
-### Cхема сети
+### Cхема решения
+<details>
+  <summary>Cхема решения</summary>
+
 ![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/scheme/lab8_scheme.PNG "Схема стенда")
+</details>
+
 
 ### Параметы VXLAN в Overlay-сети 
 <details>
   <summary>Описание параметров</summary>
   
-#### В решении используется два tenant, возможно масштабирование путем увеличения числа tenant
+#### В решении используется два tenant
 |VRF	|Тип VNI |Номер VNI	|Номер VLAN	|Значение RT| Значение RD|
 |:-			|:-		|:-		|:-		|:-			|:-|
 |tenant-1	|L3VNI	|4001	|4001	|4001:4001	|RID:4001|
