@@ -1,7 +1,7 @@
 # Итоговая работа по курсу
 [**Вернуться обратно**](https://github.com/takmenevag/otus-dc-design/tree/main/)
 ## Задачи
-- организация геораспределенной отказоустойчивой сети передачи данных центра обработки данных с использованием технологии VXLAN BGP EVPN
+- организация геораспределенной отказоустойчивой сети передачи данных центра обработки данных с использованием технологии VXLAN
 
 ## Решение
 
@@ -53,6 +53,10 @@
 |10.8.0.0/14	|сервисы DC-независимые|
 |10.12.0.0/14	|резерв сервисы|
 |||
+|10.0.0.0/16	|DCI транспорт|
+|10.0.0.0/24	|транспорт|
+|10.0.1.0/24	|резерв транспорт|
+|||
 |10.8.0.0/14	|DCI сервисы|
 |10.8.0.0/16	|сервисы|
 |10.9.0.0/16	|резерв|
@@ -75,15 +79,57 @@
 |10.28.0.0/14	|резерв|
 |||
 |10.16.0.0/14	|POD1|
-|10.16.0.0/16	|Cеть|
-|10.17.0.0/16	|ТШ+резевр|
+|10.16.0.0/16	|Cеть+резевр|
+|10.17.0.0/16	|резевр|
 |10.18.0.0/15	|резерв|
 |||
-|10.16.0.0/14	|POD1|
-|10.16.0.0/16	|Cеть|
-|10.17.0.0/16	|ТШ+резевр|
-|10.18.0.0/15	|резерв|
+|10.16.0.0/16	|Cеть+резевр|
+|…					|…|
+|10.16.241.0/24		|dc1-p1-r002-blf-1, r012-blf-1|
+|10.16.242.0/24		|резерв|
+|10.16.243.0/24		|резерв|
+|10.16.244.0/24		|резерв|
+|10.16.245.0/24		|резерв|
+|10.16.246.0/24		|резерв|
+|10.16.247.0/24		|резерв|
+|10.16.248.0/24		|резерв| 
+|10.16.249.0/24		|dc1-p1-r009-fw-1, r019-fw-1|
+|10.16.250.0/25		|dc1-p1-r002-sp-1|
+|10.16.250.128/25	|резерв spine|
+|10.16.251.0/25		|dc1-p1-r012-sp-1|
+|10.16.251.128/25	|резерв spine|
+|10.16.252.0/25		|резерв spine|
+|10.16.252.128/25	|резерв spine|
+|10.16.253.0/25		|резерв spine|
+|10.16.253.128/25	|резерв spine|
+|10.16.254.0/23		|loopback|
+|||
+|10.16.254.0/23		|loopback|
+|10.16.254.0		|резерв|
+|10.16.254.1		|dc1-p1-r002-sp-1|
+|10.16.254.2		|dc1-p1-r012-sp-1|
+|10.16.254.3		|резерв spine|
+|10.16.254.4		|резерв spine|
+|10.16.254.5		|резерв spine|
+|10.16.254.6		|резерв spine|
+|10.16.254.7		|резерв spine|
+|10.16.254.8		|резерв spine|
+|10.16.254.9		|резерв ss|
+|10.16.254.10		|резерв ss|
+|10.16.254.11		|dc1-p1-r003-lf-1|
+|10.16.254.12		|dc1-p1-r003-lf-2|
+|10.16.254.13		|dc1-p1-r013-lf-1|
+|10.16.254.14		|dc1-p1-r013-lf-2|
+|…					|…|
+|10.16.254.187		|dc1-p1-r002-blf-1|
+|10.16.254.188		|dc1-p1-r012-blf-1|
+|10.16.254.189		|резерв boleaf|
+|10.16.254.190		|резерв boleaf|
+|10.16.254.191		|dc1-p1-r009-fw-1|
+
 ---
+#### IP-блоки DC2
+*************************************************
 
 </details>
 
@@ -95,9 +141,8 @@
 - для решения 2xDC, 2xPOD или 4xDC, 1xPOD с leaf < 70 шт. используется 2 байтные номера AS
 - для решения с leaf > 70 шт. или других комбинаций DC/POD используется 4 байтные номера AS
 
-
 В связи с чем ниже приведены 2 варианта распределения номеров AS \
-Для лабы взяты 2 байтные номера AS для облегчения диагностики
+Для лабы взята 2 байтные номера AS для облегчения диагностики
 
 ---  
 #### Для случая 2xDC, 2xPOD или 4xDC, 1xPOD, leaf < 70 шт.
@@ -202,6 +247,7 @@ dcX-pX-rXXX-XX-X
 </details>
 
 ### IP-адресация оборудования и подсетей
+
 <details>
   <summary>IP-адресации DC1</summary>
   
@@ -227,6 +273,7 @@ dcX-pX-rXXX-XX-X
 |dc1-p1-r003-lf-1	|Loopback0	|10.16.254.11/32 	|-|
 |dc1-p1-r003-lf-1	|Eth1		|10.16.250.1/31		|sp1-lf.11|
 |dc1-p1-r003-lf-1	|Eth2		|10.16.251.1/31		|sp2-lf.11|
+| | | | |
 |dc1-p1-r003-lf-2	|Loopback0	|10.16.254.12/32 		|-|
 |dc1-p1-r003-lf-2	|Eth1		|10.16.250.3/31		|sp1-lf.12|
 |dc1-p1-r003-lf-2	|Eth2		|10.16.251.3/31		|sp2-lf.12|
@@ -234,6 +281,7 @@ dcX-pX-rXXX-XX-X
 |dc1-p1-r013-lf-1	|Loopback0	|10.16.254.13/32 	|-|
 |dc1-p1-r013-lf-1	|Eth1		|10.16.250.5/31		|sp1-lf.13|
 |dc1-p1-r013-lf-1	|Eth2		|10.16.251.5/31		|sp2-lf.13|
+| | | | |
 |dc1-p1-r013-lf-2	|Loopback0	|10.16.254.14/32 	|-|
 |dc1-p1-r013-lf-2	|Eth1		|10.16.250.7/31		|sp1-lf.14|
 |dc1-p1-r013-lf-2	|Eth2		|10.16.251.7/31		|sp2-lf.14|
@@ -241,6 +289,7 @@ dcX-pX-rXXX-XX-X
 |dc1-p1-r002-blf-1	|Loopback0	|10.16.254.187/32 	|-|
 |dc1-p1-r002-blf-1	|Eth1		|10.16.250.125/31	|sp1-blf.187|
 |dc1-p1-r002-blf-1	|Eth2		|10.16.251.125/31	|sp2-blf.187|
+| | | | |
 |dc1-p1-r012-blf-1	|Loopback0	|10.16.254.188/32 	|-|
 |dc1-p1-r012-blf-1	|Eth1		|10.16.250.127/31	|sp1-blf.188|
 |dc1-p1-r012-blf-1	|Eth2		|10.16.251.127/31	|sp2-blf.188|
@@ -260,6 +309,9 @@ dcX-pX-rXXX-XX-X
 |dc1-server-201	|Po7		|10.8.30.201/24	|Клиентская сеть, VLAN 30|
 </details>
 
+----
+IP-адресации DC2
+**********************************
 
 ### Описание решения для Underlay-сети
 
@@ -388,20 +440,10 @@ dcX-pX-rXXX-XX-X
 |1	|dc1-p1-r003-lf-2 	|Po7	|0000:0101:0011:0007:0000 	|01:01:00:11:00:07 	|0101.0011.0007|
 |1	|dc1-p1-r003-lf-2 	|Po8	|0000:0101:0011:0008:0000 	|01:01:00:11:00:08 	|0101.0011.0008|
 |1	|dc1-p1-r013-lf-1 	|Po7	|0000:0101:0013:0007:0000 	|01:01:00:13:00:07 	|0101.0013.0007|
-|1	|dc1-p1-r013-lf-1 	|Po8	|0000:0101:0013:0008:0000 	|01:01:00:13:00:08 	|0101.0013.0008|
 |1	|dc1-p1-r013-lf-2 	|Po7	|0000:0101:0013:0007:0000 	|01:01:00:13:00:07 	|0101.0013.0007|
-|1	|dc1-p1-r013-lf-2 	|Po8	|0000:0101:0013:0008:0000 	|01:01:00:13:00:08 	|0101.0013.0008|
 |	|	|	|	|	|
 |2	|dc2-p1-r003-lf-1 	|Po7	|0000:0201:0011:0007:0000 	|02:01:00:11:00:07 	|0201.0011.0007|
-|2	|dc2-p1-r003-lf-1 	|Po8	|0000:0201:0011:0008:0000 	|02:01:00:11:00:08 	|0201.0011.0008|
 |2	|dc2-p1-r003-lf-2 	|Po7	|0000:0201:0011:0007:0000 	|02:01:00:11:00:07 	|0201.0011.0007|
-|2	|dc2-p1-r003-lf-2 	|Po8	|0000:0201:0011:0008:0000 	|02:01:00:11:00:08 	|0201.0011.0008|
-|2	|dc2-p1-r013-lf-1 	|Po7	|0000:0201:0013:0007:0000 	|02:01:00:13:00:07 	|0201.0013.0007|
-|2	|dc2-p1-r013-lf-1 	|Po8	|0000:0201:0013:0008:0000 	|02:01:00:13:00:08 	|0201.0013.0008|
-|2	|dc2-p1-r013-lf-2 	|Po7	|0000:0201:0013:0007:0000 	|02:01:00:13:00:07 	|0201.0013.0007|
-|2	|dc2-p1-r013-lf-2 	|Po8	|0000:0201:0013:0008:0000 	|02:01:00:13:00:08 	|0201.0013.0008|
-
-**!!!! border leaf**
 
 </details>
 
@@ -454,19 +496,9 @@ dcX-pX-rXXX-XX-X
 
 ```
 
-- dc1-p1-r009-fw-1 (fw-2)
+- dc1-p1-r019-fw-1 (fw-2)
 ```
-
-```
-
-- dc1-p1-r010-br-1 (br-1)
-```
-
-```
-
-- dc1-p1-r020-br-1 (br-2)
-```
-
+по факту отсутствует, т.к. кластер эмулируется одним устройством
 ```
 
 - dc1-vlX-s201
@@ -474,119 +506,283 @@ dcX-pX-rXXX-XX-X
 
 ```
 
-- dc1-vl10-c101
+- dc1-vlx-c101
 ```
 
 ```
 
-- dc1-vl30-c101
+- dc1-vl10-h151
 ```
 
-```
-
-- dc1-vl40-c101
-```
-
-```
-</details>
-
-
-### Проверка взаимодействия
-
-<details>
-  <summary>вывод ip/mac хостов </summary>
-  
-```
-client-102> show ip all
-NAME   IP/MASK              GATEWAY           MAC                DNS
-client-10.8.20.102/24       10.8.20.254       00:50:79:66:68:08  
-
-client-102> show arp
-00:00:00:00:ca:fe  10.8.20.254 expires in 101 seconds 
-```
-```
-client-103> show ip all
-NAME   IP/MASK              GATEWAY           MAC                DNS
-client-10.8.30.103/24       10.8.30.254       00:50:79:66:68:09  
-
-client-103> show arp        
-00:00:00:00:ca:fe  10.8.30.254 expires in 114 seconds 
-```
-```
-client-104#show interfaces | i address|Vlan
-.....
-Vlan40 is up, line protocol is up (connected)
-  Hardware is Vlan, address is 5000.0045.abdf (bia 5000.0045.abdf)
-  Internet address is 10.8.40.104/24
-  Broadcast address is 255.255.255.255
-  
-client-104#show ip arp
-Address         Age (sec)  Hardware Addr   Interface
-10.8.40.254       3:06:47  0000.0000.cafe  Vlan40, Port-Channel8
-```
-```
-server-201#show interfaces | i address|Vlan
-....
-Vlan10 is up, line protocol is up (connected)
-  Hardware is Vlan, address is 5000.0088.fe27 (bia 5000.0088.fe27)
-  Internet address is 10.8.10.201/24
-  Broadcast address is 255.255.255.255
-Vlan20 is up, line protocol is up (connected)
-  Hardware is Vlan, address is 5000.0088.fe27 (bia 5000.0088.fe27)
-  Internet address is 10.8.20.201/24
-  Broadcast address is 255.255.255.255
-Vlan30 is up, line protocol is up (connected)
-  Hardware is Vlan, address is 5000.0088.fe27 (bia 5000.0088.fe27)
-  Internet address is 10.8.30.201/24
-  Broadcast address is 255.255.255.255
-
-server-201#show ip arp vrf all
-VRF: default
-Address         Age (sec)  Hardware Addr   Interface
-
-VRF: vlan-10
-Address         Age (sec)  Hardware Addr   Interface
-10.8.10.254       2:30:04  0000.0000.cafe  Vlan10, Port-Channel7
-
-VRF: vlan-20
-Address         Age (sec)  Hardware Addr   Interface
-10.8.20.102       0:12:21  0050.7966.6808  Vlan20, not learned
-10.8.20.254       1:51:42  0000.0000.cafe  Vlan20, Port-Channel7
-
-VRF: vlan-30
-Address         Age (sec)  Hardware Addr   Interface
-10.8.30.103       0:11:50  0050.7966.6809  Vlan30, not learned
-10.8.30.254       2:25:11  0000.0000.cafe  Vlan30, Port-Channel7
-```
-```
-dc1-fw-199#show interfaces | i address|Vlan
-Vlan4081 is up, line protocol is up (connected)
-  Hardware is Vlan, address is 5000.00ae.f703 (bia 5000.00ae.f703)
-  Internet address is 10.16.25003.244/29
-  Broadcast address is 255.255.255.255
-Vlan4082 is up, line protocol is up (connected)
-  Hardware is Vlan, address is 5000.00ae.f703 (bia 5000.00ae.f703)
-  Internet address is 10.16.25003.252/29
-  Broadcast address is 255.255.255.255
-
-dc1-fw-199#show ip arp
-Address         Age (sec)  Hardware Addr   Interface
-10.16.25003.241      0:00:01  5000.0003.3766  Vlan4081, Port-Channel1
-10.16.25003.249      0:00:02  5000.0003.3766  Vlan4082, Port-Channel1
 ```
 
 </details>
 
 <details>
-  <summary>проверки spine-1</summary>
+  <summary>Команды для настройки DC2 </summary>
+
+- dc2-p1-r002-sp-1 (spine-1)
+```
+
+```
+- dc2-p1-r012-sp-1 (spine-2)
+```
+
+```
+
+- dc2-p1-r003-lf-1 (leaf-11)
+```
+
+```
+
+- dc2-p1-r003-lf-2 (leaf-12)
+```
+
+```
+
+- dc2-p1-r013-lf-1 (leaf-13)
+```
+
+```
+
+- dc2-p1-r013-lf-1 (leaf-14)
+```
+
+```
+
+- dc2-p1-r002-lf-1 (boleaf-187)
+```
+
+```
+
+- dc2-p1-r012-lf-1 (boleaf-188)
+```
+
+```
+
+- dc2-p1-r009-fw-1 (fw-1)
+```
+
+```
+
+- dc2-p1-r019-fw-1 (fw-2)
+```
+по факту отсутствует, т.к. кластер эмулируется одним устройством
+```
+
+- dc2-vlX-s201
+```
+
+```
+
+- dc2-vlx-c101
+```
+
+```
+
+- dc2-vl10-h151
+```
+
+```
+
+</details>
+
+### Вывод ip/mac хостов
+
+<details>
+  <summary>Вывод ip/mac хостов </summary>
   
 ```
 
 ```
+
+</details>
+
+### Проверка взаимодействия DC1
+
+<details>
+  <summary>Проверки dc1-p1-r002-sp-1 (spine-1)</summary>
+  
+```
+
+```
+
 </details>
 
 <details>
-  <summary>трассировка между VRF</summary>
+  <summary>Проверки dc1-p1-r012-sp-1 (spine-2)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r003-lf-1 (leaf-11)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r003-lf-2 (leaf-12)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r013-lf-1 (leaf-13)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r013-lf-1 (leaf-14)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r002-lf-1 (boleaf-187)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r012-lf-1 (boleaf-188)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-p1-r009-fw-1 (fw-1)</summary>
+  
+```
+
+```
+
+</details>
+
+### Проверка взаимодействия DC2
+
+
+<details>
+  <summary>Проверки dc2-p1-r002-sp-1 (spine-1)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r012-sp-1 (spine-2)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r003-lf-1 (leaf-11)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r003-lf-2 (leaf-12)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r013-lf-1 (leaf-13)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r013-lf-1 (leaf-14)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r002-lf-1 (boleaf-187)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r012-lf-1 (boleaf-188)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc2-p1-r009-fw-1 (fw-1)</summary>
+  
+```
+
+```
+
+</details>
+
+<details>
+  <summary>ping внутри и между VRF</summary>
+
+- из VRF tenant-1 в VRF tenant-2 \
+_client-102 подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199_
+```
+
+```
+
+- из VRF tenant-2 в VRF tenant-2 \
+_client-104 подключен к leaf-101, поэтому в трассировке еще leaf-103_
+```
+```
+</details>
+
+
+<details>
+  <summary>Трассировка внутри и между VRF</summary>
 
 - из VRF tenant-1 в VRF tenant-2 \
 _client-102 подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199_
