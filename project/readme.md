@@ -14089,21 +14089,30 @@ dc2-vlx-s202#
 </details>
 
 ### Итоговые конфигурации оборудования DC1
-- [dc1-p1-r002-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-1.txt)
-- [dc1-p1-r012-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-2.txt)
-- [dc1-p1-r003-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-101.txt)
-- [dc1-p1-r003-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-102.txt)
-- [dc1-p1-r013-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-101.txt)
-- [dc1-p1-r013-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-102.txt)
-
-- [dc1-fw-199](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-fw-199.txt)
-- [dc1-client-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-102.txt)
-- [dc1-client-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-103.txt)
-- [dc1-client-104](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-104.txt)
-- [dc1-server-201](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-server-201.txt)
----
+- [dc1-p1-r002-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r002-sp-1.txt)
+- [dc1-p1-r012-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r012-sp-1.txt)
+- [dc1-p1-r003-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r003-lf-1.txt)
+- [dc1-p1-r003-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r003-lf-2.txt)
+- [dc1-p1-r013-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r013-lf-1.txt)
+- [dc1-p1-r013-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r013-lf-2.txt)
+- [dc1-p1-r002-blf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r002-blf-1.txt)
+- [dc1-p1-r012-blf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r012-blf-1.txt)
+- [dc1-p1-r009-fw-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-p1-r009-fw-1.txt)
+- [dc1-vlx-s201](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-vlx-s201.txt)
+- [dc1-vlx-c101](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-vlx-c101.txt)
+- [dc1-vlx-h151](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc1-vlx-h151.txt)
 
 ### Итоговые конфигурации оборудования DC2
+- [dc2-p1-r002-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r002-sp-1.txt)
+- [dc2-p1-r012-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r012-sp-1.txt)
+- [dc2-p1-r003-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r003-lf-1.txt)
+- [dc2-p1-r003-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r003-lf-2.txt)
+- [dc2-p1-r002-blf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r002-blf-1.txt)
+- [dc2-p1-r012-blf-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r012-blf-1.txt)
+- [dc2-p1-r009-fw-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r009-fw-1.txt)
+- [dc2-vlx-s202](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-vlx-s202.txt)
+
+
 ---
 
 [**Вернуться обратно**](https://github.com/takmenevag/otus-dc-design/tree/main/)
