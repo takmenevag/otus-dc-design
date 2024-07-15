@@ -1,5 +1,30 @@
 
+dc1-vlx-s201#ter len 0
+dc1-vlx-s201#show run
+Building configuration...
+
+Current configuration : 2317 bytes
+!
+! Last configuration change at 13:23:40 UTC Thu Jul 11 2024
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
 hostname dc1-vlx-s201
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
 !
 vtp mode transparent
 !
@@ -23,8 +48,18 @@ ip vrf vlan40
  route-target export 40:40
  route-target import 40:40
 !
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
 spanning-tree mode pvst
+spanning-tree extend system-id
 no spanning-tree vlan 10,20,30,40
+!
 !
 vlan 10
  name NET-10.8.10.0/24
@@ -37,6 +72,19 @@ vlan 30
 !
 vlan 40
  name NET-10.8.40.0/24
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
 !
 interface Port-channel7
  description ### uplink ###
@@ -52,6 +100,12 @@ interface Ethernet0/1
  switchport trunk encapsulation dot1q
  switchport mode trunk
  channel-group 7 mode active
+!
+interface Ethernet0/2
+ shutdown
+!
+interface Ethernet0/3
+ shutdown
 !
 interface Vlan10
  ip vrf forwarding vlan10
@@ -73,7 +127,36 @@ interface Vlan40
  ip address 10.8.40.201 255.255.255.0
  arp timeout 250
 !
+ip forward-protocol nd
+!
+no ip http server
+!
 ip route vrf vlan10 0.0.0.0 0.0.0.0 10.8.10.254
 ip route vrf vlan20 0.0.0.0 0.0.0.0 10.8.20.254
 ip route vrf vlan30 0.0.0.0 0.0.0.0 10.8.30.254
 ip route vrf vlan40 0.0.0.0 0.0.0.0 10.8.40.254
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 30 0
+ privilege level 15
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport preferred none
+ transport input all
+!
+!
+!
+end
+
+dc1-vlx-s201#
