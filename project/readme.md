@@ -14064,7 +14064,6 @@ VRF info: (vrf in name/id, vrf out name/id)
   6 10.8.10.101 267 msec *  271 msec
 dc2-vlx-s202#
 ```
-
 </details>
 
 ### Масштабирование решение
