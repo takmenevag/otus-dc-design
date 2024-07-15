@@ -619,7 +619,7 @@ dcX-pX-rXXX-XX-X
 <details>
   <summary>Cхема решения</summary>
 
-![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/scheme/lab8_scheme.PNG "Схема стенда")
+![Изображение](https://github.com/takmenevag/otus-dc-design/blob/main/project/other/takmenev_project_scheme.PNG "Схема решения")
 </details>
 
 
@@ -1266,7 +1266,7 @@ router bgp 65113
       redistribute connected
 ```
 
-- dc1-p1-r013-lf-1 (leaf-14)
+- dc1-p1-r013-lf-2 (leaf-14)
 ```
 service routing protocols model multi-agent
 !
@@ -14089,11 +14089,13 @@ dc2-vlx-s202#
 </details>
 
 ### Итоговые конфигурации оборудования DC1
-- [dc1-spine-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-1.txt)
-- [dc1-spine-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-2.txt)
-- [dc1-leaf-101](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-101.txt)
-- [dc1-leaf-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-102.txt)
-- [dc1-leaf-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-103.txt)
+- [dc1-p1-r002-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-1.txt)
+- [dc1-p1-r012-sp-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-spine-2.txt)
+- [dc1-p1-r003-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-101.txt)
+- [dc1-p1-r003-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-102.txt)
+- [dc1-p1-r013-lf-1](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-101.txt)
+- [dc1-p1-r013-lf-2](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-leaf-102.txt)
+
 - [dc1-fw-199](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-fw-199.txt)
 - [dc1-client-102](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-102.txt)
 - [dc1-client-103](https://github.com/takmenevag/otus-dc-design/blob/main/labs/lab8/config/dc1-client-103.txt)
