@@ -3091,7 +3091,64 @@ Vlan40 is up, line protocol is up
   <summary>Проверки dc1-p1-r002-sp-1 (spine-1)</summary>
   
 ```
+dc1-p1-r002-sp-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.1, local AS number 65101
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.250.1   4 65111            699       677    0    0 00:24:29 Estab   1      1
+  10.16.250.3   4 65112            712       675    0    0 00:24:30 Estab   1      1
+  10.16.250.5   4 65113            697       684    0    0 00:24:29 Estab   1      1
+  10.16.250.7   4 65114            699       689    0    0 00:24:29 Estab   1      1
+  10.16.250.125 4 65187            702       685    0    0 00:24:29 Estab   8      8
+  10.16.250.127 4 65187            684       651    0   19 00:24:29 Estab   8      8
+```
+```
+dc1-p1-r002-sp-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.1, local AS number 65101
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.250.1   4 65111            707       685    0    0 00:24:51 Estab   27     27
+  10.16.250.3   4 65112            721       683    0    0 00:24:51 Estab   27     27
+  10.16.250.5   4 65113            705       692    0    0 00:24:51 Estab   12     12
+  10.16.250.7   4 65114            708       698    0    0 00:24:51 Estab   12     12
+  10.16.250.125 4 65187            710       693    0    0 00:24:50 Estab   52     52
+  10.16.250.127 4 65187            691       660    0   19 00:24:51 Estab   52     52
+```
+```
+dc1-p1-r002-sp-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.1, local AS number 65101
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         -                     -       -          -       0       i
+ * >      10.16.254.11/32        10.16.250.1           0       -          100     0       65111 i
+ * >      10.16.254.12/32        10.16.250.3           0       -          100     0       65112 i
+ * >      10.16.254.13/32        10.16.250.5           0       -          100     0       65113 i
+ * >      10.16.254.14/32        10.16.250.7           0       -          100     0       65114 i
+ * >Ec    10.16.254.187/32       10.16.250.127         0       -          100     0       65187 i
+ *  ec    10.16.254.187/32       10.16.250.125         0       -          100     0       65187 i
+ * >Ec    10.16.254.188/32       10.16.250.127         0       -          100     0       65187 i
+ *  ec    10.16.254.188/32       10.16.250.125         0       -          100     0       65187 i
+ * >Ec    10.32.254.1/32         10.16.250.127         0       -          100     0       65187 65287 65201 i
+ *  ec    10.32.254.1/32         10.16.250.125         0       -          100     0       65187 65287 65201 i
+ * >Ec    10.32.254.2/32         10.16.250.127         0       -          100     0       65187 65287 65201 i
+ *  ec    10.32.254.2/32         10.16.250.125         0       -          100     0       65187 65287 65201 i
+ * >Ec    10.32.254.11/32        10.16.250.127         0       -          100     0       65187 65287 65201 65211 i
+ *  ec    10.32.254.11/32        10.16.250.125         0       -          100     0       65187 65287 65201 65211 i
+ * >Ec    10.32.254.12/32        10.16.250.127         0       -          100     0       65187 65287 65201 65212 i
+ *  ec    10.32.254.12/32        10.16.250.125         0       -          100     0       65187 65287 65201 65212 i
+ * >Ec    10.32.254.187/32       10.16.250.127         0       -          100     0       65187 65287 i
+ *  ec    10.32.254.187/32       10.16.250.125         0       -          100     0       65187 65287 i
+ * >Ec    10.32.254.188/32       10.16.250.127         0       -          100     0       65187 65287 i
+ *  ec    10.32.254.188/32       10.16.250.125         0       -          100     0       65187 65287 i
 ```
 
 </details>
@@ -3100,7 +3157,64 @@ Vlan40 is up, line protocol is up
   <summary>Проверки dc1-p1-r012-sp-1 (spine-2)</summary>
   
 ```
+dc1-p1-r012-sp-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.2, local AS number 65101
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.251.1   4 65111            674       656    0    0 00:23:32 Estab   1      1
+  10.16.251.3   4 65112            671       651    0    0 00:23:32 Estab   1      1
+  10.16.251.5   4 65113            672       667    0    0 00:23:33 Estab   1      1
+  10.16.251.7   4 65114            671       658    0    0 00:23:31 Estab   1      1
+  10.16.251.125 4 65187            666       642    0    0 00:23:32 Estab   8      8
+  10.16.251.127 4 65187            661       644    0   19 00:23:31 Estab   8      8
+```
+```
+dc1-p1-r012-sp-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.2, local AS number 65101
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.251.1   4 65111            682       664    0    0 00:23:54 Estab   27     27
+  10.16.251.3   4 65112            679       660    0    0 00:23:54 Estab   27     27
+  10.16.251.5   4 65113            680       676    0    0 00:23:55 Estab   12     12
+  10.16.251.7   4 65114            679       667    0    0 00:23:53 Estab   12     12
+  10.16.251.125 4 65187            674       650    0    0 00:23:54 Estab   52     52
+  10.16.251.127 4 65187            670       653    0   19 00:23:53 Estab   52     52
+```
+```
+dc1-p1-r012-sp-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.2, local AS number 65101
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.2/32         -                     -       -          -       0       i
+ * >      10.16.254.11/32        10.16.251.1           0       -          100     0       65111 i
+ * >      10.16.254.12/32        10.16.251.3           0       -          100     0       65112 i
+ * >      10.16.254.13/32        10.16.251.5           0       -          100     0       65113 i
+ * >      10.16.254.14/32        10.16.251.7           0       -          100     0       65114 i
+ * >Ec    10.16.254.187/32       10.16.251.125         0       -          100     0       65187 i
+ *  ec    10.16.254.187/32       10.16.251.127         0       -          100     0       65187 i
+ * >Ec    10.16.254.188/32       10.16.251.125         0       -          100     0       65187 i
+ *  ec    10.16.254.188/32       10.16.251.127         0       -          100     0       65187 i
+ * >Ec    10.32.254.1/32         10.16.251.125         0       -          100     0       65187 65287 65201 i
+ *  ec    10.32.254.1/32         10.16.251.127         0       -          100     0       65187 65287 65201 i
+ * >Ec    10.32.254.2/32         10.16.251.125         0       -          100     0       65187 65287 65201 i
+ *  ec    10.32.254.2/32         10.16.251.127         0       -          100     0       65187 65287 65201 i
+ * >Ec    10.32.254.11/32        10.16.251.125         0       -          100     0       65187 65287 65201 65211 i
+ *  ec    10.32.254.11/32        10.16.251.127         0       -          100     0       65187 65287 65201 65211 i
+ * >Ec    10.32.254.12/32        10.16.251.125         0       -          100     0       65187 65287 65201 65212 i
+ *  ec    10.32.254.12/32        10.16.251.127         0       -          100     0       65187 65287 65201 65212 i
+ * >Ec    10.32.254.187/32       10.16.251.125         0       -          100     0       65187 65287 i
+ *  ec    10.32.254.187/32       10.16.251.127         0       -          100     0       65187 65287 i
+ * >Ec    10.32.254.188/32       10.16.251.125         0       -          100     0       65187 65287 i
+ *  ec    10.32.254.188/32       10.16.251.127         0       -          100     0       65187 65287 i
 ```
 
 </details>
