@@ -1,4 +1,14 @@
 
+dc2-p1-r002-sp-1#sh run
+! Command: show running-config
+! device: dc2-p1-r002-sp-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
 service routing protocols model multi-agent
 !
 hostname dc2-p1-r002-sp-1
@@ -17,6 +27,12 @@ interface Ethernet2
    ip address 10.32.250.2/31
    bfd interval 3000 min-rx 3000 multiplier 3
 !
+interface Ethernet3
+   shutdown
+!
+interface Ethernet4
+   shutdown
+!
 interface Ethernet5
    description ### sp1-blf.187 ###
    no switchport
@@ -29,8 +45,16 @@ interface Ethernet6
    ip address 10.32.250.126/31
    bfd interval 3000 min-rx 3000 multiplier 3
 !
+interface Ethernet7
+   shutdown
+!
+interface Ethernet8
+   shutdown
+!
 interface Loopback0
    ip address 10.32.254.1/32
+!
+interface Management1
 !
 ip routing
 !
@@ -59,3 +83,6 @@ router bgp 65201
    address-family ipv4
       neighbor DC2-LEAF activate
       redistribute connected route-map RM-CONNECTED-TO-BGP
+!
+end
+dc2-p1-r002-sp-1#
