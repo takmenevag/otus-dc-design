@@ -1,4 +1,14 @@
 
+dc1-p1-r012-blf-1#sh run
+! Command: show running-config
+! device: dc1-p1-r012-blf-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
 service routing protocols model multi-agent
 !
 hostname dc1-p1-r012-blf-1
@@ -62,6 +72,9 @@ interface Ethernet5
    ip address 10.0.0.2/31
    bfd interval 3000 min-rx 3000 multiplier 3
 !
+interface Ethernet6
+   shutdown
+!
 interface Ethernet7
    description ### blf.188-fw1 ###
    channel-group 7 mode active
@@ -72,6 +85,8 @@ interface Ethernet8
 !
 interface Loopback0
    ip address 10.16.254.188/32
+!
+interface Management1
 !
 interface Vlan4081
    description ### dc1-fw-01-cl-tenant-1 ###
@@ -186,3 +201,6 @@ router bgp 65187
       neighbor 10.16.241.252 description ### dc1-p1-r009-fw-1 ###
       neighbor 10.16.241.252 route-map RM-VXLAN-FW-OUT out
       redistribute connected
+!
+end
+dc1-p1-r012-blf-1#
