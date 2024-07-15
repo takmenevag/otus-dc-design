@@ -1,6 +1,4 @@
 
-dc1-p1-r009-fw-1#sh
-*Jul 14 10:32:48.987: %SYS-5-CONFIG_I: Configured from console by console
 dc1-p1-r009-fw-1#sh run
 Building configuration...
 
