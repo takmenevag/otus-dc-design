@@ -3223,7 +3223,1069 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc1-p1-r003-lf-1 (leaf-11)</summary>
   
 ```
+dc1-p1-r003-lf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.0 4 65101         159061    158652    0   19 00:24:28 Estab   12     12
+  ### dc1-p1-r012-sp-1 ### 10.16.251.0 4 65101         113081    112824    0    0 00:23:31 Estab   12     12
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.0 4 65101         159069    158661    0    0 00:24:50 Estab   111    111
+  ### dc1-p1-r012-sp-1 ### 10.16.251.0 4 65101         113089    112833    0    0 00:23:53 Estab   111    111
+```
+```
+dc1-p1-r003-lf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.16.250.0           0       -          100     0       65101 i
+ * >      10.16.254.2/32         10.16.251.0           0       -          100     0       65101 i
+ * >      10.16.254.11/32        -                     -       -          -       0       i
+ * >Ec    10.16.254.12/32        10.16.250.0           0       -          100     0       65101 65112 i
+ *  ec    10.16.254.12/32        10.16.251.0           0       -          100     0       65101 65112 i
+ * >Ec    10.16.254.13/32        10.16.250.0           0       -          100     0       65101 65113 i
+ *  ec    10.16.254.13/32        10.16.251.0           0       -          100     0       65101 65113 i
+ * >Ec    10.16.254.14/32        10.16.250.0           0       -          100     0       65101 65114 i
+ *  ec    10.16.254.14/32        10.16.251.0           0       -          100     0       65101 65114 i
+ * >Ec    10.16.254.187/32       10.16.250.0           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.187/32       10.16.251.0           0       -          100     0       65101 65187 i
+ * >Ec    10.16.254.188/32       10.16.250.0           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.188/32       10.16.251.0           0       -          100     0       65101 65187 i
+ * >Ec    10.32.254.1/32         10.16.250.0           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.1/32         10.16.251.0           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.2/32         10.16.250.0           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.2/32         10.16.251.0           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.11/32        10.16.250.0           0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.32.254.11/32        10.16.251.0           0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.32.254.12/32        10.16.250.0           0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.32.254.12/32        10.16.251.0           0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.32.254.187/32       10.16.250.0           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.187/32       10.16.251.0           0       -          100     0       65101 65187 65287 i
+ * >Ec    10.32.254.188/32       10.16.250.0           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.188/32       10.16.251.0           0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.8.20.254, local AS number 65111
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.10.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+          10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+          10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+          10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+          10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >      10.8.20.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+          10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+          10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.8.40.254, local AS number 65111
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.30.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+          10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+          10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >      10.8.40.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+          10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+          10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r003-lf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.12        unicast, flood
+10.16.254.13        unicast, flood
+10.16.254.14        unicast, flood
+10.16.254.187       unicast       
+10.16.254.188       unicast       
+10.32.254.11        unicast, flood
+10.32.254.12        unicast, flood
+10.32.254.187       unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  9
+```
+```
+dc1-p1-r003-lf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface           802.1Q Tag
+----------- ---------- ------------ ------------------- ----------
+10010       10         static       Port-Channel7       10        
+                                    Port-Channel8       10        
+                                    Vxlan1              10        
+10020       20         static       Port-Channel7       20        
+                                    Vxlan1              20        
+10030       30         static       Port-Channel7       30        
+                                    Vxlan1              30        
+10040       40         static       Port-Channel7       40        
+                                    Vxlan1              40        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4094       tenant-1       evpn         
+4002       4093       tenant-2       evpn         
+```
+```
+dc1-p1-r003-lf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.16.254.11
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 10010]       [20, 10020]       [30, 10030]       [40, 10040]      
+   
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4093, 4002]      [4094, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  Headend replication flood vtep list is:
+    10 10.32.254.11    10.32.254.12    10.16.254.12    10.16.254.14    10.16.254.13   
+    20 10.32.254.11    10.32.254.12    10.16.254.12   
+    30 10.32.254.11    10.32.254.12    10.16.254.12    10.16.254.14    10.16.254.13   
+    40 10.32.254.11    10.32.254.12    10.16.254.12   
+  Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-p1-r003-lf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.10.0/24 is directly connected, Vlan10
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.20.0/24 is directly connected, Vlan20
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r003-lf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.30.0/24 is directly connected, Vlan30
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.40.0/24 is directly connected, Vlan40
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 imet 10.16.254.11
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:20 imet 10.16.254.11
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:30 imet 10.16.254.11
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:40 imet 10.16.254.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.16.254.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >      RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >      RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >      RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r003-lf-1#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10010:10
+  Route target export: Route-Target-AS:10010:10
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0008:0000
+      Interface: Port-Channel8
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:08
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+EVPN instance: VLAN 20
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10020:20
+  Route target export: Route-Target-AS:10020:20
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+EVPN instance: VLAN 30
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10030:30
+  Route target export: Route-Target-AS:10030:30
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+EVPN instance: VLAN 40
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10040:40
+  Route target export: Route-Target-AS:10040:40
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+```
+```
+dc1-p1-r003-lf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 2
+Number of aggregators: 2
+
+   Port-Channel       Protocol    Ports    
+------------------ -------------- ---------
+   Po7(U)             LACP(a)     Et7(PG+) 
+   Po8(U)             LACP(a)     Et8(PG+) 
+```
+```
+dc1-p1-r003-lf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     2       0:28:38 ago
+                                     10.16.254.14   
+  10  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:37 ago
+                                     10.32.254.12   
+  20  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:37 ago
+                                     10.32.254.12   
+  30  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     2       0:28:38 ago
+                                     10.16.254.14   
+  30  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:37 ago
+                                     10.32.254.12   
+  40  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:37 ago
+                                     10.32.254.12   
+4093  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       2 days, 6:55:36 ago
+4093  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       2 days, 6:55:32 ago
+4093  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:21 ago
+4093  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:45 ago
+4093  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:22 ago
+4093  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:57 ago
+4093  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       2 days, 6:55:36 ago
+4093  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:00 ago
+4093  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:50 ago
+4094  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       2 days, 6:55:42 ago
+4094  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       2 days, 6:55:33 ago
+4094  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:21 ago
+4094  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:44 ago
+4094  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:22 ago
+4094  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:55 ago
+4094  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       2 days, 6:55:44 ago
+4094  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:43:59 ago
+4094  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:50 ago
+Total Remote Mac Addresses for this criterion: 24
+```
+```
+dc1-p1-r003-lf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+   1    0000.0000.cafe    STATIC      Cpu
+  10    0000.0000.cafe    STATIC      Cpu
+  10    aabb.cc81.5000    DYNAMIC     Po7        1       3 days, 5:53:57 ago
+  10    aabb.cc81.6000    DYNAMIC     Po8        1       2 days, 7:11:40 ago
+  10    aabb.cc81.7000    DYNAMIC     Vx1        2       0:28:43 ago
+  10    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:43 ago
+  20    0000.0000.cafe    STATIC      Cpu
+  20    aabb.cc81.5000    DYNAMIC     Po7        1       3 days, 6:05:39 ago
+  20    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:43 ago
+  30    0000.0000.cafe    STATIC      Cpu
+  30    aabb.cc81.5000    DYNAMIC     Po7        1       3 days, 5:53:33 ago
+  30    aabb.cc81.7000    DYNAMIC     Vx1        2       0:28:43 ago
+  30    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:43 ago
+  40    0000.0000.cafe    STATIC      Cpu
+  40    aabb.cc81.5000    DYNAMIC     Po7        1       3 days, 5:44:13 ago
+  40    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:43 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4093    5000.0003.3766    DYNAMIC     Vx1        1       2 days, 6:55:41 ago
+4093    5000.0015.f4e8    DYNAMIC     Vx1        1       2 days, 6:55:38 ago
+4093    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:27 ago
+4093    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:50 ago
+4093    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4093    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:03 ago
+4093    5000.00d5.5dc0    DYNAMIC     Vx1        1       2 days, 6:55:41 ago
+4093    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:05 ago
+4093    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:56 ago
+4094    0000.0000.cafe    STATIC      Cpu
+4094    5000.0003.3766    DYNAMIC     Vx1        1       2 days, 6:55:48 ago
+4094    5000.0015.f4e8    DYNAMIC     Vx1        1       2 days, 6:55:39 ago
+4094    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:27 ago
+4094    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:50 ago
+4094    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4094    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:01 ago
+4094    5000.00d5.5dc0    DYNAMIC     Vx1        1       2 days, 6:55:49 ago
+4094    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:05 ago
+4094    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:56 ago
+Total Mac Addresses for this criterion: 36
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc1-p1-r003-lf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.8.10.101             -  aabb.cc81.7000  Vlan10, Vxlan1
+10.8.10.151       0:03:50  aabb.cc81.6000  Vlan10, Port-Channel8
+10.8.10.201       0:03:30  aabb.cc81.5000  Vlan10, Port-Channel7
+10.8.10.202             -  aabb.cc81.f000  Vlan10, Vxlan1
+10.8.20.201       0:01:27  aabb.cc81.5000  Vlan20, Port-Channel7
+10.8.20.202             -  aabb.cc81.f000  Vlan20, Vxlan1
+```
+```
+dc1-p1-r003-lf-1#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.8.30.101             -  aabb.cc81.7000  Vlan30, Vxlan1
+10.8.30.201       0:01:05  aabb.cc81.5000  Vlan30, Port-Channel7
+10.8.30.202             -  aabb.cc81.f000  Vlan30, Vxlan1
+10.8.40.201       0:00:04  aabb.cc81.5000  Vlan40, Port-Channel7
+10.8.40.202             -  aabb.cc81.f000  Vlan40, Vxlan1
 ```
 
 </details>
@@ -3232,7 +4294,1075 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc1-p1-r003-lf-2 (leaf-12)</summary>
   
 ```
+dc1-p1-r003-lf-2#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.2 4 65101         111572    111192    0    0 00:24:28 Estab   12     12
+  ### dc1-p1-r012-sp-1 ### 10.16.251.2 4 65101         111521    111288    0   19 00:23:31 Estab   12     12
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.2 4 65101         111581    111200    0    0 00:24:50 Estab   111    111
+  ### dc1-p1-r012-sp-1 ### 10.16.251.2 4 65101         111531    111297    0    0 00:23:53 Estab   111    111
+```
+```
+dc1-p1-r003-lf-2#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.16.250.2           0       -          100     0       65101 i
+ * >      10.16.254.2/32         10.16.251.2           0       -          100     0       65101 i
+ * >Ec    10.16.254.11/32        10.16.250.2           0       -          100     0       65101 65111 i
+ *  ec    10.16.254.11/32        10.16.251.2           0       -          100     0       65101 65111 i
+ * >      10.16.254.12/32        -                     -       -          -       0       i
+ * >Ec    10.16.254.13/32        10.16.250.2           0       -          100     0       65101 65113 i
+ *  ec    10.16.254.13/32        10.16.251.2           0       -          100     0       65101 65113 i
+ * >Ec    10.16.254.14/32        10.16.250.2           0       -          100     0       65101 65114 i
+ *  ec    10.16.254.14/32        10.16.251.2           0       -          100     0       65101 65114 i
+ * >Ec    10.16.254.187/32       10.16.250.2           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.187/32       10.16.251.2           0       -          100     0       65101 65187 i
+ * >Ec    10.16.254.188/32       10.16.250.2           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.188/32       10.16.251.2           0       -          100     0       65101 65187 i
+ * >Ec    10.32.254.1/32         10.16.250.2           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.1/32         10.16.251.2           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.2/32         10.16.250.2           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.2/32         10.16.251.2           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.11/32        10.16.250.2           0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.32.254.11/32        10.16.251.2           0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.32.254.12/32        10.16.250.2           0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.32.254.12/32        10.16.251.2           0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.32.254.187/32       10.16.250.2           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.187/32       10.16.251.2           0       -          100     0       65101 65187 65287 i
+ * >Ec    10.32.254.188/32       10.16.250.2           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.188/32       10.16.251.2           0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.8.20.254, local AS number 65112
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.10.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+          10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+          10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+          10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+          10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >      10.8.20.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+          10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+          10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.8.40.254, local AS number 65112
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.30.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+          10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+          10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >      10.8.40.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+          10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+          10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r003-lf-2#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast, flood
+10.16.254.13        unicast, flood
+10.16.254.14        unicast, flood
+10.16.254.187       unicast       
+10.16.254.188       unicast       
+10.32.254.11        unicast, flood
+10.32.254.12        unicast, flood
+10.32.254.187       unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  9
+```
+```
+dc1-p1-r003-lf-2#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface           802.1Q Tag
+----------- ---------- ------------ ------------------- ----------
+10010       10         static       Port-Channel7       10        
+                                    Port-Channel8       10        
+                                    Vxlan1              10        
+10020       20         static       Port-Channel7       20        
+                                    Vxlan1              20        
+10030       30         static       Port-Channel7       30        
+                                    Vxlan1              30        
+10040       40         static       Port-Channel7       40        
+                                    Vxlan1              40        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4094       tenant-1       evpn         
+4002       4093       tenant-2       evpn         
+```
+```
+dc1-p1-r003-lf-2#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.16.254.12
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 10010]       [20, 10020]       [30, 10030]       [40, 10040]      
+   
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4093, 4002]      [4094, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  Headend replication flood vtep list is:
+    10 10.32.254.11    10.32.254.12    10.16.254.14    10.16.254.11    10.16.254.13   
+    20 10.32.254.11    10.32.254.12    10.16.254.11   
+    30 10.32.254.11    10.32.254.12    10.16.254.14    10.16.254.11    10.16.254.13   
+    40 10.32.254.11    10.32.254.12    10.16.254.11   
+  Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-p1-r003-lf-2#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.10.0/24 is directly connected, Vlan10
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.20.0/24 is directly connected, Vlan20
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r003-lf-2#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.30.0/24 is directly connected, Vlan30
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.40.0/24 is directly connected, Vlan40
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 imet 10.16.254.12
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:20 imet 10.16.254.12
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:30 imet 10.16.254.12
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:40 imet 10.16.254.12
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.16.254.12, local AS number 65112
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >      RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r003-lf-2#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10010:10
+  Route target export: Route-Target-AS:10010:10
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+    ESI: 0000:0101:0011:0008:0000
+      Interface: Port-Channel8
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:08
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+EVPN instance: VLAN 20
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10020:20
+  Route target export: Route-Target-AS:10020:20
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+EVPN instance: VLAN 30
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10030:30
+  Route target export: Route-Target-AS:10030:30
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+EVPN instance: VLAN 40
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10040:40
+  Route target export: Route-Target-AS:10040:40
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.11
+      Non-Designated forwarder: 10.16.254.12
+```
+```
+dc1-p1-r003-lf-2#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 2
+Number of aggregators: 2
+
+   Port-Channel       Protocol    Ports    
+------------------ -------------- ---------
+   Po7(U)             LACP(a)     Et7(PG+) 
+   Po8(U)             LACP(a)     Et8(PG+) 
+```
+```
+dc1-p1-r003-lf-2#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     1       0:28:36 ago
+                                     10.16.254.14   
+  10  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:36 ago
+                                     10.32.254.12   
+  20  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     2       0:28:36 ago
+                                     10.32.254.12   
+  30  aabb.cc81.5000  EVPN      Vx1  0.0.0.0          1       0:00:50 ago
+  30  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     1       0:28:36 ago
+                                     10.16.254.14   
+  30  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:36 ago
+                                     10.32.254.12   
+  40  aabb.cc81.5000  EVPN      Vx1  0.0.0.0          1       0:00:50 ago
+  40  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     2       0:28:36 ago
+                                     10.32.254.12   
+4093  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       3 days, 5:42:08 ago
+4093  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       3 days, 5:42:07 ago
+4093  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:21 ago
+4093  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:45 ago
+4093  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       2 days, 6:55:51 ago
+4093  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:24 ago
+4093  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:57 ago
+4093  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:01 ago
+4093  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:51 ago
+4094  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       3 days, 5:42:08 ago
+4094  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       3 days, 5:42:07 ago
+4094  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:21 ago
+4094  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:45 ago
+4094  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       2 days, 6:55:51 ago
+4094  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:24 ago
+4094  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:55 ago
+4094  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:01 ago
+4094  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:53 ago
+Total Remote Mac Addresses for this criterion: 26
+```
+```
+dc1-p1-r003-lf-2#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+   1    0000.0000.cafe    STATIC      Cpu
+  10    0000.0000.cafe    STATIC      Cpu
+  10    aabb.cc81.5000    DYNAMIC     Po7        2       0:06:00 ago
+  10    aabb.cc81.6000    DYNAMIC     Po8        2       0:07:24 ago
+  10    aabb.cc81.7000    DYNAMIC     Vx1        1       0:28:42 ago
+  10    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:42 ago
+  20    0000.0000.cafe    STATIC      Cpu
+  20    aabb.cc81.5000    DYNAMIC     Po7        2       0:05:56 ago
+  20    aabb.cc81.f000    DYNAMIC     Vx1        2       0:28:42 ago
+  30    0000.0000.cafe    STATIC      Cpu
+  30    aabb.cc81.5000    DYNAMIC     Po7        1       0:00:56 ago
+  30    aabb.cc81.7000    DYNAMIC     Vx1        1       0:28:42 ago
+  30    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:42 ago
+  40    0000.0000.cafe    STATIC      Cpu
+  40    aabb.cc81.5000    DYNAMIC     Po7        1       0:00:56 ago
+  40    aabb.cc81.f000    DYNAMIC     Vx1        2       0:28:42 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4093    5000.0003.3766    DYNAMIC     Vx1        1       3 days, 5:42:14 ago
+4093    5000.0015.f4e8    DYNAMIC     Vx1        1       3 days, 5:42:13 ago
+4093    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:27 ago
+4093    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:51 ago
+4093    5000.0072.8b31    DYNAMIC     Vx1        1       2 days, 6:55:57 ago
+4093    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:30 ago
+4093    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:03 ago
+4093    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:07 ago
+4093    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:57 ago
+4094    0000.0000.cafe    STATIC      Cpu
+4094    5000.0003.3766    DYNAMIC     Vx1        1       3 days, 5:42:14 ago
+4094    5000.0015.f4e8    DYNAMIC     Vx1        1       3 days, 5:42:13 ago
+4094    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:27 ago
+4094    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:51 ago
+4094    5000.0072.8b31    DYNAMIC     Vx1        1       2 days, 6:55:57 ago
+4094    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:30 ago
+4094    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:02 ago
+4094    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:07 ago
+4094    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:59 ago
+Total Mac Addresses for this criterion: 36
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc1-p1-r003-lf-2#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.8.10.101             -  aabb.cc81.7000  Vlan10, Vxlan1
+10.8.10.151             -  aabb.cc81.6000  Vlan10, Port-Channel8
+10.8.10.201             -  aabb.cc81.5000  Vlan10, Port-Channel7
+10.8.10.202             -  aabb.cc81.f000  Vlan10, Vxlan1
+10.8.20.201             -  aabb.cc81.5000  Vlan20, Port-Channel7
+10.8.20.202             -  aabb.cc81.f000  Vlan20, Vxlan1
+```
+```
+dc1-p1-r003-lf-2#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.8.30.101             -  aabb.cc81.7000  Vlan30, Vxlan1
+10.8.30.201             -  aabb.cc81.5000  Vlan30, Port-Channel7
+10.8.30.202             -  aabb.cc81.f000  Vlan30, Vxlan1
+10.8.40.201             -  aabb.cc81.5000  Vlan40, Port-Channel7
+10.8.40.202             -  aabb.cc81.f000  Vlan40, Vxlan1
 ```
 
 </details>
@@ -3241,16 +5371,2107 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc1-p1-r013-lf-1 (leaf-13)</summary>
   
 ```
+dc1-p1-r013-lf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.4 4 65101         111576    111343    0    0 00:24:29 Estab   12     12
+  ### dc1-p1-r012-sp-1 ### 10.16.251.4 4 65101         111526    111250    0    0 00:23:32 Estab   12     12
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.4 4 65101         111584    111351    0    0 00:24:51 Estab   126    126
+  ### dc1-p1-r012-sp-1 ### 10.16.251.4 4 65101         111535    111259    0    0 00:23:54 Estab   126    126
+```
+```
+dc1-p1-r013-lf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.16.250.4           0       -          100     0       65101 i
+ * >      10.16.254.2/32         10.16.251.4           0       -          100     0       65101 i
+ * >Ec    10.16.254.11/32        10.16.250.4           0       -          100     0       65101 65111 i
+ *  ec    10.16.254.11/32        10.16.251.4           0       -          100     0       65101 65111 i
+ * >Ec    10.16.254.12/32        10.16.250.4           0       -          100     0       65101 65112 i
+ *  ec    10.16.254.12/32        10.16.251.4           0       -          100     0       65101 65112 i
+ * >      10.16.254.13/32        -                     -       -          -       0       i
+ * >Ec    10.16.254.14/32        10.16.250.4           0       -          100     0       65101 65114 i
+ *  ec    10.16.254.14/32        10.16.251.4           0       -          100     0       65101 65114 i
+ * >Ec    10.16.254.187/32       10.16.250.4           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.187/32       10.16.251.4           0       -          100     0       65101 65187 i
+ * >Ec    10.16.254.188/32       10.16.250.4           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.188/32       10.16.251.4           0       -          100     0       65101 65187 i
+ * >Ec    10.32.254.1/32         10.16.250.4           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.1/32         10.16.251.4           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.2/32         10.16.250.4           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.2/32         10.16.251.4           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.11/32        10.16.250.4           0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.32.254.11/32        10.16.251.4           0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.32.254.12/32        10.16.250.4           0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.32.254.12/32        10.16.251.4           0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.32.254.187/32       10.16.250.4           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.187/32       10.16.251.4           0       -          100     0       65101 65187 65287 i
+ * >Ec    10.32.254.188/32       10.16.250.4           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.188/32       10.16.251.4           0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.8.10.254, local AS number 65113
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.10.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+          10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+          10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.8.30.254, local AS number 65113
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.30.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+          10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+          10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r013-lf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast, flood
+10.16.254.12        unicast, flood
+10.16.254.14        unicast, flood
+10.16.254.187       unicast       
+10.16.254.188       unicast       
+10.32.254.11        unicast, flood
+10.32.254.12        unicast, flood
+10.32.254.187       unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  9
+```
+```
+dc1-p1-r013-lf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface           802.1Q Tag
+----------- ---------- ------------ ------------------- ----------
+10010       10         static       Port-Channel7       10        
+                                    Vxlan1              10        
+10030       30         static       Port-Channel7       30        
+                                    Vxlan1              30        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4094       tenant-1       evpn         
+4002       4093       tenant-2       evpn         
+```
+```
+dc1-p1-r013-lf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.16.254.13
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 10010]       [30, 10030]      
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4093, 4002]      [4094, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  Headend replication flood vtep list is:
+    10 10.32.254.11    10.32.254.12    10.16.254.12    10.16.254.14    10.16.254.11   
+    30 10.32.254.11    10.32.254.12    10.16.254.12    10.16.254.14    10.16.254.11   
+  Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-p1-r013-lf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.10.0/24 is directly connected, Vlan10
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.0/24 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r013-lf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.30.0/24 is directly connected, Vlan30
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.40.0/24 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.13:10 imet 10.16.254.13
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.13:30 imet 10.16.254.13
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.16.254.13, local AS number 65113
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r013-lf-1#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10010:10
+  Route target export: Route-Target-AS:10010:10
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.13
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0013:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:13:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.13
+      Non-Designated forwarder: 10.16.254.14
+EVPN instance: VLAN 30
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10030:30
+  Route target export: Route-Target-AS:10030:30
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.13
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0013:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:13:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.13
+      Non-Designated forwarder: 10.16.254.14
+```
+```
+dc1-p1-r013-lf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 1
+Number of aggregators: 1
+
+   Port-Channel       Protocol    Ports    
+------------------ -------------- ---------
+   Po7(U)             LACP(a)     Et7(PG+) 
+```
+```
+dc1-p1-r013-lf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     1       0:28:34 ago
+                                     10.16.254.12   
+  10  aabb.cc81.6000  EVPN      Vx1  10.16.254.11     1       0:28:35 ago
+                                     10.16.254.12   
+  10  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:34 ago
+                                     10.32.254.12   
+  30  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     1       0:28:34 ago
+                                     10.16.254.12   
+  30  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     1       0:28:34 ago
+                                     10.32.254.12   
+4093  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       3 days, 5:42:08 ago
+4093  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:22 ago
+4093  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:45 ago
+4093  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       2 days, 6:55:51 ago
+4093  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:22 ago
+4093  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:57 ago
+4093  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       3 days, 5:42:10 ago
+4093  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:00 ago
+4093  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:53 ago
+4094  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       3 days, 5:42:08 ago
+4094  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:22 ago
+4094  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:43 ago
+4094  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       2 days, 6:55:51 ago
+4094  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:22 ago
+4094  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:55 ago
+4094  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       3 days, 5:42:11 ago
+4094  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:00 ago
+4094  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:53 ago
+Total Remote Mac Addresses for this criterion: 23
+```
+```
+dc1-p1-r013-lf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0000.0000.cafe    STATIC      Cpu
+  10    aabb.cc81.5000    DYNAMIC     Vx1        1       0:28:42 ago
+  10    aabb.cc81.6000    DYNAMIC     Vx1        1       0:28:42 ago
+  10    aabb.cc81.7000    DYNAMIC     Po7        1       3 days, 5:24:05 ago
+  10    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:42 ago
+  30    0000.0000.cafe    STATIC      Cpu
+  30    aabb.cc81.5000    DYNAMIC     Vx1        1       0:28:42 ago
+  30    aabb.cc81.7000    DYNAMIC     Po7        1       3 days, 4:57:50 ago
+  30    aabb.cc81.f000    DYNAMIC     Vx1        1       0:28:42 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4093    5000.0015.f4e8    DYNAMIC     Vx1        1       3 days, 5:42:15 ago
+4093    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4093    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:52 ago
+4093    5000.0072.8b31    DYNAMIC     Vx1        1       2 days, 6:55:58 ago
+4093    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4093    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:04 ago
+4093    5000.00d5.5dc0    DYNAMIC     Vx1        1       3 days, 5:42:17 ago
+4093    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:07 ago
+4093    5000.00d8.ac19    DYNAMIC     Vx1        1       21:44:00 ago
+4094    0000.0000.cafe    STATIC      Cpu
+4094    5000.0015.f4e8    DYNAMIC     Vx1        1       3 days, 5:42:15 ago
+4094    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4094    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:50 ago
+4094    5000.0072.8b31    DYNAMIC     Vx1        1       2 days, 6:55:58 ago
+4094    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4094    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:02 ago
+4094    5000.00d5.5dc0    DYNAMIC     Vx1        1       3 days, 5:42:18 ago
+4094    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:07 ago
+4094    5000.00d8.ac19    DYNAMIC     Vx1        1       21:44:00 ago
+Total Mac Addresses for this criterion: 29
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc1-p1-r013-lf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.8.10.101       0:04:15  aabb.cc81.7000  Vlan10, Port-Channel7
+10.8.10.151             -  aabb.cc81.6000  Vlan10, Vxlan1
+10.8.10.201             -  aabb.cc81.5000  Vlan10, Vxlan1
+10.8.10.202             -  aabb.cc81.f000  Vlan10, Vxlan1
+```
+```
+dc1-p1-r013-lf-1#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.8.30.101       0:01:33  aabb.cc81.7000  Vlan30, Port-Channel7
+10.8.30.201             -  aabb.cc81.5000  Vlan30, Vxlan1
+10.8.30.202             -  aabb.cc81.f000  Vlan30, Vxlan1
 ```
 
 </details>
 
 <details>
-  <summary>Проверки dc1-p1-r013-lf-1 (leaf-14)</summary>
+  <summary>Проверки dc1-p1-r013-lf-2 (leaf-14)</summary>
   
 ```
+dc1-p1-r013-lf-2#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.6 4 65101         111638    111357    0    0 00:24:29 Estab   12     12
+  ### dc1-p1-r012-sp-1 ### 10.16.251.6 4 65101         111570    111437    0    0 00:23:31 Estab   12     12
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-sp-1 ### 10.16.250.6 4 65101         111647    111366    0    0 00:24:50 Estab   126    126
+  ### dc1-p1-r012-sp-1 ### 10.16.251.6 4 65101         111579    111445    0    0 00:23:53 Estab   126    126
+```
+```
+dc1-p1-r013-lf-2#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.16.250.6           0       -          100     0       65101 i
+ * >      10.16.254.2/32         10.16.251.6           0       -          100     0       65101 i
+ * >Ec    10.16.254.11/32        10.16.250.6           0       -          100     0       65101 65111 i
+ *  ec    10.16.254.11/32        10.16.251.6           0       -          100     0       65101 65111 i
+ * >Ec    10.16.254.12/32        10.16.250.6           0       -          100     0       65101 65112 i
+ *  ec    10.16.254.12/32        10.16.251.6           0       -          100     0       65101 65112 i
+ * >Ec    10.16.254.13/32        10.16.250.6           0       -          100     0       65101 65113 i
+ *  ec    10.16.254.13/32        10.16.251.6           0       -          100     0       65101 65113 i
+ * >      10.16.254.14/32        -                     -       -          -       0       i
+ * >Ec    10.16.254.187/32       10.16.250.6           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.187/32       10.16.251.6           0       -          100     0       65101 65187 i
+ * >Ec    10.16.254.188/32       10.16.250.6           0       -          100     0       65101 65187 i
+ *  ec    10.16.254.188/32       10.16.251.6           0       -          100     0       65101 65187 i
+ * >Ec    10.32.254.1/32         10.16.250.6           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.1/32         10.16.251.6           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.2/32         10.16.250.6           0       -          100     0       65101 65187 65287 65201 i
+ *  ec    10.32.254.2/32         10.16.251.6           0       -          100     0       65101 65187 65287 65201 i
+ * >Ec    10.32.254.11/32        10.16.250.6           0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.32.254.11/32        10.16.251.6           0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.32.254.12/32        10.16.250.6           0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.32.254.12/32        10.16.251.6           0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.32.254.187/32       10.16.250.6           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.187/32       10.16.251.6           0       -          100     0       65101 65187 65287 i
+ * >Ec    10.32.254.188/32       10.16.250.6           0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.254.188/32       10.16.251.6           0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.8.10.254, local AS number 65114
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.10.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.10.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.10.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+          10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+          10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.20.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.8.30.254, local AS number 65114
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65101 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65101 65187 65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >      10.8.30.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.30.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+          10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+          10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *        10.8.40.0/24           10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65101 65187 65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65101 65187 65287 65201 65212 i
+ * >Ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65101 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65101 65187 i
+ * >Ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65101 65187 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r013-lf-2#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast, flood
+10.16.254.12        unicast, flood
+10.16.254.13        unicast, flood
+10.16.254.187       unicast       
+10.16.254.188       unicast       
+10.32.254.11        unicast, flood
+10.32.254.12        unicast, flood
+10.32.254.187       unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  9
+```
+```
+dc1-p1-r013-lf-2#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface           802.1Q Tag
+----------- ---------- ------------ ------------------- ----------
+10010       10         static       Port-Channel7       10        
+                                    Vxlan1              10        
+10030       30         static       Port-Channel7       30        
+                                    Vxlan1              30        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4094       tenant-1       evpn         
+4002       4093       tenant-2       evpn         
+```
+```
+dc1-p1-r013-lf-2#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.16.254.14
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 10010]       [30, 10030]      
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4093, 4002]      [4094, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  Headend replication flood vtep list is:
+    10 10.32.254.11    10.32.254.12    10.16.254.12    10.16.254.11    10.16.254.13   
+    30 10.32.254.11    10.32.254.12    10.16.254.12    10.16.254.11    10.16.254.13   
+  Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-p1-r013-lf-2#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.10.0/24 is directly connected, Vlan10
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.0/24 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r013-lf-2#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ C        10.8.30.0/24 is directly connected, Vlan30
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.40.0/24 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:10 imet 10.16.254.14
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.14:30 imet 10.16.254.14
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.16.254.14, local AS number 65114
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65101 65187 65191 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65101 65187 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >      RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65101 65187 65287 65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65101 65187 65287 65201 65212 i
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65101 65187 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65101 65187 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65101 65187 65287 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65101 65187 65287 i
+```
+```
+dc1-p1-r013-lf-2#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10010:10
+  Route target export: Route-Target-AS:10010:10
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.14
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0013:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:13:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.13
+      Non-Designated forwarder: 10.16.254.14
+EVPN instance: VLAN 30
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10030:30
+  Route target export: Route-Target-AS:10030:30
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.254.14
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0101:0013:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 01:01:00:13:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.16.254.13
+      Non-Designated forwarder: 10.16.254.14
+```
+```
+dc1-p1-r013-lf-2#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 1
+Number of aggregators: 1
+
+   Port-Channel       Protocol    Ports    
+------------------ -------------- ---------
+   Po7(U)             LACP(a)     Et7(PG+) 
+```
+```
+dc1-p1-r013-lf-2#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     1       0:28:40 ago
+                                     10.16.254.12   
+  10  aabb.cc81.6000  EVPN      Vx1  10.16.254.11     1       0:28:40 ago
+                                     10.16.254.12   
+  10  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     2       0:28:37 ago
+                                     10.32.254.12   
+  30  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     1       0:28:40 ago
+                                     10.16.254.12   
+  30  aabb.cc81.7000  EVPN      Vx1  0.0.0.0          1       0:00:55 ago
+  30  aabb.cc81.f000  EVPN      Vx1  10.32.254.11     2       0:28:37 ago
+                                     10.32.254.12   
+4093  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       2 days, 6:55:56 ago
+4093  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:21 ago
+4093  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:45 ago
+4093  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       2 days, 6:55:51 ago
+4093  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:22 ago
+4093  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:58 ago
+4093  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       2 days, 6:55:59 ago
+4093  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:01 ago
+4093  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:53 ago
+4094  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       2 days, 6:55:59 ago
+4094  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       1 day, 2:34:21 ago
+4094  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:45 ago
+4094  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       2 days, 6:55:51 ago
+4094  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       1 day, 2:34:22 ago
+4094  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:55 ago
+4094  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       2 days, 6:55:59 ago
+4094  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:43:59 ago
+4094  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:54 ago
+Total Remote Mac Addresses for this criterion: 24
+```
+```
+dc1-p1-r013-lf-2#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0000.0000.cafe    STATIC      Cpu
+  10    aabb.cc81.5000    DYNAMIC     Vx1        1       0:28:46 ago
+  10    aabb.cc81.6000    DYNAMIC     Vx1        1       0:28:46 ago
+  10    aabb.cc81.7000    DYNAMIC     Po7        2       0:06:03 ago
+  10    aabb.cc81.f000    DYNAMIC     Vx1        2       0:28:44 ago
+  30    0000.0000.cafe    STATIC      Cpu
+  30    aabb.cc81.5000    DYNAMIC     Vx1        1       0:28:46 ago
+  30    aabb.cc81.7000    DYNAMIC     Po7        1       0:01:02 ago
+  30    aabb.cc81.f000    DYNAMIC     Vx1        2       0:28:44 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4093    5000.0003.3766    DYNAMIC     Vx1        1       2 days, 6:56:02 ago
+4093    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:27 ago
+4093    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:51 ago
+4093    5000.0072.8b31    DYNAMIC     Vx1        1       2 days, 6:55:58 ago
+4093    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4093    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:04 ago
+4093    5000.00d5.5dc0    DYNAMIC     Vx1        1       2 days, 6:56:05 ago
+4093    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:07 ago
+4093    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:59 ago
+4094    0000.0000.cafe    STATIC      Cpu
+4094    5000.0003.3766    DYNAMIC     Vx1        1       2 days, 6:56:05 ago
+4094    5000.0045.abdf    DYNAMIC     Vx1        1       1 day, 2:34:27 ago
+4094    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:51 ago
+4094    5000.0072.8b31    DYNAMIC     Vx1        1       2 days, 6:55:58 ago
+4094    5000.0088.fe27    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4094    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:01 ago
+4094    5000.00d5.5dc0    DYNAMIC     Vx1        1       2 days, 6:56:05 ago
+4094    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:06 ago
+4094    5000.00d8.ac19    DYNAMIC     Vx1        1       21:44:00 ago
+Total Mac Addresses for this criterion: 29
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc1-p1-r013-lf-2#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.8.10.101             -  aabb.cc81.7000  Vlan10, Port-Channel7
+10.8.10.151             -  aabb.cc81.6000  Vlan10, Vxlan1
+10.8.10.201             -  aabb.cc81.5000  Vlan10, Vxlan1
+10.8.10.202             -  aabb.cc81.f000  Vlan10, Vxlan1
+```
+```
+dc1-p1-r013-lf-2#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.8.30.101             -  aabb.cc81.7000  Vlan30, Port-Channel7
+10.8.30.201             -  aabb.cc81.5000  Vlan30, Vxlan1
+10.8.30.202             -  aabb.cc81.f000  Vlan30, Vxlan1
 ```
 
 </details>
@@ -3259,7 +7480,898 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc1-p1-r002-lf-1 (boleaf-187)</summary>
   
 ```
+dc1-p1-r002-blf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-blf-1 ## 10.0.0.1      4 65287          33123     33259    0    0 21:39:50 Estab   6      6
+  ### dc1-p1-r012-blf-1 ## 10.16.241.1   4 65187          37311     37299    0   38 22:40:51 Estab   13     13
+  ### dc1-p1-r002-sp-1 ### 10.16.250.124 4 65101          37610     37753    0    0 00:24:29 Estab   5      5
+  ### dc1-p1-r012-sp-1 ### 10.16.251.124 4 65101          37593     37713    0    0 00:23:32 Estab   5      5
+```
+```
+dc1-p1-r002-blf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-blf-1 ## 10.0.0.1      4 65287          33132     33267    0    0 21:40:11 Estab   48     48
+  ### dc1-p1-r002-sp-1 ### 10.16.250.124 4 65101          37618     37762    0    0 00:24:51 Estab   78     78
+  ### dc1-p1-r012-sp-1 ### 10.16.251.124 4 65101          37602     37721    0    0 00:23:54 Estab   78     78
+```
+```
+dc1-p1-r002-blf-1#show ip bgp summary vrf all
+BGP summary information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-blf-1 ## 10.0.0.1      4 65287          33140     33276    0    0 21:40:34 Estab   6      6
+  ### dc1-p1-r012-blf-1 ## 10.16.241.1   4 65187          37328     37317    0   19 22:41:35 Estab   13     13
+  ### dc1-p1-r002-sp-1 ### 10.16.250.124 4 65101          37627     37771    0    0 00:25:14 Estab   5      5
+  ### dc1-p1-r012-sp-1 ### 10.16.251.124 4 65101          37611     37730    0    0 00:24:17 Estab   5      5
 
+BGP summary information for VRF tenant-1
+Router identifier 10.16.241.241, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r009-fw-1 ### 10.16.241.244 4 65191          27565     33190    0   19 21:30:29 Estab   1      1
+
+BGP summary information for VRF tenant-2
+Router identifier 10.16.241.249, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r009-fw-1 ### 10.16.241.252 4 65191          27558     33169    0   19 21:30:09 Estab   1      1
+```
+```
+dc1-p1-r002-blf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.16.250.124         0       -          100     0       65101 i
+ *        10.16.254.1/32         10.16.241.1           0       -          100     0       65101 i
+ * >      10.16.254.2/32         10.16.251.124         0       -          100     0       65101 i
+ *        10.16.254.2/32         10.16.241.1           0       -          100     0       65101 i
+ * >Ec    10.16.254.11/32        10.16.250.124         0       -          100     0       65101 65111 i
+ *  ec    10.16.254.11/32        10.16.251.124         0       -          100     0       65101 65111 i
+ *        10.16.254.11/32        10.16.241.1           0       -          100     0       65101 65111 i
+ * >Ec    10.16.254.12/32        10.16.250.124         0       -          100     0       65101 65112 i
+ *  ec    10.16.254.12/32        10.16.251.124         0       -          100     0       65101 65112 i
+ *        10.16.254.12/32        10.16.241.1           0       -          100     0       65101 65112 i
+ * >Ec    10.16.254.13/32        10.16.250.124         0       -          100     0       65101 65113 i
+ *  ec    10.16.254.13/32        10.16.251.124         0       -          100     0       65101 65113 i
+ *        10.16.254.13/32        10.16.241.1           0       -          100     0       65101 65113 i
+ * >Ec    10.16.254.14/32        10.16.250.124         0       -          100     0       65101 65114 i
+ *  ec    10.16.254.14/32        10.16.251.124         0       -          100     0       65101 65114 i
+ *        10.16.254.14/32        10.16.241.1           0       -          100     0       65101 65114 i
+ * >      10.16.254.187/32       -                     -       -          -       0       i
+ * >      10.16.254.188/32       10.16.241.1           0       -          100     0       i
+ * >      10.32.254.1/32         10.0.0.1              0       -          100     0       65287 65201 i
+ *        10.32.254.1/32         10.16.241.1           0       -          100     0       65287 65201 i
+ * >      10.32.254.2/32         10.0.0.1              0       -          100     0       65287 65201 i
+ *        10.32.254.2/32         10.16.241.1           0       -          100     0       65287 65201 i
+ * >      10.32.254.11/32        10.0.0.1              0       -          100     0       65287 65201 65211 i
+ *        10.32.254.11/32        10.16.241.1           0       -          100     0       65287 65201 65211 i
+ * >      10.32.254.12/32        10.0.0.1              0       -          100     0       65287 65201 65212 i
+ *        10.32.254.12/32        10.16.241.1           0       -          100     0       65287 65201 65212 i
+ * >      10.32.254.187/32       10.0.0.1              0       -          100     0       65287 i
+ *        10.32.254.187/32       10.16.241.1           0       -          100     0       65287 i
+ * >      10.32.254.188/32       10.0.0.1              0       -          100     0       65287 i
+ *        10.32.254.188/32       10.16.241.1           0       -          100     0       65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.16.241.241, local AS number 65187
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.241.244         0       -          100     0       65191 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65287 65291 65291 65291 65291 i
+ * >Ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  Ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  Ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >      10.16.241.240/29       -                     -       -          -       0       i
+ * >      10.32.241.240/29       10.32.254.187         0       -          100     0       65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.16.241.249, local AS number 65187
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.241.252         0       -          100     0       65191 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65287 65291 65291 65291 65291 i
+ * >Ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  Ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  Ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >      10.16.241.248/29       -                     -       -          -       0       i
+ * >      10.32.241.248/29       10.32.254.187         0       -          100     0       65287 i
+```
+```
+dc1-p1-r002-blf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast       
+10.16.254.12        unicast       
+10.16.254.13        unicast       
+10.16.254.14        unicast       
+10.32.254.11        unicast       
+10.32.254.12        unicast       
+10.32.254.187       unicast       
+
+Total number of remote VTEPS:  7
+```
+```
+dc1-p1-r002-blf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI       VLAN       Source       Interface       802.1Q Tag
+--------- ---------- ------------ --------------- ----------
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4092       tenant-1       evpn         
+4002       4091       tenant-2       evpn         
+```
+```
+dc1-p1-r002-blf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.16.254.187
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: CLI
+  Remote MAC learning is disabled
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4091, 4002]      [4092, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  MLAG Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-p1-r002-blf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+                                via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.10.0/24 [20/0] via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+                              via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.0/24 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via 10.16.241.244, Vlan4081
+ C        10.16.241.240/29 is directly connected, Vlan4081
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+```
+```
+dc1-p1-r002-blf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+                                via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.30.0/24 [20/0] via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+                              via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                              via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.40.0/24 [20/0] via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                              via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via 10.16.241.252, Vlan4082
+ C        10.16.241.248/29 is directly connected, Vlan4082
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+```
+```
+dc1-p1-r002-blf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r002-blf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r002-blf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r002-blf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r002-blf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.16.254.187, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65191 i
+ * >      RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65191 i
+ * >      RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65287 65291 65291 65291 65291 i
+ * >      RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65287 i
+ * >      RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65287 i
+```
+```
+dc1-p1-r002-blf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 3
+Number of aggregators: 3
+
+   Port-Channel       Protocol    Ports             
+------------------ -------------- ------------------
+   Po1(U)             LACP(a)     Et3(PG+) Et4(PG+) 
+   Po7(U)             LACP(a)     Et7(PG+) PEt7(P)  
+   Po8(U)             LACP(a)     Et8(PG+) PEt8(P)  
+```
+```
+dc1-p1-r002-blf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+4091  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       1 day, 2:34:03 ago
+4091  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       1 day, 2:34:03 ago
+4091  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       1 day, 2:34:03 ago
+4091  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:59 ago
+4091  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       1 day, 2:34:03 ago
+4091  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:03 ago
+4091  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:56 ago
+4092  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       1 day, 2:34:03 ago
+4092  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       1 day, 2:34:03 ago
+4092  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       1 day, 2:34:03 ago
+4092  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:58 ago
+4092  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       1 day, 2:34:03 ago
+4092  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:44:03 ago
+4092  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:57 ago
+Total Remote Mac Addresses for this criterion: 14
+```
+```
+dc1-p1-r002-blf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+4081    001e.1483.73c6    DYNAMIC     Po7        1       21:34:08 ago
+4081    5000.0045.abdf    STATIC      Po1
+4082    001e.1483.73c6    DYNAMIC     Po7        1       21:34:10 ago
+4082    5000.0045.abdf    STATIC      Po1
+4091    0000.0000.cafe    STATIC      Cpu
+4091    5000.0003.3766    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4091    5000.0015.f4e8    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4091    5000.0045.abdf    STATIC      Po1
+4091    5000.0072.8b31    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4091    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:06 ago
+4091    5000.00d5.5dc0    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4091    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:10 ago
+4091    5000.00d8.ac19    DYNAMIC     Vx1        1       21:44:03 ago
+4092    0000.0000.cafe    STATIC      Cpu
+4092    5000.0003.3766    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4092    5000.0015.f4e8    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4092    5000.0045.abdf    STATIC      Po1
+4092    5000.0072.8b31    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4092    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:44:04 ago
+4092    5000.00d5.5dc0    DYNAMIC     Vx1        1       1 day, 2:34:10 ago
+4092    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:10 ago
+4092    5000.00d8.ac19    DYNAMIC     Vx1        1       21:44:04 ago
+4093    5000.0045.abdf    STATIC      Po1
+4094    5000.0045.abdf    STATIC      Po1
+Total Mac Addresses for this criterion: 24
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc1-p1-r002-blf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.16.241.242     0:00:23  5000.0045.abdf  Vlan4081, Port-Channel1
+10.16.241.244     0:00:10  001e.1483.73c6  Vlan4081, Port-Channel7
+```
+```
+dc1-p1-r002-blf-1#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.16.241.250     0:00:26  5000.0045.abdf  Vlan4082, Port-Channel1
+10.16.241.252     0:00:13  001e.1483.73c6  Vlan4082, Port-Channel7
+```
+```
+dc1-p1-r002-blf-1#show mlag
+MLAG Configuration:              
+domain-id                          :   dc1-p1-r002-blf-1
+local-interface                    :            Vlan4094
+peer-address                       :         10.16.241.3
+peer-link                          :       Port-Channel1
+peer-config                        :          consistent
+                                                       
+MLAG Status:                     
+state                              :              Active
+negotiation status                 :           Connected
+peer-link status                   :                  Up
+local-int status                   :                  Up
+system-id                          :   52:00:00:45:ab:df
+dual-primary detection             :            Disabled
+dual-primary interface errdisabled :               False
+                                                       
+MLAG Ports:                      
+Disabled                           :                   0
+Configured                         :                   0
+Inactive                           :                   0
+Active-partial                     :                   0
+Active-full                        :                   2
 ```
 
 </details>
@@ -3268,7 +8380,897 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc1-p1-r012-lf-1 (boleaf-188)</summary>
   
 ```
+dc1-p1-r012-blf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r012-blf-1 ## 10.0.0.3      4 65287          33090     33254    0   38 21:39:42 Estab   6      6
+  ### dc1-p1-r002-blf-1 ## 10.16.241.0   4 65187          37278     37335    0   38 22:40:51 Estab   13     13
+  ### dc1-p1-r002-sp-1 ### 10.16.250.126 4 65101          37701     37660    0   38 00:24:30 Estab   5      5
+  ### dc1-p1-r012-sp-1 ### 10.16.251.126 4 65101          37691     37778    0   38 00:23:31 Estab   5      5
+```
+```
+dc1-p1-r012-blf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r012-blf-1 ## 10.0.0.3      4 65287          33098     33261    0   19 21:40:03 Estab   48     48
+  ### dc1-p1-r002-sp-1 ### 10.16.250.126 4 65101          37709     37667    0   38 00:24:52 Estab   78     78
+  ### dc1-p1-r012-sp-1 ### 10.16.251.126 4 65101          37699     37786    0   19 00:23:53 Estab   78     78
+```
+```
+dc1-p1-r012-blf-1#show ip bgp summary vrf all
+BGP summary information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r012-blf-1 ## 10.0.0.3      4 65287          33106     33269    0   38 21:40:26 Estab   6      6
+  ### dc1-p1-r002-blf-1 ## 10.16.241.0   4 65187          37296     37353    0   19 22:41:35 Estab   13     13
+  ### dc1-p1-r002-sp-1 ### 10.16.250.126 4 65101          37718     37677    0    0 00:25:15 Estab   5      5
+  ### dc1-p1-r012-sp-1 ### 10.16.251.126 4 65101          37708     37794    0   38 00:24:16 Estab   5      5
 
+BGP summary information for VRF tenant-1
+Router identifier 10.16.241.242, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r009-fw-1 ### 10.16.241.244 4 65191          26647     32090    0   38 21:30:29 Estab   1      1
+
+BGP summary information for VRF tenant-2
+Router identifier 10.16.241.250, local AS number 65187
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r009-fw-1 ### 10.16.241.252 4 65191          26642     32037    0   38 21:30:03 Estab   1      1
+```
+```
+dc1-p1-r012-blf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.16.250.126         0       -          100     0       65101 i
+ *        10.16.254.1/32         10.16.241.0           0       -          100     0       65101 i
+ * >      10.16.254.2/32         10.16.251.126         0       -          100     0       65101 i
+ *        10.16.254.2/32         10.16.241.0           0       -          100     0       65101 i
+ * >Ec    10.16.254.11/32        10.16.250.126         0       -          100     0       65101 65111 i
+ *  ec    10.16.254.11/32        10.16.251.126         0       -          100     0       65101 65111 i
+ *        10.16.254.11/32        10.16.241.0           0       -          100     0       65101 65111 i
+ * >Ec    10.16.254.12/32        10.16.250.126         0       -          100     0       65101 65112 i
+ *  ec    10.16.254.12/32        10.16.251.126         0       -          100     0       65101 65112 i
+ *        10.16.254.12/32        10.16.241.0           0       -          100     0       65101 65112 i
+ * >Ec    10.16.254.13/32        10.16.250.126         0       -          100     0       65101 65113 i
+ *  ec    10.16.254.13/32        10.16.251.126         0       -          100     0       65101 65113 i
+ *        10.16.254.13/32        10.16.241.0           0       -          100     0       65101 65113 i
+ * >Ec    10.16.254.14/32        10.16.250.126         0       -          100     0       65101 65114 i
+ *  ec    10.16.254.14/32        10.16.251.126         0       -          100     0       65101 65114 i
+ *        10.16.254.14/32        10.16.241.0           0       -          100     0       65101 65114 i
+ * >      10.16.254.187/32       10.16.241.0           0       -          100     0       i
+ * >      10.16.254.188/32       -                     -       -          -       0       i
+ * >      10.32.254.1/32         10.0.0.3              0       -          100     0       65287 65201 i
+ *        10.32.254.1/32         10.16.241.0           0       -          100     0       65287 65201 i
+ * >      10.32.254.2/32         10.0.0.3              0       -          100     0       65287 65201 i
+ *        10.32.254.2/32         10.16.241.0           0       -          100     0       65287 65201 i
+ * >      10.32.254.11/32        10.0.0.3              0       -          100     0       65287 65201 65211 i
+ *        10.32.254.11/32        10.16.241.0           0       -          100     0       65287 65201 65211 i
+ * >      10.32.254.12/32        10.0.0.3              0       -          100     0       65287 65201 65212 i
+ *        10.32.254.12/32        10.16.241.0           0       -          100     0       65287 65201 65212 i
+ * >      10.32.254.187/32       10.0.0.3              0       -          100     0       65287 i
+ *        10.32.254.187/32       10.16.241.0           0       -          100     0       65287 i
+ * >      10.32.254.188/32       10.0.0.3              0       -          100     0       65287 i
+ *        10.32.254.188/32       10.16.241.0           0       -          100     0       65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.16.241.242, local AS number 65187
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.241.244         0       -          100     0       65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65287 65291 65291 65291 65291 i
+ * >Ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  Ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ *  ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  Ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ *  ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ * >Ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >      10.16.241.240/29       -                     -       -          -       0       i
+ * >      10.32.241.240/29       10.32.254.188         0       -          100     0       65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.16.241.250, local AS number 65187
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.241.252         0       -          100     0       65191 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65287 65291 65291 65291 65291 i
+ * >Ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65101 65113 i
+ *  Ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ *  ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ * >Ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65101 65111 i
+ *  Ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ *  ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65287 65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65287 65201 65212 i
+ * >      10.16.241.248/29       -                     -       -          -       0       i
+ * >      10.32.241.248/29       10.32.254.188         0       -          100     0       65287 i
+```
+```
+dc1-p1-r012-blf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast       
+10.16.254.12        unicast       
+10.16.254.13        unicast       
+10.16.254.14        unicast       
+10.32.254.11        unicast       
+10.32.254.12        unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  7
+```
+```
+dc1-p1-r012-blf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI       VLAN       Source       Interface       802.1Q Tag
+--------- ---------- ------------ --------------- ----------
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4092       tenant-1       evpn         
+4002       4091       tenant-2       evpn         
+```
+```
+dc1-p1-r012-blf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.16.254.188
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: CLI
+  Remote MAC learning is disabled
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4091, 4002]      [4092, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  MLAG Shared Router MAC is 0000.0000.0000
+```
+```
+dc1-p1-r012-blf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.10.0/24 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                              via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                              via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.0/24 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via 10.16.241.244, Vlan4081
+ C        10.16.241.240/29 is directly connected, Vlan4081
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r012-blf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+                                via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+ B E      10.8.30.0/24 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                              via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+                                via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+ B E      10.8.40.0/24 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                              via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via 10.16.241.252, Vlan4082
+ C        10.16.241.248/29 is directly connected, Vlan4082
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc1-p1-r012-blf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r012-blf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r012-blf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r012-blf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+```
+```
+dc1-p1-r012-blf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.16.254.188, local AS number 65187
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65191 i
+ * >      RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65191 i
+ * >      RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65287 65291 65291 65291 65291 i
+ * >      RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65101 65113 i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65101 65114 i
+ * >      RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65101 65112 i
+ * >      RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65287 65201 65211 i
+ * >      RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65287 65201 65212 i
+ * >      RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 -                     -       -       0       i
+ * >      RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65287 i
+ * >      RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65287 i
+```
+```
+dc1-p1-r012-blf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 3
+Number of aggregators: 3
+
+   Port-Channel       Protocol    Ports             
+------------------ -------------- ------------------
+   Po1(U)             LACP(a)     Et3(PG+) Et4(PG+) 
+   Po7(U)             LACP(a)     Et7(PG+) PEt7(P)  
+   Po8(U)             LACP(a)     Et8(PG+) PEt8(P)  
+```
+```
+dc1-p1-r012-blf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+4091  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       1 day, 2:34:22 ago
+4091  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       1 day, 2:34:22 ago
+4091  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:49 ago
+4091  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       1 day, 2:34:22 ago
+4091  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:47 ago
+4091  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       1 day, 2:34:22 ago
+4091  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:47 ago
+4092  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       1 day, 2:34:22 ago
+4092  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       1 day, 2:34:22 ago
+4092  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:49 ago
+4092  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       1 day, 2:34:23 ago
+4092  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:47 ago
+4092  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       1 day, 2:34:23 ago
+4092  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:47 ago
+Total Remote Mac Addresses for this criterion: 14
+```
+```
+dc1-p1-r012-blf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+4081    001e.1483.73c6    DYNAMIC     Po7        1       21:34:08 ago
+4081    5000.0088.fe27    STATIC      Po1
+4082    001e.1483.73c6    DYNAMIC     Po7        1       21:34:10 ago
+4082    5000.0088.fe27    STATIC      Po1
+4091    0000.0000.cafe    STATIC      Cpu
+4091    5000.0003.3766    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4091    5000.0015.f4e8    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4091    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:55 ago
+4091    5000.0072.8b31    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4091    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:43:53 ago
+4091    5000.00d5.5dc0    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4091    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:53 ago
+4092    0000.0000.cafe    STATIC      Cpu
+4092    5000.0003.3766    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4092    5000.0015.f4e8    DYNAMIC     Vx1        1       1 day, 2:34:28 ago
+4092    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:55 ago
+4092    5000.0072.8b31    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4092    5000.0088.fe27    STATIC      Po1
+4092    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:43:53 ago
+4092    5000.00d5.5dc0    DYNAMIC     Vx1        1       1 day, 2:34:29 ago
+4092    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:53 ago
+4093    5000.0088.fe27    STATIC      Po1
+4094    5000.0088.fe27    STATIC      Po1
+Total Mac Addresses for this criterion: 23
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc1-p1-r012-blf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.16.241.241     0:00:13  5000.0088.fe27  Vlan4081, Port-Channel1
+10.16.241.244     0:00:13  001e.1483.73c6  Vlan4081, Port-Channel7
+```
+```
+dc1-p1-r012-blf-1#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.16.241.249     0:00:14  5000.0088.fe27  Vlan4082, Port-Channel1
+10.16.241.252     0:00:14  001e.1483.73c6  Vlan4082, Port-Channel7
+```
+```
+dc1-p1-r012-blf-1#show mlag
+MLAG Configuration:              
+domain-id                          :   dc1-p1-r002-blf-1
+local-interface                    :            Vlan4094
+peer-address                       :         10.16.241.2
+peer-link                          :       Port-Channel1
+peer-config                        :          consistent
+                                                       
+MLAG Status:                     
+state                              :              Active
+negotiation status                 :           Connected
+peer-link status                   :                  Up
+local-int status                   :                  Up
+system-id                          :   52:00:00:45:ab:df
+dual-primary detection             :            Disabled
+dual-primary interface errdisabled :               False
+                                                       
+MLAG Ports:                      
+Disabled                           :                   0
+Configured                         :                   0
+Inactive                           :                   0
+Active-partial                     :                   0
+Active-full                        :                   2
 ```
 
 </details>
@@ -3277,19 +9279,491 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc1-p1-r009-fw-1 (fw-1)</summary>
   
 ```
+dc1-p1-r009-fw-1#show etherchannel summary 
+Flags:  D - down        P/bndl - bundled in port-channel
+        I - stand-alone s/susp - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
 
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 2
+Number of aggregators:           2
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+7       Po7(RU)         LACP     Gi1(bndl) Gi2(bndl)
+8       Po8(RU)         LACP     Gi3(bndl) Gi4(bndl)
+
+RU - L3 port-channel UP State
+SU - L2 port-channel UP state
+P/bndl -  Bundled
+S/susp  - Suspended
+```
+```
+dc1-p1-r009-fw-1#show ip bgp summary
+BGP router identifier 10.16.254.191, local AS number 65191
+BGP table version is 50, main routing table version 50
+5 network entries using 1240 bytes of memory
+9 path entries using 1224 bytes of memory
+4 multipath network entries and 8 multipath paths
+2/2 BGP path/bestpath attribute entries using 576 bytes of memory
+1 BGP AS-PATH entries using 40 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 3080 total bytes of memory
+BGP activity 5/0 prefixes, 9/0 paths, scan interval 60 secs
+5 networks peaked at 12:31:43 Jul 13 2024 UTC (22:04:15.063 ago)
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.16.241.241   4        65187   30983   25721       50    0    0 22:04:42        2
+10.16.241.242   4        65187   30981   25720       50    0    0 22:04:41        2
+10.16.241.249   4        65187   30967   25713       50    0    0 22:04:21        2
+10.16.241.250   4        65187   30923   25712       50    0    0 22:04:15        2
+```
+```
+dc1-p1-r009-fw-1#show ip bgp
+BGP table version is 50, local router ID is 10.16.254.191
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal, 
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter, 
+              x best-external, a additional-path, c RIB-compressed, 
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>   10.8.0.0/16      0.0.0.0                            32768 i
+ s>   10.8.10.0/24     10.16.241.242                          0 65187 65101 65111 i
+ sm                    10.16.241.241                          0 65187 65101 65111 i
+ s>   10.8.20.0/24     10.16.241.242                          0 65187 65101 65111 i
+ sm                    10.16.241.241                          0 65187 65101 65111 i
+ s>   10.8.30.0/24     10.16.241.250                          0 65187 65101 65111 i
+ sm                    10.16.241.249                          0 65187 65101 65111 i
+ s>   10.8.40.0/24     10.16.241.250                          0 65187 65101 65111 i
+ sm                    10.16.241.249                          0 65187 65101 65111 i
+```
+```
+dc1-p1-r009-fw-1#show ip route 
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, m - OMP
+       n - NAT, Ni - NAT inside, No - NAT outside, Nd - NAT DIA
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       H - NHRP, G - NHRP registered, g - NHRP registration summary
+       o - ODR, P - periodic downloaded static route, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+      10.0.0.0/8 is variably subnetted, 9 subnets, 4 masks
+B        10.8.0.0/16 [200/0], 00:03:33, Null0
+B        10.8.10.0/24 [20/0] via 10.16.241.242, 00:03:33
+                      [20/0] via 10.16.241.241, 00:03:33
+B        10.8.20.0/24 [20/0] via 10.16.241.242, 00:03:33
+                      [20/0] via 10.16.241.241, 00:03:33
+B        10.8.30.0/24 [20/0] via 10.16.241.250, 00:03:33
+                      [20/0] via 10.16.241.249, 00:03:33
+B        10.8.40.0/24 [20/0] via 10.16.241.250, 00:03:33
+                      [20/0] via 10.16.241.249, 00:03:33
+C        10.16.241.240/29 is directly connected, Port-channel7.4081
+L        10.16.241.244/32 is directly connected, Port-channel7.4081
+C        10.16.241.248/29 is directly connected, Port-channel7.4082
+L        10.16.241.252/32 is directly connected, Port-channel7.4082
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-vlx-s201</summary>
+  
+```
+dc1-vlx-s201#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.10.201/24
+Vlan20 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.20.201/24
+Vlan30 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.30.201/24
+Vlan40 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.40.201/24
+```
+```
+dc1-vlx-s201#show etherchannel summary
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      N - not in use, no aggregation
+        f - failed to allocate aggregator
+        M - not in use, minimum links not met
+        m - not in use, port not aggregated due to minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+        A - formed by Auto LAG
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+7      Po7(SU)         LACP      Et0/0(P)    Et0/1(P)    
+```
+```
+dc1-vlx-s201#show ip route vrf *
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+Routing Table: vlan10
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.10.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.10.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.10.0/24 is directly connected, Vlan10
+L        10.8.10.201/32 is directly connected, Vlan10
+```
+```
+Routing Table: vlan20
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.20.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.20.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.20.0/24 is directly connected, Vlan20
+L        10.8.20.201/32 is directly connected, Vlan20
+```
+```
+Routing Table: vlan30
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.30.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.30.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.30.0/24 is directly connected, Vlan30
+L        10.8.30.201/32 is directly connected, Vlan30
+```
+```
+Routing Table: vlan40
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.40.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.40.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.40.0/24 is directly connected, Vlan40
+L        10.8.40.201/32 is directly connected, Vlan40
+```
+```
+dc1-vlx-s201#show ip arp vrf vlan10 
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.10.101             1   aabb.cc81.7000  ARPA   Vlan10
+Internet  10.8.10.151             0   aabb.cc81.6000  ARPA   Vlan10
+Internet  10.8.10.201             -   aabb.cc81.5000  ARPA   Vlan10
+Internet  10.8.10.254             0   0000.0000.cafe  ARPA   Vlan10
+
+dc1-vlx-s201#show ip arp vrf vlan20
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.20.201             -   aabb.cc81.5000  ARPA   Vlan20
+Internet  10.8.20.254             2   0000.0000.cafe  ARPA   Vlan20
+
+dc1-vlx-s201#show ip arp vrf vlan30
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.30.201             -   aabb.cc81.5000  ARPA   Vlan30
+Internet  10.8.30.202             0   aabb.cc81.f000  ARPA   Vlan30
+Internet  10.8.30.254             2   0000.0000.cafe  ARPA   Vlan30
+
+dc1-vlx-s201#show ip arp vrf vlan40
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.40.201             -   aabb.cc81.5000  ARPA   Vlan40
+Internet  10.8.40.254             0   0000.0000.cafe  ARPA   Vlan40
+```
+
+
+</details>
+
+<details>
+  <summary>Проверки dc1-vlx-с101</summary>
+  
+```
+dc1-vlx-c101#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.7000 (bia aabb.cc81.7000)
+  Internet address is 10.8.10.101/24
+Vlan30 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.7000 (bia aabb.cc81.7000)
+  Internet address is 10.8.30.101/24
+```
+```
+dc1-vlx-c101#show etherchannel summary
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      N - not in use, no aggregation
+        f - failed to allocate aggregator
+        M - not in use, minimum links not met
+        m - not in use, port not aggregated due to minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+        A - formed by Auto LAG
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+7      Po7(SU)         LACP      Et0/0(P)    Et0/1(P)    
+```
+```
+dc1-vlx-c101#show ip route vrf *
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+Routing Table: vlan10
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.10.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.10.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.10.0/24 is directly connected, Vlan10
+L        10.8.10.101/32 is directly connected, Vlan10
+```
+```
+Routing Table: vlan30
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.30.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.30.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.30.0/24 is directly connected, Vlan30
+L        10.8.30.101/32 is directly connected, Vlan30
+```
+```
+dc1-vlx-c101#show ip arp vrf vlan10 
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.10.101             -   aabb.cc81.7000  ARPA   Vlan10
+Internet  10.8.10.151             1   aabb.cc81.6000  ARPA   Vlan10
+Internet  10.8.10.201             0   aabb.cc81.5000  ARPA   Vlan10
+Internet  10.8.10.254             3   0000.0000.cafe  ARPA   Vlan10
+
+dc1-vlx-c101#show ip arp vrf vlan30
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.30.101             -   aabb.cc81.7000  ARPA   Vlan30
+Internet  10.8.30.202             2   aabb.cc81.f000  ARPA   Vlan30
+Internet  10.8.30.254             1   0000.0000.cafe  ARPA   Vlan30
+```
+
+</details>
+
+<details>
+  <summary>Проверки dc1-vlx-h151</summary>
+  
+```
+dc1-vl10-h151#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.6000 (bia aabb.cc81.6000)
+  Internet address is 10.8.10.151/24
+```
+```
+dc1-vl10-h151#show etherchannel summary
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      N - not in use, no aggregation
+        f - failed to allocate aggregator
+        M - not in use, minimum links not met
+        m - not in use, port not aggregated due to minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+        A - formed by Auto LAG
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+8      Po8(SU)         LACP      Et0/0(P)    Et0/1(P)    
+```
+```
+dc1-vl10-h151#show ip route vrf *
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.10.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.10.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.10.0/24 is directly connected, Vlan10
+L        10.8.10.151/32 is directly connected, Vlan10
+```
+```
+dc1-vl10-h151#show ip arp
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.10.101             0   aabb.cc81.7000  ARPA   Vlan10
+Internet  10.8.10.151             -   aabb.cc81.6000  ARPA   Vlan10
+Internet  10.8.10.201             0   aabb.cc81.5000  ARPA   Vlan10
+Internet  10.8.10.202             1   aabb.cc81.f000  ARPA   Vlan10
+Internet  10.8.10.254             0   0000.0000.cafe  ARPA   Vlan10
 ```
 
 </details>
 
 ### Проверка взаимодействия DC2
 
-
 <details>
   <summary>Проверки dc2-p1-r002-sp-1 (spine-1)</summary>
   
 ```
+dc2-p1-r002-sp-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.32.254.1, local AS number 65201
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.32.250.1   4 65211         109968    110379    0    0    3d05h Estab   1      1
+  10.32.250.3   4 65212         109946    110291    0    0    3d05h Estab   1      1
+  10.32.250.125 4 65287          30612     30623    0    0 21:39:48 Estab   10     10
+  10.32.250.127 4 65287          30560     30591    0   19 21:39:42 Estab   10     10
+```
+```
+dc2-p1-r002-sp-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.32.254.1, local AS number 65201
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.32.250.1   4 65211         109976    110387    0    0    3d05h Estab   22     22
+  10.32.250.3   4 65212         109954    110300    0    0    3d05h Estab   22     22
+  10.32.250.125 4 65287          30620     30631    0    0 21:40:09 Estab   86     86
+  10.32.250.127 4 65287          30568     30600    0    0 21:40:02 Estab   86     86
+```
+```
+dc2-p1-r002-sp-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.32.254.1, local AS number 65201
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.16.254.1/32         10.32.250.127         0       -          100     0       65287 65187 65101 i
+ *  ec    10.16.254.1/32         10.32.250.125         0       -          100     0       65287 65187 65101 i
+ * >Ec    10.16.254.2/32         10.32.250.125         0       -          100     0       65287 65187 65101 i
+ *  ec    10.16.254.2/32         10.32.250.127         0       -          100     0       65287 65187 65101 i
+ * >Ec    10.16.254.11/32        10.32.250.127         0       -          100     0       65287 65187 65101 65111 i
+ *  ec    10.16.254.11/32        10.32.250.125         0       -          100     0       65287 65187 65101 65111 i
+ * >Ec    10.16.254.12/32        10.32.250.127         0       -          100     0       65287 65187 65101 65112 i
+ *  ec    10.16.254.12/32        10.32.250.125         0       -          100     0       65287 65187 65101 65112 i
+ * >Ec    10.16.254.13/32        10.32.250.125         0       -          100     0       65287 65187 65101 65113 i
+ *  ec    10.16.254.13/32        10.32.250.127         0       -          100     0       65287 65187 65101 65113 i
+ * >Ec    10.16.254.14/32        10.32.250.125         0       -          100     0       65287 65187 65101 65114 i
+ *  ec    10.16.254.14/32        10.32.250.127         0       -          100     0       65287 65187 65101 65114 i
+ * >Ec    10.16.254.187/32       10.32.250.125         0       -          100     0       65287 65187 i
+ *  ec    10.16.254.187/32       10.32.250.127         0       -          100     0       65287 65187 i
+ * >Ec    10.16.254.188/32       10.32.250.125         0       -          100     0       65287 65187 i
+ *  ec    10.16.254.188/32       10.32.250.127         0       -          100     0       65287 65187 i
+ * >      10.32.254.1/32         -                     -       -          -       0       i
+ * >      10.32.254.11/32        10.32.250.1           0       -          100     0       65211 i
+ * >      10.32.254.12/32        10.32.250.3           0       -          100     0       65212 i
+ * >Ec    10.32.254.187/32       10.32.250.125         0       -          100     0       65287 i
+ *  ec    10.32.254.187/32       10.32.250.127         0       -          100     0       65287 i
+ * >Ec    10.32.254.188/32       10.32.250.127         0       -          100     0       65287 i
+ *  ec    10.32.254.188/32       10.32.250.125         0       -          100     0       65287 i
 ```
 
 </details>
@@ -3298,7 +9772,62 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc2-p1-r012-sp-1 (spine-2)</summary>
   
 ```
+dc2-p1-r012-sp-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.32.254.2, local AS number 65201
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.32.251.1   4 65211          30574     30600    0   19 21:39:31 Estab   1      1
+  10.32.251.3   4 65212         110100    110362    0    0    3d05h Estab   1      1
+  10.32.251.125 4 65287          30632     30608    0    0 21:39:48 Estab   10     10
+  10.32.251.127 4 65287            768       732    0    0 00:27:44 Estab   10     10
+```
+```
+dc2-p1-r012-sp-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.32.254.2, local AS number 65201
+Neighbor Status Codes: m - Under maintenance
+  Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.32.251.1   4 65211          30583     30608    0    0 21:39:52 Estab   22     22
+  10.32.251.3   4 65212         110108    110370    0    0    3d05h Estab   22     22
+  10.32.251.125 4 65287          30640     30616    0    0 21:40:09 Estab   86     86
+  10.32.251.127 4 65287            776       739    0   19 00:28:06 Estab   86     86
+```
+```
+dc2-p1-r012-sp-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.32.254.2, local AS number 65201
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.16.254.1/32         10.32.251.127         0       -          100     0       65287 65187 65101 i
+ *  ec    10.16.254.1/32         10.32.251.125         0       -          100     0       65287 65187 65101 i
+ * >Ec    10.16.254.2/32         10.32.251.125         0       -          100     0       65287 65187 65101 i
+ *  ec    10.16.254.2/32         10.32.251.127         0       -          100     0       65287 65187 65101 i
+ * >Ec    10.16.254.11/32        10.32.251.127         0       -          100     0       65287 65187 65101 65111 i
+ *  ec    10.16.254.11/32        10.32.251.125         0       -          100     0       65287 65187 65101 65111 i
+ * >Ec    10.16.254.12/32        10.32.251.127         0       -          100     0       65287 65187 65101 65112 i
+ *  ec    10.16.254.12/32        10.32.251.125         0       -          100     0       65287 65187 65101 65112 i
+ * >Ec    10.16.254.13/32        10.32.251.125         0       -          100     0       65287 65187 65101 65113 i
+ *  ec    10.16.254.13/32        10.32.251.127         0       -          100     0       65287 65187 65101 65113 i
+ * >Ec    10.16.254.14/32        10.32.251.125         0       -          100     0       65287 65187 65101 65114 i
+ *  ec    10.16.254.14/32        10.32.251.127         0       -          100     0       65287 65187 65101 65114 i
+ * >Ec    10.16.254.187/32       10.32.251.125         0       -          100     0       65287 65187 i
+ *  ec    10.16.254.187/32       10.32.251.127         0       -          100     0       65287 65187 i
+ * >Ec    10.16.254.188/32       10.32.251.125         0       -          100     0       65287 65187 i
+ *  ec    10.16.254.188/32       10.32.251.127         0       -          100     0       65287 65187 i
+ * >      10.32.254.2/32         -                     -       -          -       0       i
+ * >      10.32.254.11/32        10.32.251.1           0       -          100     0       65211 i
+ * >      10.32.254.12/32        10.32.251.3           0       -          100     0       65212 i
+ * >Ec    10.32.254.187/32       10.32.251.125         0       -          100     0       65287 i
+ *  ec    10.32.254.187/32       10.32.251.127         0       -          100     0       65287 i
+ * >Ec    10.32.254.188/32       10.32.251.127         0       -          100     0       65287 i
+ *  ec    10.32.254.188/32       10.32.251.125         0       -          100     0       65287 i
 ```
 
 </details>
@@ -3307,7 +9836,1074 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc2-p1-r003-lf-1 (leaf-11)</summary>
   
 ```
+dc2-p1-r003-lf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-sp-1 ### 10.32.250.0 4 65201         111941    111648    0    0    3d05h Estab   12     12
+  ### dc2-p1-r012-sp-1 ### 10.32.251.0 4 65201         112164    111902    0    0 21:39:30 Estab   12     12
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-sp-1 ### 10.32.250.0 4 65201         111950    111656    0   19    3d05h Estab   116    116
+  ### dc2-p1-r012-sp-1 ### 10.32.251.0 4 65201         112172    111911    0    0 21:39:52 Estab   116    116
+```
+```
+dc2-p1-r003-lf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.16.254.1/32         10.32.251.0           0       -          100     0       65201 65287 65187 65101 i
+ *  ec    10.16.254.1/32         10.32.250.0           0       -          100     0       65201 65287 65187 65101 i
+ * >Ec    10.16.254.2/32         10.32.250.0           0       -          100     0       65201 65287 65187 65101 i
+ *  ec    10.16.254.2/32         10.32.251.0           0       -          100     0       65201 65287 65187 65101 i
+ * >Ec    10.16.254.11/32        10.32.250.0           0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.16.254.11/32        10.32.251.0           0       -          100     0       65201 65287 65187 65101 65111 i
+ * >Ec    10.16.254.12/32        10.32.250.0           0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.16.254.12/32        10.32.251.0           0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.16.254.13/32        10.32.250.0           0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.16.254.13/32        10.32.251.0           0       -          100     0       65201 65287 65187 65101 65113 i
+ * >Ec    10.16.254.14/32        10.32.250.0           0       -          100     0       65201 65287 65187 65101 65114 i
+ *  ec    10.16.254.14/32        10.32.251.0           0       -          100     0       65201 65287 65187 65101 65114 i
+ * >Ec    10.16.254.187/32       10.32.250.0           0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.254.187/32       10.32.251.0           0       -          100     0       65201 65287 65187 i
+ * >Ec    10.16.254.188/32       10.32.250.0           0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.254.188/32       10.32.251.0           0       -          100     0       65201 65287 65187 i
+ * >      10.32.254.1/32         10.32.250.0           0       -          100     0       65201 i
+ * >      10.32.254.2/32         10.32.251.0           0       -          100     0       65201 i
+ * >      10.32.254.11/32        -                     -       -          -       0       i
+ * >Ec    10.32.254.12/32        10.32.250.0           0       -          100     0       65201 65212 i
+ *  ec    10.32.254.12/32        10.32.251.0           0       -          100     0       65201 65212 i
+ * >Ec    10.32.254.187/32       10.32.250.0           0       -          100     0       65201 65287 i
+ *  ec    10.32.254.187/32       10.32.251.0           0       -          100     0       65201 65287 i
+ * >Ec    10.32.254.188/32       10.32.250.0           0       -          100     0       65201 65287 i
+ *  ec    10.32.254.188/32       10.32.251.0           0       -          100     0       65201 65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.8.20.254, local AS number 65211
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ * >      10.8.10.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *        10.8.10.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.10.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.10.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.10.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.10.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.10.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.10.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.10.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.10.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+          10.8.10.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >      10.8.20.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *        10.8.20.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.20.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.20.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.20.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.20.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+          10.8.20.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >Ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ * >Ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65201 65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.8.40.254, local AS number 65211
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ * >      10.8.30.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *        10.8.30.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.30.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.30.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.30.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.30.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.30.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.30.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.30.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.30.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+          10.8.30.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >      10.8.40.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *        10.8.40.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.40.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.40.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.40.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.40.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+          10.8.40.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >Ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ * >Ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65201 65287 i
+```
+```
+dc2-p1-r003-lf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        flood, unicast
+10.16.254.12        flood, unicast
+10.16.254.13        flood, unicast
+10.16.254.14        flood, unicast
+10.16.254.187       unicast       
+10.16.254.188       unicast       
+10.32.254.12        flood, unicast
+10.32.254.187       unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  9
+```
+```
+dc2-p1-r003-lf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface           802.1Q Tag
+----------- ---------- ------------ ------------------- ----------
+10010       10         static       Port-Channel7       10        
+                                    Vxlan1              10        
+10020       20         static       Port-Channel7       20        
+                                    Vxlan1              20        
+10030       30         static       Port-Channel7       30        
+                                    Vxlan1              30        
+10040       40         static       Port-Channel7       40        
+                                    Vxlan1              40        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4094       tenant-1       evpn         
+4002       4093       tenant-2       evpn         
+```
+```
+dc2-p1-r003-lf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.32.254.11
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 10010]       [20, 10020]       [30, 10030]       [40, 10040]      
+   
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4093, 4002]      [4094, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  Headend replication flood vtep list is:
+    10 10.32.254.12    10.16.254.12    10.16.254.14    10.16.254.11    10.16.254.13   
+    20 10.32.254.12    10.16.254.12    10.16.254.11   
+    30 10.32.254.12    10.16.254.12    10.16.254.14    10.16.254.11    10.16.254.13   
+    40 10.32.254.12    10.16.254.12    10.16.254.11   
+  Shared Router MAC is 0000.0000.0000
+```
+```
+dc2-p1-r003-lf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.10.0/24 is directly connected, Vlan10
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.20.0/24 is directly connected, Vlan20
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc2-p1-r003-lf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.30.0/24 is directly connected, Vlan30
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.40.0/24 is directly connected, Vlan40
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >      RD: 10.32.254.11:10 imet 10.32.254.11
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:20 imet 10.32.254.11
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:30 imet 10.32.254.11
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:40 imet 10.32.254.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >      RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >      RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >      RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.32.254.11, local AS number 65211
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >      RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >      RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >      RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >      RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+```
+```
+dc2-p1-r003-lf-1#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10010:10
+  Route target export: Route-Target-AS:10010:10
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+EVPN instance: VLAN 20
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10020:20
+  Route target export: Route-Target-AS:10020:20
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+EVPN instance: VLAN 30
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10030:30
+  Route target export: Route-Target-AS:10030:30
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+EVPN instance: VLAN 40
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10040:40
+  Route target export: Route-Target-AS:10040:40
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+```
+```
+dc2-p1-r003-lf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 1
+Number of aggregators: 1
+
+   Port-Channel       Protocol    Ports    
+------------------ -------------- ---------
+   Po7(U)             LACP(a)     Et7(PG+) 
+```
+```
+dc2-p1-r003-lf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     2       0:28:27 ago
+                                     10.16.254.12   
+  10  aabb.cc81.6000  EVPN      Vx1  10.16.254.11     2       0:28:27 ago
+                                     10.16.254.12   
+  10  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     2       0:28:27 ago
+                                     10.16.254.14   
+  20  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     2       0:28:27 ago
+                                     10.16.254.12   
+  30  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     2       0:28:29 ago
+                                     10.16.254.12   
+  30  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     1       0:28:27 ago
+                                     10.16.254.14   
+  40  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     2       0:28:27 ago
+                                     10.16.254.12   
+4093  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:28 ago
+4093  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:28 ago
+4093  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       21:43:39 ago
+4093  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:47 ago
+4093  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:33 ago
+4093  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       21:43:53 ago
+4093  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:36 ago
+4093  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:43:53 ago
+4093  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       3 days, 6:09:55 ago
+4094  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:28 ago
+4094  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:28 ago
+4094  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       21:43:39 ago
+4094  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:47 ago
+4094  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:32 ago
+4094  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       21:43:53 ago
+4094  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:34 ago
+4094  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:43:55 ago
+4094  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       3 days, 5:42:23 ago
+Total Remote Mac Addresses for this criterion: 25
+```
+```
+dc2-p1-r003-lf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0000.0000.cafe    STATIC      Cpu
+  10    aabb.cc81.5000    DYNAMIC     Vx1        2       0:28:34 ago
+  10    aabb.cc81.6000    DYNAMIC     Vx1        2       0:28:34 ago
+  10    aabb.cc81.7000    DYNAMIC     Vx1        2       0:28:33 ago
+  10    aabb.cc81.f000    DYNAMIC     Po7        1       3 days, 6:00:36 ago
+  20    0000.0000.cafe    STATIC      Cpu
+  20    aabb.cc81.5000    DYNAMIC     Vx1        2       0:28:34 ago
+  20    aabb.cc81.f000    DYNAMIC     Po7        1       3 days, 6:00:36 ago
+  30    0000.0000.cafe    STATIC      Cpu
+  30    aabb.cc81.5000    DYNAMIC     Vx1        2       0:28:35 ago
+  30    aabb.cc81.7000    DYNAMIC     Vx1        1       0:28:33 ago
+  30    aabb.cc81.f000    DYNAMIC     Po7        1       3 days, 6:00:36 ago
+  40    0000.0000.cafe    STATIC      Cpu
+  40    aabb.cc81.5000    DYNAMIC     Vx1        2       0:28:34 ago
+  40    aabb.cc81.f000    DYNAMIC     Po7        1       3 days, 5:43:17 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4093    5000.0003.3766    DYNAMIC     Vx1        1       0:28:34 ago
+4093    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:34 ago
+4093    5000.0045.abdf    DYNAMIC     Vx1        1       21:43:45 ago
+4093    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:53 ago
+4093    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:39 ago
+4093    5000.0088.fe27    DYNAMIC     Vx1        1       21:43:59 ago
+4093    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:43 ago
+4093    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:43:59 ago
+4093    5000.00d8.ac19    DYNAMIC     Vx1        1       3 days, 6:10:02 ago
+4094    0000.0000.cafe    STATIC      Cpu
+4094    5000.0003.3766    DYNAMIC     Vx1        1       0:28:34 ago
+4094    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:34 ago
+4094    5000.0045.abdf    DYNAMIC     Vx1        1       21:43:45 ago
+4094    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:53 ago
+4094    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:38 ago
+4094    5000.0088.fe27    DYNAMIC     Vx1        1       21:43:59 ago
+4094    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:40 ago
+4094    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:02 ago
+4094    5000.00d8.ac19    DYNAMIC     Vx1        1       3 days, 5:42:29 ago
+Total Mac Addresses for this criterion: 35
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc2-p1-r003-lf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.8.10.101             -  aabb.cc81.7000  Vlan10, Vxlan1
+10.8.10.151             -  aabb.cc81.6000  Vlan10, Vxlan1
+10.8.10.201             -  aabb.cc81.5000  Vlan10, Vxlan1
+10.8.10.202       0:02:03  aabb.cc81.f000  Vlan10, Port-Channel7
+10.8.20.201             -  aabb.cc81.5000  Vlan20, Vxlan1
+10.8.20.202       0:03:35  aabb.cc81.f000  Vlan20, Port-Channel7
+```
+```
+dc2-p1-r003-lf-1#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.8.30.101             -  aabb.cc81.7000  Vlan30, Vxlan1
+10.8.30.201             -  aabb.cc81.5000  Vlan30, Vxlan1
+10.8.30.202       0:03:50  aabb.cc81.f000  Vlan30, Port-Channel7
+10.8.40.201             -  aabb.cc81.5000  Vlan40, Vxlan1
+10.8.40.202       0:01:37  aabb.cc81.f000  Vlan40, Port-Channel7
 ```
 
 </details>
@@ -3316,25 +10912,1075 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc2-p1-r003-lf-2 (leaf-12)</summary>
   
 ```
-
+dc2-p1-r003-lf-2#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-sp-1 ### 10.32.250.2 4 65201         111812    111538    0    0    3d05h Estab   12     12
+  ### dc2-p1-r012-sp-1 ### 10.32.251.2 4 65201         112051    111783    0    0    3d05h Estab   12     12
 ```
-
-</details>
-
-<details>
-  <summary>Проверки dc2-p1-r013-lf-1 (leaf-13)</summary>
-  
 ```
-
+dc2-p1-r003-lf-2#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r002-sp-1 ### 10.32.250.2 4 65201         111821    111547    0    0    3d05h Estab   116    116
+  ### dc2-p1-r012-sp-1 ### 10.32.251.2 4 65201         112059    111791    0    0    3d05h Estab   116    116
 ```
-
-</details>
-
-<details>
-  <summary>Проверки dc2-p1-r013-lf-1 (leaf-14)</summary>
-  
 ```
+dc2-p1-r003-lf-2#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.16.254.1/32         10.32.251.2           0       -          100     0       65201 65287 65187 65101 i
+ *  ec    10.16.254.1/32         10.32.250.2           0       -          100     0       65201 65287 65187 65101 i
+ * >Ec    10.16.254.2/32         10.32.250.2           0       -          100     0       65201 65287 65187 65101 i
+ *  ec    10.16.254.2/32         10.32.251.2           0       -          100     0       65201 65287 65187 65101 i
+ * >Ec    10.16.254.11/32        10.32.250.2           0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.16.254.11/32        10.32.251.2           0       -          100     0       65201 65287 65187 65101 65111 i
+ * >Ec    10.16.254.12/32        10.32.250.2           0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.16.254.12/32        10.32.251.2           0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.16.254.13/32        10.32.250.2           0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.16.254.13/32        10.32.251.2           0       -          100     0       65201 65287 65187 65101 65113 i
+ * >Ec    10.16.254.14/32        10.32.250.2           0       -          100     0       65201 65287 65187 65101 65114 i
+ *  ec    10.16.254.14/32        10.32.251.2           0       -          100     0       65201 65287 65187 65101 65114 i
+ * >Ec    10.16.254.187/32       10.32.250.2           0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.254.187/32       10.32.251.2           0       -          100     0       65201 65287 65187 i
+ * >Ec    10.16.254.188/32       10.32.250.2           0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.254.188/32       10.32.251.2           0       -          100     0       65201 65287 65187 i
+ * >      10.32.254.1/32         10.32.250.2           0       -          100     0       65201 i
+ * >      10.32.254.2/32         10.32.251.2           0       -          100     0       65201 i
+ * >Ec    10.32.254.11/32        10.32.250.2           0       -          100     0       65201 65211 i
+ *  ec    10.32.254.11/32        10.32.251.2           0       -          100     0       65201 65211 i
+ * >      10.32.254.12/32        -                     -       -          -       0       i
+ * >Ec    10.32.254.187/32       10.32.250.2           0       -          100     0       65201 65287 i
+ *  ec    10.32.254.187/32       10.32.251.2           0       -          100     0       65201 65287 i
+ * >Ec    10.32.254.188/32       10.32.250.2           0       -          100     0       65201 65287 i
+ *  ec    10.32.254.188/32       10.32.251.2           0       -          100     0       65201 65287 i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.8.20.254, local AS number 65212
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ * >      10.8.10.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *        10.8.10.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.10.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.10.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.10.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.10.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.10.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.10.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.10.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *  ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.10.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+          10.8.10.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ * >      10.8.20.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *        10.8.20.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.20.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.20.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.20.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.20.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+          10.8.20.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ * >Ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.240/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.240/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ * >Ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.240/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.240/29       10.32.254.188         0       -          100     0       65201 65287 i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.8.40.254, local AS number 65212
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >Ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.187         0       -          100     0       65201 65287 65187 65191 i
+ *  ec    10.8.0.0/16            10.16.254.188         0       -          100     0       65201 65287 65187 65191 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.187         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ *        10.8.0.0/16            10.32.254.188         0       -          100     0       65201 65287 65291 65291 65291 65291 i
+ * >      10.8.30.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *        10.8.30.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.30.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.30.0/24           10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *        10.8.30.0/24           10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *        10.8.30.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.30.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.30.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.30.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65201 65287 65187 65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65201 65287 65187 65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.30.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+          10.8.30.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ * >      10.8.40.0/24           -                     -       -          -       0       i
+ *  Ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *        10.8.40.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.40.0/24           10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *        10.8.40.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *        10.8.40.0/24           10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65201 65287 65187 65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65201 65287 65187 65101 65112 i
+          10.8.40.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+          10.8.40.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ * >Ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.248/29       10.16.254.187         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ *  ec    10.16.241.248/29       10.16.254.188         0       -          100     0       65201 65287 65187 i
+ * >Ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.248/29       10.32.254.187         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65201 65287 i
+ *  ec    10.32.241.248/29       10.32.254.188         0       -          100     0       65201 65287 i
+```
+```
+dc2-p1-r003-lf-2#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast, flood
+10.16.254.12        unicast, flood
+10.16.254.13        unicast, flood
+10.16.254.14        unicast, flood
+10.16.254.187       unicast       
+10.16.254.188       unicast       
+10.32.254.11        unicast, flood
+10.32.254.187       unicast       
+10.32.254.188       unicast       
+
+Total number of remote VTEPS:  9
+```
+```
+dc2-p1-r003-lf-2#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface           802.1Q Tag
+----------- ---------- ------------ ------------------- ----------
+10010       10         static       Port-Channel7       10        
+                                    Vxlan1              10        
+10020       20         static       Port-Channel7       20        
+                                    Vxlan1              20        
+10030       30         static       Port-Channel7       30        
+                                    Vxlan1              30        
+10040       40         static       Port-Channel7       40        
+                                    Vxlan1              40        
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4094       tenant-1       evpn         
+4002       4093       tenant-2       evpn         
+```
+```
+dc2-p1-r003-lf-2#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.32.254.12
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: EVPN
+  Remote MAC learning via EVPN
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+    [10, 10010]       [20, 10020]       [30, 10030]       [40, 10040]      
+   
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4093, 4002]      [4094, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  Headend replication flood vtep list is:
+    10 10.32.254.11    10.16.254.12    10.16.254.14    10.16.254.11    10.16.254.13   
+    20 10.32.254.11    10.16.254.12    10.16.254.11   
+    30 10.32.254.11    10.16.254.12    10.16.254.14    10.16.254.11    10.16.254.13   
+    40 10.32.254.11    10.16.254.12    10.16.254.11   
+  Shared Router MAC is 0000.0000.0000
+```
+```
+dc2-p1-r003-lf-2#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.10.0/24 is directly connected, Vlan10
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.20.0/24 is directly connected, Vlan20
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.240/29 [20/0] via VTEP 10.32.254.187 VNI 4001 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4001 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc2-p1-r003-lf-2#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+                                via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.30.0/24 is directly connected, Vlan30
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ C        10.8.40.0/24 is directly connected, Vlan40
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                             via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+                                  via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.32.241.248/29 [20/0] via VTEP 10.32.254.187 VNI 4002 router-mac 50:00:00:d5:e2:ad local-interface Vxlan1
+                                  via VTEP 10.32.254.188 VNI 4002 router-mac 50:00:00:68:a1:7f local-interface Vxlan1
+```
+```
+dc2-p1-r003-lf-2#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:10 imet 10.32.254.12
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:20 imet 10.32.254.12
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:30 imet 10.32.254.12
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:40 imet 10.32.254.12
+                                 -                     -       -       0       i
+```
+```
+dc2-p1-r003-lf-2#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 -                     -       -       0       i
+```
+```
+dc2-p1-r003-lf-2#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 -                     -       -       0       i
+```
+```
+dc2-p1-r003-lf-2#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 -                     -       -       0       i
+```
+```
+dc2-p1-r003-lf-2#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.32.254.12, local AS number 65212
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65201 65287 65187 65191 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.187         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.32.254.188         -       100     0       65201 65287 65291 65291 65291 65291 i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ *  ec    RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65201 65287 65187 65101 65113 i
+ * >Ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ *  ec    RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65201 65287 65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ *  ec    RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65201 65287 65187 65101 65111 i
+ * >Ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ *  ec    RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65201 65287 65187 65101 65112 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >      RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ *  ec    RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65201 65287 65187 i
+ * >Ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ * >Ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+ * >Ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.187         -       100     0       65201 65287 i
+ * >Ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+ *  ec    RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 10.32.254.188         -       100     0       65201 65287 i
+```
+```
+dc2-p1-r003-lf-2#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10010:10
+  Route target export: Route-Target-AS:10010:10
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+EVPN instance: VLAN 20
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10020:20
+  Route target export: Route-Target-AS:10020:20
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+EVPN instance: VLAN 30
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10030:30
+  Route target export: Route-Target-AS:10030:30
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+EVPN instance: VLAN 40
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:10040:40
+  Route target export: Route-Target-AS:10040:40
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.32.254.12
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0201:0011:0007:0000
+      Interface: Port-Channel7
+      Mode: all-active
+      State: up
+      ES-Import RT: 02:01:00:11:00:07
+      DF election algorithm: modulus
+      Designated forwarder: 10.32.254.11
+      Non-Designated forwarder: 10.32.254.12
+```
+```
+dc2-p1-r003-lf-2#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 1
+Number of aggregators: 1
+
+   Port-Channel       Protocol    Ports    
+------------------ -------------- ---------
+   Po7(U)             LACP(a)     Et7(PG+) 
+```
+```
+dc2-p1-r003-lf-2#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     2       0:28:32 ago
+                                     10.16.254.12   
+  10  aabb.cc81.6000  EVPN      Vx1  10.16.254.11     1       0:28:32 ago
+                                     10.16.254.12   
+  10  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     1       0:28:29 ago
+                                     10.16.254.14   
+  20  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     1       0:28:32 ago
+                                     10.16.254.12   
+  30  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     1       0:28:32 ago
+                                     10.16.254.12   
+  30  aabb.cc81.7000  EVPN      Vx1  10.16.254.13     1       0:28:29 ago
+                                     10.16.254.14   
+  30  aabb.cc81.f000  EVPN      Vx1  0.0.0.0          1       0:00:24 ago
+  40  aabb.cc81.5000  EVPN      Vx1  10.16.254.11     2       0:28:32 ago
+                                     10.16.254.12   
+4093  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:31 ago
+4093  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:31 ago
+4093  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       21:43:40 ago
+4093  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:50 ago
+4093  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:34 ago
+4093  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       21:43:55 ago
+4093  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       3 days, 5:42:22 ago
+4093  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:37 ago
+4093  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:43:55 ago
+4094  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:31 ago
+4094  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:30 ago
+4094  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       21:43:39 ago
+4094  5000.0068.a17f  EVPN      Vx1  10.32.254.188    1       21:43:50 ago
+4094  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:33 ago
+4094  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       21:43:57 ago
+4094  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       3 days, 5:42:22 ago
+4094  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:35 ago
+4094  5000.00d5.e2ad  EVPN      Vx1  10.32.254.187    1       21:43:57 ago
+Total Remote Mac Addresses for this criterion: 26
+```
+```
+dc2-p1-r003-lf-2#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0000.0000.cafe    STATIC      Cpu
+  10    aabb.cc81.5000    DYNAMIC     Vx1        2       0:28:38 ago
+  10    aabb.cc81.6000    DYNAMIC     Vx1        1       0:28:38 ago
+  10    aabb.cc81.7000    DYNAMIC     Vx1        1       0:28:35 ago
+  10    aabb.cc81.f000    DYNAMIC     Po7        2       0:01:50 ago
+  20    0000.0000.cafe    STATIC      Cpu
+  20    aabb.cc81.5000    DYNAMIC     Vx1        1       0:28:38 ago
+  20    aabb.cc81.f000    DYNAMIC     Po7        2       0:01:48 ago
+  30    0000.0000.cafe    STATIC      Cpu
+  30    aabb.cc81.5000    DYNAMIC     Vx1        1       0:28:38 ago
+  30    aabb.cc81.7000    DYNAMIC     Vx1        1       0:28:35 ago
+  30    aabb.cc81.f000    DYNAMIC     Po7        1       0:00:30 ago
+  40    0000.0000.cafe    STATIC      Cpu
+  40    aabb.cc81.5000    DYNAMIC     Vx1        2       0:28:38 ago
+  40    aabb.cc81.f000    DYNAMIC     Po7        2       0:01:27 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4093    5000.0003.3766    DYNAMIC     Vx1        1       0:28:37 ago
+4093    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:37 ago
+4093    5000.0045.abdf    DYNAMIC     Vx1        1       21:43:46 ago
+4093    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:56 ago
+4093    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:41 ago
+4093    5000.0088.fe27    DYNAMIC     Vx1        1       21:44:01 ago
+4093    5000.00ba.c6f8    DYNAMIC     Vx1        1       3 days, 5:42:28 ago
+4093    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:43 ago
+4093    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:01 ago
+4094    0000.0000.cafe    STATIC      Cpu
+4094    5000.0003.3766    DYNAMIC     Vx1        1       0:28:37 ago
+4094    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:36 ago
+4094    5000.0045.abdf    DYNAMIC     Vx1        1       21:43:45 ago
+4094    5000.0068.a17f    DYNAMIC     Vx1        1       21:43:56 ago
+4094    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:39 ago
+4094    5000.0088.fe27    DYNAMIC     Vx1        1       21:44:03 ago
+4094    5000.00ba.c6f8    DYNAMIC     Vx1        1       3 days, 5:42:28 ago
+4094    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:41 ago
+4094    5000.00d5.e2ad    DYNAMIC     Vx1        1       21:44:04 ago
+Total Mac Addresses for this criterion: 35
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc2-p1-r003-lf-2#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.8.10.101             -  aabb.cc81.7000  Vlan10, Vxlan1
+10.8.10.151             -  aabb.cc81.6000  Vlan10, Vxlan1
+10.8.10.201             -  aabb.cc81.5000  Vlan10, Vxlan1
+10.8.10.202             -  aabb.cc81.f000  Vlan10, Port-Channel7
+10.8.20.201             -  aabb.cc81.5000  Vlan20, Vxlan1
+10.8.20.202             -  aabb.cc81.f000  Vlan20, Port-Channel7
+```
+```
+dc2-p1-r003-lf-2#show ip arp vrf tenant-2
+Address         Age (sec)  Hardware Addr   Interface
+10.8.30.101             -  aabb.cc81.7000  Vlan30, Vxlan1
+10.8.30.201             -  aabb.cc81.5000  Vlan30, Vxlan1
+10.8.30.202             -  aabb.cc81.f000  Vlan30, Port-Channel7
+10.8.40.201             -  aabb.cc81.5000  Vlan40, Vxlan1
+10.8.40.202             -  aabb.cc81.f000  Vlan40, Port-Channel7
 ```
 
 </details>
@@ -3343,7 +11989,821 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc2-p1-r002-lf-1 (boleaf-187)</summary>
   
 ```
+dc2-p1-r002-blf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-blf-1 ## 10.0.0.0      4 65187          30563     30459    0    0 21:39:50 Estab   8      8
+  ### dc2-p1-r012-blf-1 ## 10.32.241.1   4 65287          30414     30440    0   19 00:24:14 Estab   13     13
+  ### dc2-p1-r002-sp-1 ### 10.32.250.124 4 65201          30624     30613    0    0 21:39:49 Estab   3      3
+  ### dc2-p1-r012-sp-1 ### 10.32.251.124 4 65201          30608     30633    0    0 21:39:49 Estab   3      3
+```
+```
+dc2-p1-r002-blf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-blf-1 ## 10.0.0.0      4 65187          30571     30468    0    0 21:40:11 Estab   82     82
+  ### dc2-p1-r002-sp-1 ### 10.32.250.124 4 65201          30632     30621    0    0 21:40:11 Estab   44     44
+  ### dc2-p1-r012-sp-1 ### 10.32.251.124 4 65201          30616     30641    0    0 21:40:10 Estab   44     44
+```
+```
+dc2-p1-r002-blf-1#show ip bgp summary vrf all
+BGP summary information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r002-blf-1 ## 10.0.0.0      4 65187          30580     30476    0    0 21:40:34 Estab   8      8
+  ### dc2-p1-r012-blf-1 ## 10.32.241.1   4 65287          30431     30458    0   19 00:24:58 Estab   13     13
+  ### dc2-p1-r002-sp-1 ### 10.32.250.124 4 65201          30640     30629    0    0 21:40:33 Estab   3      3
+  ### dc2-p1-r012-sp-1 ### 10.32.251.124 4 65201          30625     30649    0    0 21:40:33 Estab   3      3
 
+BGP summary information for VRF tenant-1
+Router identifier 10.32.241.241, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r009-fw-1 ### 10.32.241.244 4 65291          24585     29619    0   19 00:24:57 Estab   1      1
+
+BGP summary information for VRF tenant-2
+Router identifier 10.32.241.249, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r009-fw-1 ### 10.32.241.252 4 65291          24584     29618    0   38 00:24:57 Estab   1      1
+```
+```
+dc2-p1-r002-blf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.0.0.0              0       -          100     0       65187 65101 i
+ *        10.16.254.1/32         10.32.241.1           0       -          100     0       65187 65101 i
+ * >      10.16.254.2/32         10.0.0.0              0       -          100     0       65187 65101 i
+ *        10.16.254.2/32         10.32.241.1           0       -          100     0       65187 65101 i
+ * >      10.16.254.11/32        10.0.0.0              0       -          100     0       65187 65101 65111 i
+ *        10.16.254.11/32        10.32.241.1           0       -          100     0       65187 65101 65111 i
+ * >      10.16.254.12/32        10.0.0.0              0       -          100     0       65187 65101 65112 i
+ *        10.16.254.12/32        10.32.241.1           0       -          100     0       65187 65101 65112 i
+ * >      10.16.254.13/32        10.0.0.0              0       -          100     0       65187 65101 65113 i
+ *        10.16.254.13/32        10.32.241.1           0       -          100     0       65187 65101 65113 i
+ * >      10.16.254.14/32        10.0.0.0              0       -          100     0       65187 65101 65114 i
+ *        10.16.254.14/32        10.32.241.1           0       -          100     0       65187 65101 65114 i
+ * >      10.16.254.187/32       10.0.0.0              0       -          100     0       65187 i
+ *        10.16.254.187/32       10.32.241.1           0       -          100     0       65187 i
+ * >      10.16.254.188/32       10.0.0.0              0       -          100     0       65187 i
+ *        10.16.254.188/32       10.32.241.1           0       -          100     0       65187 i
+ * >      10.32.254.1/32         10.32.250.124         0       -          100     0       65201 i
+ *        10.32.254.1/32         10.32.241.1           0       -          100     0       65201 i
+ * >      10.32.254.2/32         10.32.251.124         0       -          100     0       65201 i
+ *        10.32.254.2/32         10.32.241.1           0       -          100     0       65201 i
+ * >Ec    10.32.254.11/32        10.32.250.124         0       -          100     0       65201 65211 i
+ *  ec    10.32.254.11/32        10.32.251.124         0       -          100     0       65201 65211 i
+ *        10.32.254.11/32        10.32.241.1           0       -          100     0       65201 65211 i
+ * >Ec    10.32.254.12/32        10.32.250.124         0       -          100     0       65201 65212 i
+ *  ec    10.32.254.12/32        10.32.251.124         0       -          100     0       65201 65212 i
+ *        10.32.254.12/32        10.32.241.1           0       -          100     0       65201 65212 i
+ * >      10.32.254.187/32       -                     -       -          -       0       i
+ * >      10.32.254.188/32       10.32.241.1           0       -          100     0       i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.32.241.241, local AS number 65287
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.254.187         0       -          100     0       65187 65191 i
+ *        10.8.0.0/16            10.32.241.244         0       -          100     0       65291 65291 65291 65291 i
+ * >Ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  Ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65187 65101 65114 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65187 65101 65113 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65187 65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65187 65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >Ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  Ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >      10.16.241.240/29       10.16.254.187         0       -          100     0       65187 i
+ * >      10.32.241.240/29       -                     -       -          -       0       i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.32.241.249, local AS number 65287
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.254.187         0       -          100     0       65187 65191 i
+ *        10.8.0.0/16            10.32.241.252         0       -          100     0       65291 65291 65291 65291 i
+ * >Ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  Ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65187 65101 65114 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65187 65101 65113 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65187 65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65187 65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >Ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  Ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >      10.16.241.248/29       10.16.254.187         0       -          100     0       65187 i
+ * >      10.32.241.248/29       -                     -       -          -       0       i
+```
+```
+dc2-p1-r002-blf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast       
+10.16.254.12        unicast       
+10.16.254.13        unicast       
+10.16.254.14        unicast       
+10.16.254.187       unicast       
+10.32.254.11        unicast       
+10.32.254.12        unicast       
+
+Total number of remote VTEPS:  7
+```
+```
+dc2-p1-r002-blf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI       VLAN       Source       Interface       802.1Q Tag
+--------- ---------- ------------ --------------- ----------
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4092       tenant-1       evpn         
+4002       4091       tenant-2       evpn         
+```
+```
+dc2-p1-r002-blf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.32.254.187
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: CLI
+  Remote MAC learning is disabled
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4091, 4002]      [4092, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  MLAG Shared Router MAC is 0000.0000.0000
+```
+```
+dc2-p1-r002-blf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+                                via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.10.0/24 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                              via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.0/24 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                              via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.187 VNI 4001 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ C        10.32.241.240/29 is directly connected, Vlan4081
+```
+```
+dc2-p1-r002-blf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.30.0/24 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                              via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+                                via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.40.0/24 [20/0] via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                              via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.187 VNI 4002 router-mac 50:00:00:88:fe:27 local-interface Vxlan1
+ C        10.32.241.248/29 is directly connected, Vlan4082
+```
+```
+dc2-p1-r002-blf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r002-blf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r002-blf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r002-blf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r002-blf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.32.254.187, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.187:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65187 65191 i
+ * >      RD: 10.16.254.187:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.187         -       100     0       65187 65191 i
+ * >      RD: 10.32.254.187:4001 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65291 65291 65291 65291 i
+ * >      RD: 10.32.254.187:4002 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65291 65291 65291 65291 i
+ * >      RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.187:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.187         -       100     0       65187 i
+ * >      RD: 10.16.254.187:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.187         -       100     0       65187 i
+ * >      RD: 10.32.254.187:4001 ip-prefix 10.32.241.240/29
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.187:4002 ip-prefix 10.32.241.248/29
+                                 -                     -       -       0       i
+```
+```
+dc2-p1-r002-blf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 3
+Number of aggregators: 3
+
+   Port-Channel       Protocol    Ports             
+------------------ -------------- ------------------
+   Po1(U)             LACP(a)     Et3(PG+) Et4(PG+) 
+   Po7(U)             LACP(a)     Et7(PG+) PEt7(P)  
+   Po8(U)             LACP(a)     Et8(PG+) PEt8(P)  
+```
+```
+dc2-p1-r002-blf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+4091  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:34 ago
+4091  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:34 ago
+4091  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:38 ago
+4091  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       21:43:40 ago
+4091  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:40 ago
+4091  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:38 ago
+4091  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:40 ago
+4092  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:34 ago
+4092  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:34 ago
+4092  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:38 ago
+4092  5000.0088.fe27  EVPN      Vx1  10.16.254.187    1       21:43:40 ago
+4092  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:40 ago
+4092  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:37 ago
+4092  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:39 ago
+Total Remote Mac Addresses for this criterion: 14
+```
+```
+dc2-p1-r002-blf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+4081    001e.7ad4.49c6    DYNAMIC     Po7        1       21:05:44 ago
+4081    5000.0068.a17f    STATIC      Po1
+4082    001e.7ad4.49c6    DYNAMIC     Po7        1       21:05:44 ago
+4082    5000.0068.a17f    STATIC      Po1
+4091    0000.0000.cafe    STATIC      Cpu
+4091    5000.0003.3766    DYNAMIC     Vx1        1       0:28:40 ago
+4091    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:40 ago
+4091    5000.0068.a17f    STATIC      Po1
+4091    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:44 ago
+4091    5000.0088.fe27    DYNAMIC     Vx1        1       21:43:46 ago
+4091    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:43:46 ago
+4091    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:44 ago
+4091    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:46 ago
+4092    0000.0000.cafe    STATIC      Cpu
+4092    5000.0003.3766    DYNAMIC     Vx1        1       0:28:40 ago
+4092    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:40 ago
+4092    5000.0068.a17f    STATIC      Po1
+4092    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:44 ago
+4092    5000.0088.fe27    DYNAMIC     Vx1        1       21:43:46 ago
+4092    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:43:46 ago
+4092    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:43 ago
+4092    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:46 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4094    0000.0000.cafe    STATIC      Cpu
+Total Mac Addresses for this criterion: 24
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc2-p1-r002-blf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.32.241.242     0:03:35  5000.0068.a17f  Vlan4081, Port-Channel1
+10.32.241.244     0:00:32  001e.7ad4.49c6  Vlan4081, Port-Channel7
+```
+```
+dc2-p1-r002-blf-1#show ip arp vrf tenant-2
+
+Address         Age (sec)  Hardware Addr   Interface
+10.32.241.250     0:01:15  5000.0068.a17f  Vlan4082, Port-Channel1
+10.32.241.252     0:00:32  001e.7ad4.49c6  Vlan4082, Port-Channel7
+```
+```
+dc2-p1-r002-blf-1#show mlag
+MLAG Configuration:              
+domain-id                          :   dc2-p1-r002-blf-1
+local-interface                    :            Vlan4094
+peer-address                       :         10.32.241.3
+peer-link                          :       Port-Channel1
+peer-config                        :          consistent
+                                                       
+MLAG Status:                     
+state                              :              Active
+negotiation status                 :           Connected
+peer-link status                   :                  Up
+local-int status                   :                  Up
+system-id                          :   52:00:00:68:a1:7f
+dual-primary detection             :            Disabled
+dual-primary interface errdisabled :               False
+                                                       
+MLAG Ports:                      
+Disabled                           :                   0
+Configured                         :                   0
+Inactive                           :                   0
+Active-partial                     :                   0
+Active-full                        :                   2
 ```
 
 </details>
@@ -3352,7 +12812,821 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc2-p1-r012-lf-1 (boleaf-188)</summary>
   
 ```
+dc2-p1-r012-blf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r012-blf-1 ## 10.0.0.2      4 65187          30531     30446    0   38 21:39:42 Estab   8      8
+  ### dc2-p1-r002-blf-1 ## 10.32.241.0   4 65287          30417     30415    0   19 00:24:13 Estab   13     13
+  ### dc2-p1-r002-sp-1 ### 10.32.250.126 4 65201          30591     30561    0   19 21:39:43 Estab   3      3
+  ### dc2-p1-r012-sp-1 ### 10.32.251.126 4 65201          30731     30727    0   19 00:27:45 Estab   3      3
+```
+```
+dc2-p1-r012-blf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r012-blf-1 ## 10.0.0.2      4 65187          30539     30454    0   19 21:40:03 Estab   82     82
+  ### dc2-p1-r002-sp-1 ### 10.32.250.126 4 65201          30600     30569    0   19 21:40:04 Estab   44     44
+  ### dc2-p1-r012-sp-1 ### 10.32.251.126 4 65201          30738     30736    0   19 00:28:07 Estab   44     44
+```
+```
+dc2-p1-r012-blf-1#show ip bgp summary vrf all
+BGP summary information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc1-p1-r012-blf-1 ## 10.0.0.2      4 65187          30547     30462    0   38 21:40:26 Estab   8      8
+  ### dc2-p1-r002-blf-1 ## 10.32.241.0   4 65287          30434     30432    0   38 00:24:58 Estab   13     13
+  ### dc2-p1-r002-sp-1 ### 10.32.250.126 4 65201          30608     30578    0   19 21:40:27 Estab   3      3
+  ### dc2-p1-r012-sp-1 ### 10.32.251.126 4 65201          30747     30745    0   19 00:28:30 Estab   3      3
 
+BGP summary information for VRF tenant-1
+Router identifier 10.32.241.242, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r009-fw-1 ### 10.32.241.244 4 65291          24589     29611    0   19 21:05:30 Estab   1      1
+
+BGP summary information for VRF tenant-2
+Router identifier 10.32.241.250, local AS number 65287
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor      V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  ### dc2-p1-r009-fw-1 ### 10.32.241.252 4 65291          24586     29629    0   19 00:28:27 Estab   1      1
+```
+```
+dc2-p1-r012-blf-1#show ip bgp vrf all
+BGP routing table information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.16.254.1/32         10.0.0.2              0       -          100     0       65187 65101 i
+ *        10.16.254.1/32         10.32.241.0           0       -          100     0       65187 65101 i
+ * >      10.16.254.2/32         10.0.0.2              0       -          100     0       65187 65101 i
+ *        10.16.254.2/32         10.32.241.0           0       -          100     0       65187 65101 i
+ * >      10.16.254.11/32        10.0.0.2              0       -          100     0       65187 65101 65111 i
+ *        10.16.254.11/32        10.32.241.0           0       -          100     0       65187 65101 65111 i
+ * >      10.16.254.12/32        10.0.0.2              0       -          100     0       65187 65101 65112 i
+ *        10.16.254.12/32        10.32.241.0           0       -          100     0       65187 65101 65112 i
+ * >      10.16.254.13/32        10.0.0.2              0       -          100     0       65187 65101 65113 i
+ *        10.16.254.13/32        10.32.241.0           0       -          100     0       65187 65101 65113 i
+ * >      10.16.254.14/32        10.0.0.2              0       -          100     0       65187 65101 65114 i
+ *        10.16.254.14/32        10.32.241.0           0       -          100     0       65187 65101 65114 i
+ * >      10.16.254.187/32       10.0.0.2              0       -          100     0       65187 i
+ *        10.16.254.187/32       10.32.241.0           0       -          100     0       65187 i
+ * >      10.16.254.188/32       10.0.0.2              0       -          100     0       65187 i
+ *        10.16.254.188/32       10.32.241.0           0       -          100     0       65187 i
+ * >      10.32.254.1/32         10.32.250.126         0       -          100     0       65201 i
+ *        10.32.254.1/32         10.32.241.0           0       -          100     0       65201 i
+ * >      10.32.254.2/32         10.32.251.126         0       -          100     0       65201 i
+ *        10.32.254.2/32         10.32.241.0           0       -          100     0       65201 i
+ * >Ec    10.32.254.11/32        10.32.250.126         0       -          100     0       65201 65211 i
+ *  ec    10.32.254.11/32        10.32.251.126         0       -          100     0       65201 65211 i
+ *        10.32.254.11/32        10.32.241.0           0       -          100     0       65201 65211 i
+ * >Ec    10.32.254.12/32        10.32.250.126         0       -          100     0       65201 65212 i
+ *  ec    10.32.254.12/32        10.32.251.126         0       -          100     0       65201 65212 i
+ *        10.32.254.12/32        10.32.241.0           0       -          100     0       65201 65212 i
+ * >      10.32.254.187/32       10.32.241.0           0       -          100     0       i
+ * >      10.32.254.188/32       -                     -       -          -       0       i
+```
+```
+BGP routing table information for VRF tenant-1
+Router identifier 10.32.241.242, local AS number 65287
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.254.188         0       -          100     0       65187 65191 i
+ *        10.8.0.0/16            10.32.241.244         0       -          100     0       65291 65291 65291 65291 i
+ * >Ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  Ec    10.8.10.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.10.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.10.0/24           10.16.254.13          0       -          100     0       65187 65101 65113 i
+ *  ec    10.8.10.0/24           10.16.254.14          0       -          100     0       65187 65101 65114 i
+ * >Ec    10.8.10.101/32         10.16.254.13          0       -          100     0       65187 65101 65113 i
+ *  ec    10.8.10.101/32         10.16.254.14          0       -          100     0       65187 65101 65114 i
+ * >Ec    10.8.10.151/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.10.151/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.10.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.10.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.10.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.10.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >Ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  Ec    10.8.20.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.20.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ * >Ec    10.8.20.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.20.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.20.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.20.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ * >      10.16.241.240/29       10.16.254.188         0       -          100     0       65187 i
+ * >      10.32.241.240/29       -                     -       -          -       0       i
+```
+```
+BGP routing table information for VRF tenant-2
+Router identifier 10.32.241.250, local AS number 65287
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.8.0.0/16            10.16.254.188         0       -          100     0       65187 65191 i
+ *        10.8.0.0/16            10.32.241.252         0       -          100     0       65291 65291 65291 65291 i
+ * >Ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  Ec    10.8.30.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.30.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.30.0/24           10.16.254.13          0       -          100     0       65187 65101 65113 i
+ *  ec    10.8.30.0/24           10.16.254.14          0       -          100     0       65187 65101 65114 i
+ * >Ec    10.8.30.101/32         10.16.254.13          0       -          100     0       65187 65101 65113 i
+ *  ec    10.8.30.101/32         10.16.254.14          0       -          100     0       65187 65101 65114 i
+ * >Ec    10.8.30.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.30.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.30.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ * >Ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.0/24           10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.0/24           10.32.254.12          0       -          100     0       65201 65212 i
+ *  Ec    10.8.40.0/24           10.16.254.12          0       -          100     0       65187 65101 65112 i
+ *  ec    10.8.40.0/24           10.16.254.11          0       -          100     0       65187 65101 65111 i
+ * >Ec    10.8.40.201/32         10.16.254.11          0       -          100     0       65187 65101 65111 i
+ *  ec    10.8.40.201/32         10.16.254.12          0       -          100     0       65187 65101 65112 i
+ * >Ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.12          0       -          100     0       65201 65212 i
+ *  ec    10.8.40.202/32         10.32.254.11          0       -          100     0       65201 65211 i
+ * >      10.16.241.248/29       10.16.254.188         0       -          100     0       65187 i
+ * >      10.32.241.248/29       -                     -       -          -       0       i
+```
+```
+dc2-p1-r012-blf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP                Tunnel Type(s)
+------------------- --------------
+10.16.254.11        unicast       
+10.16.254.12        unicast       
+10.16.254.13        unicast       
+10.16.254.14        unicast       
+10.16.254.188       unicast       
+10.32.254.11        unicast       
+10.32.254.12        unicast       
+
+Total number of remote VTEPS:  7
+```
+```
+dc2-p1-r012-blf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI       VLAN       Source       Interface       802.1Q Tag
+--------- ---------- ------------ --------------- ----------
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI        VLAN       VRF            Source       
+---------- ---------- -------------- ------------ 
+4001       4092       tenant-1       evpn         
+4002       4091       tenant-2       evpn         
+```
+```
+dc2-p1-r012-blf-1#show interfaces vxlan 1
+Vxlan1 is up, line protocol is up (connected)
+  Hardware is Vxlan
+  Source interface is Loopback0 and is active with 10.32.254.188
+  Listening on UDP port 4789
+  Replication/Flood Mode is headend with Flood List Source: CLI
+  Remote MAC learning is disabled
+  VNI mapping to VLANs
+  Static VLAN to VNI mapping is 
+  Dynamic VLAN to VNI mapping for 'evpn' is
+    [4091, 4002]      [4092, 4001]     
+  Note: All Dynamic VLANs used by VCS are internal VLANs.
+        Use 'show vxlan vni' for details.
+  Static VRF to VNI mapping is 
+   [tenant-1, 4001]
+   [tenant-2, 4002]
+  MLAG Shared Router MAC is 0000.0000.0000
+```
+```
+dc2-p1-r012-blf-1#show ip route vrf tenant-1
+
+VRF: tenant-1
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.10.101/32 [20/0] via VTEP 10.16.254.13 VNI 4001 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4001 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.10.151/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.10.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.10.0/24 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                              via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.201/32 [20/0] via VTEP 10.16.254.12 VNI 4001 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4001 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.20.202/32 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                                via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.20.0/24 [20/0] via VTEP 10.32.254.11 VNI 4001 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+                              via VTEP 10.32.254.12 VNI 4001 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.240/29 [20/0] via VTEP 10.16.254.188 VNI 4001 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ C        10.32.241.240/29 is directly connected, Vlan4081
+```
+```
+dc2-p1-r012-blf-1#show ip route vrf tenant-2
+
+VRF: tenant-2
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.8.30.101/32 [20/0] via VTEP 10.16.254.13 VNI 4002 router-mac 50:00:00:03:37:66 local-interface Vxlan1
+                                via VTEP 10.16.254.14 VNI 4002 router-mac 50:00:00:15:f4:e8 local-interface Vxlan1
+ B E      10.8.30.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.30.202/32 [20/0] via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+                                via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+ B E      10.8.30.0/24 [20/0] via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+                              via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+ B E      10.8.40.201/32 [20/0] via VTEP 10.16.254.12 VNI 4002 router-mac 50:00:00:d5:5d:c0 local-interface Vxlan1
+                                via VTEP 10.16.254.11 VNI 4002 router-mac 50:00:00:72:8b:31 local-interface Vxlan1
+ B E      10.8.40.202/32 [20/0] via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+                                via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+ B E      10.8.40.0/24 [20/0] via VTEP 10.32.254.12 VNI 4002 router-mac 50:00:00:d8:ac:19 local-interface Vxlan1
+                              via VTEP 10.32.254.11 VNI 4002 router-mac 50:00:00:ba:c6:f8 local-interface Vxlan1
+ B E      10.8.0.0/16 [20/0] via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ B E      10.16.241.248/29 [20/0] via VTEP 10.16.254.188 VNI 4002 router-mac 50:00:00:45:ab:df local-interface Vxlan1
+ C        10.32.241.248/29 is directly connected, Vlan4082
+```
+```
+dc2-p1-r012-blf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:20 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:30 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:40 imet 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:20 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:30 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:40 imet 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:10 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.13:30 imet 10.16.254.13
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.14:30 imet 10.16.254.14
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 imet 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 imet 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r012-blf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:20 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:30 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:40 mac-ip aabb.cc81.5000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:20 mac-ip aabb.cc81.5000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.5000 10.8.10.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:20 mac-ip aabb.cc81.5000 10.8.20.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:30 mac-ip aabb.cc81.5000 10.8.30.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:40 mac-ip aabb.cc81.5000 10.8.40.201
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.6000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.6000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 mac-ip aabb.cc81.6000 10.8.10.151
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:10 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.13:30 mac-ip aabb.cc81.7000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 mac-ip aabb.cc81.7000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.13:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 mac-ip aabb.cc81.7000 10.8.10.101
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.13:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:30 mac-ip aabb.cc81.7000 10.8.30.101
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 mac-ip aabb.cc81.f000 10.8.10.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 mac-ip aabb.cc81.f000 10.8.20.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 mac-ip aabb.cc81.f000 10.8.30.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 mac-ip aabb.cc81.f000 10.8.40.202
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r012-blf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.11:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:20 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:30 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.12:40 auto-discovery 0 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0007:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:10 auto-discovery 0 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 auto-discovery 0000:0101:0011:0008:0000
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.13:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:10 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.14:30 auto-discovery 0 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >      RD: 10.16.254.13:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:1 auto-discovery 0000:0101:0013:0007:0000
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:10 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:20 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:30 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:40 auto-discovery 0 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >Ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:1 auto-discovery 0000:0201:0011:0007:0000
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r012-blf-1#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0007:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.11:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.11
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:1 ethernet-segment 0000:0101:0011:0008:0000 10.16.254.12
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.13
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:1 ethernet-segment 0000:0101:0013:0007:0000 10.16.254.14
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.11
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:1 ethernet-segment 0000:0201:0011:0007:0000 10.32.254.12
+                                 10.32.254.12          -       100     0       65201 65212 i
+```
+```
+dc2-p1-r012-blf-1#show bgp evpn route-type ip-prefix ipv4 
+BGP routing table information for VRF default
+Router identifier 10.32.254.188, local AS number 65287
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.254.188:4001 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65187 65191 i
+ * >      RD: 10.16.254.188:4002 ip-prefix 10.8.0.0/16
+                                 10.16.254.188         -       100     0       65187 65191 i
+ * >      RD: 10.32.254.188:4001 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65291 65291 65291 65291 i
+ * >      RD: 10.32.254.188:4002 ip-prefix 10.8.0.0/16
+                                 -                     0       100     0       65291 65291 65291 65291 i
+ * >      RD: 10.16.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:4001 ip-prefix 10.8.10.0/24
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.10.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >Ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4001 ip-prefix 10.8.20.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >      RD: 10.16.254.13:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.13          -       100     0       65187 65101 65113 i
+ * >      RD: 10.16.254.14:4002 ip-prefix 10.8.30.0/24
+                                 10.16.254.14          -       100     0       65187 65101 65114 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.30.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.11          -       100     0       65187 65101 65111 i
+ * >      RD: 10.16.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.16.254.12          -       100     0       65187 65101 65112 i
+ * >Ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ *  ec    RD: 10.32.254.11:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.11          -       100     0       65201 65211 i
+ * >Ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ *  ec    RD: 10.32.254.12:4002 ip-prefix 10.8.40.0/24
+                                 10.32.254.12          -       100     0       65201 65212 i
+ * >      RD: 10.16.254.188:4001 ip-prefix 10.16.241.240/29
+                                 10.16.254.188         -       100     0       65187 i
+ * >      RD: 10.16.254.188:4002 ip-prefix 10.16.241.248/29
+                                 10.16.254.188         -       100     0       65187 i
+ * >      RD: 10.32.254.188:4001 ip-prefix 10.32.241.240/29
+                                 -                     -       -       0       i
+ * >      RD: 10.32.254.188:4002 ip-prefix 10.32.241.248/29
+                                 -                     -       -       0       i
+```
+```
+dc2-p1-r012-blf-1#show port-channel dense 
+
+                 Flags                                                         
+------------------------ ---------------------------- -------------------------
+  a - LACP Active          p - LACP Passive           * - static fallback      
+  F - Fallback enabled     f - Fallback configured    ^ - individual fallback  
+  U - In Use               D - Down                                            
+  + - In-Sync              - - Out-of-Sync            i - incompatible with agg
+  P - bundled in Po        s - suspended              G - Aggregable           
+  I - Individual           S - ShortTimeout           w - wait for agg         
+  E - Inactive. The number of configured port channels exceeds the config limit
+   M - Exceeds maximum weight
+
+Number of channels in use: 3
+Number of aggregators: 3
+
+   Port-Channel       Protocol    Ports             
+------------------ -------------- ------------------
+   Po1(U)             LACP(a)     Et3(PG+) Et4(PG+) 
+   Po7(U)             LACP(a)     Et7(PG+) PEt7(P)  
+   Po8(U)             LACP(a)     Et8(PG+) PEt8(P)  
+```
+```
+dc2-p1-r012-blf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+4091  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:34 ago
+4091  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:33 ago
+4091  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       21:43:43 ago
+4091  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:38 ago
+4091  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:50 ago
+4091  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:39 ago
+4091  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:50 ago
+4092  5000.0003.3766  EVPN      Vx1  10.16.254.13     1       0:28:34 ago
+4092  5000.0015.f4e8  EVPN      Vx1  10.16.254.14     1       0:28:32 ago
+4092  5000.0045.abdf  EVPN      Vx1  10.16.254.188    1       21:43:42 ago
+4092  5000.0072.8b31  EVPN      Vx1  10.16.254.11     1       0:28:38 ago
+4092  5000.00ba.c6f8  EVPN      Vx1  10.32.254.11     1       21:43:50 ago
+4092  5000.00d5.5dc0  EVPN      Vx1  10.16.254.12     1       0:28:38 ago
+4092  5000.00d8.ac19  EVPN      Vx1  10.32.254.12     1       21:43:50 ago
+Total Remote Mac Addresses for this criterion: 14
+```
+```
+dc2-p1-r012-blf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+4081    001e.7ad4.49c6    DYNAMIC     Po7        1       21:05:44 ago
+4081    5000.00d5.e2ad    STATIC      Po1
+4082    001e.7ad4.49c6    DYNAMIC     Po7        1       21:05:44 ago
+4082    5000.00d5.e2ad    STATIC      Po1
+4091    0000.0000.cafe    STATIC      Cpu
+4091    5000.0003.3766    DYNAMIC     Vx1        1       0:28:41 ago
+4091    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:39 ago
+4091    5000.0045.abdf    DYNAMIC     Vx1        1       21:43:50 ago
+4091    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:45 ago
+4091    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:43:56 ago
+4091    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:45 ago
+4091    5000.00d5.e2ad    STATIC      Po1
+4091    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:56 ago
+4092    0000.0000.cafe    STATIC      Cpu
+4092    5000.0003.3766    DYNAMIC     Vx1        1       0:28:40 ago
+4092    5000.0015.f4e8    DYNAMIC     Vx1        1       0:28:39 ago
+4092    5000.0045.abdf    DYNAMIC     Vx1        1       21:43:48 ago
+4092    5000.0072.8b31    DYNAMIC     Vx1        1       0:28:45 ago
+4092    5000.00ba.c6f8    DYNAMIC     Vx1        1       21:43:56 ago
+4092    5000.00d5.5dc0    DYNAMIC     Vx1        1       0:28:45 ago
+4092    5000.00d5.e2ad    STATIC      Po1
+4092    5000.00d8.ac19    DYNAMIC     Vx1        1       21:43:56 ago
+4093    0000.0000.cafe    STATIC      Cpu
+4094    0000.0000.cafe    STATIC      Cpu
+Total Mac Addresses for this criterion: 24
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+dc2-p1-r012-blf-1#show ip arp vrf tenant-1
+Address         Age (sec)  Hardware Addr   Interface
+10.32.241.241     0:02:56  5000.00d5.e2ad  Vlan4081, Port-Channel1
+10.32.241.244     0:00:30  001e.7ad4.49c6  Vlan4081, Port-Channel7
+```
+```
+dc2-p1-r012-blf-1#show ip arp vrf tenant-2
+
+Address         Age (sec)  Hardware Addr   Interface
+10.32.241.249     0:02:56  5000.00d5.e2ad  Vlan4082, Port-Channel1
+10.32.241.252     0:00:30  001e.7ad4.49c6  Vlan4082, Port-Channel7
+```
+```
+dc2-p1-r012-blf-1#show mlag
+MLAG Configuration:              
+domain-id                          :   dc2-p1-r002-blf-1
+local-interface                    :            Vlan4094
+peer-address                       :         10.32.241.2
+peer-link                          :       Port-Channel1
+peer-config                        :          consistent
+                                                       
+MLAG Status:                     
+state                              :              Active
+negotiation status                 :           Connected
+peer-link status                   :                  Up
+local-int status                   :                  Up
+system-id                          :   52:00:00:68:a1:7f
+dual-primary detection             :            Disabled
+dual-primary interface errdisabled :               False
+                                                       
+MLAG Ports:                      
+Disabled                           :                   0
+Configured                         :                   0
+Inactive                           :                   0
+Active-partial                     :                   0
+Active-full                        :                   2
 ```
 
 </details>
@@ -3361,40 +13635,436 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
   <summary>Проверки dc2-p1-r009-fw-1 (fw-1)</summary>
   
 ```
+dc2-p1-r009-fw-1#show etherchannel summary 
+Flags:  D - down        P/bndl - bundled in port-channel
+        I - stand-alone s/susp - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
 
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 2
+Number of aggregators:           2
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+7       Po7(RU)         LACP     Gi1(bndl) Gi2(bndl)
+8       Po8(RU)         LACP     Gi3(bndl) Gi4(bndl)
+
+RU - L3 port-channel UP State
+SU - L2 port-channel UP state
+P/bndl -  Bundled
+S/susp  - Suspended
+```
+```
+dc2-p1-r009-fw-1#show ip bgp summary
+BGP router identifier 10.32.254.191, local AS number 65291
+BGP table version is 32, main routing table version 32
+5 network entries using 1240 bytes of memory
+13 path entries using 1768 bytes of memory
+4 multipath network entries and 8 multipath paths
+4/3 BGP path/bestpath attribute entries using 1152 bytes of memory
+3 BGP AS-PATH entries using 120 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 4280 total bytes of memory
+BGP activity 5/0 prefixes, 41/28 paths, scan interval 60 secs
+5 networks peaked at 12:56:15 Jul 13 2024 UTC (21:39:44.761 ago)
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.32.241.241   4        65287     774     641       32    0    0 00:32:49        3
+10.32.241.242   4        65287   30381   25221       32    0    0 21:39:43        3
+10.32.241.249   4        65287     773     641       32    0    0 00:32:50        3
+10.32.241.250   4        65287     736     612       32    0    0 00:31:21        3
+```
+```
+dc2-p1-r009-fw-1#show ip bgp
+BGP table version is 32, local router ID is 10.32.254.191
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal, 
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter, 
+              x best-external, a additional-path, c RIB-compressed, 
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *    10.8.0.0/16      10.32.241.250                          0 65287 65187 65191 i
+ *                     10.32.241.241                          0 65287 65187 65191 i
+ *                     10.32.241.249                          0 65287 65187 65191 i
+ *                     10.32.241.242                          0 65287 65187 65191 i
+ *>                    0.0.0.0                            32768 i
+ sm   10.8.10.0/24     10.32.241.241                          0 65287 65201 65211 i
+ s>                    10.32.241.242                          0 65287 65201 65212 i
+ sm   10.8.20.0/24     10.32.241.241                          0 65287 65201 65211 i
+ s>                    10.32.241.242                          0 65287 65201 65212 i
+ sm   10.8.30.0/24     10.32.241.250                          0 65287 65201 65212 i
+ s>                    10.32.241.249                          0 65287 65201 65211 i
+ sm   10.8.40.0/24     10.32.241.250                          0 65287 65201 65212 i
+ s>                    10.32.241.249                          0 65287 65201 65211 i
+```
+```
+dc2-p1-r009-fw-1#show ip route 
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, m - OMP
+       n - NAT, Ni - NAT inside, No - NAT outside, Nd - NAT DIA
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       H - NHRP, G - NHRP registered, g - NHRP registration summary
+       o - ODR, P - periodic downloaded static route, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+      10.0.0.0/8 is variably subnetted, 9 subnets, 4 masks
+B        10.8.0.0/16 [200/0], 00:04:59, Null0
+B        10.8.10.0/24 [20/0] via 10.32.241.242, 00:04:59
+                      [20/0] via 10.32.241.241, 00:04:59
+B        10.8.20.0/24 [20/0] via 10.32.241.242, 00:04:59
+                      [20/0] via 10.32.241.241, 00:04:59
+B        10.8.30.0/24 [20/0] via 10.32.241.250, 00:04:59
+                      [20/0] via 10.32.241.249, 00:04:59
+B        10.8.40.0/24 [20/0] via 10.32.241.250, 00:04:59
+                      [20/0] via 10.32.241.249, 00:04:59
+C        10.32.241.240/29 is directly connected, Port-channel7.4081
+L        10.32.241.244/32 is directly connected, Port-channel7.4081
+C        10.32.241.248/29 is directly connected, Port-channel7.4082
+L        10.32.241.252/32 is directly connected, Port-channel7.4082
 ```
 
 </details>
 
 <details>
-  <summary>ping внутри и между VRF</summary>
+  <summary>Проверки dc2-vlx-s202</summary>
+  
+```
+dc2-vlx-s202#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.10.202/24
+Vlan20 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.20.202/24
+Vlan30 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.30.202/24
+Vlan40 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.40.202/24
+```
+```
+dc2-vlx-s202#show etherchannel summary
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      N - not in use, no aggregation
+        f - failed to allocate aggregator
+        M - not in use, minimum links not met
+        m - not in use, port not aggregated due to minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+        A - formed by Auto LAG
 
-- из VRF tenant-1 в VRF tenant-2 \
-_client-102 подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199_
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+7      Po7(SU)         LACP      Et0/0(P)    Et0/1(P)    
+```
+```
+dc2-vlx-s202#show ip route vrf *
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+Routing Table: vlan10
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.10.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.10.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.10.0/24 is directly connected, Vlan10
+L        10.8.10.202/32 is directly connected, Vlan10
+```
+```
+Routing Table: vlan20
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.20.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.20.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.20.0/24 is directly connected, Vlan20
+L        10.8.20.202/32 is directly connected, Vlan20
+```
+```
+Routing Table: vlan30
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.30.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.30.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.30.0/24 is directly connected, Vlan30
+L        10.8.30.202/32 is directly connected, Vlan30
+```
+```
+Routing Table: vlan40
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 10.8.40.254 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 10.8.40.254
+      10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        10.8.40.0/24 is directly connected, Vlan40
+L        10.8.40.202/32 is directly connected, Vlan40
+```
+```
+dc2-vlx-s202#show ip arp vrf vlan10 
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.10.151             0   aabb.cc81.6000  ARPA   Vlan10
+Internet  10.8.10.202             -   aabb.cc81.f000  ARPA   Vlan10
+Internet  10.8.10.254             1   0000.0000.cafe  ARPA   Vlan10
+
+dc2-vlx-s202#show ip arp vrf vlan10 
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.10.151             0   aabb.cc81.6000  ARPA   Vlan10
+Internet  10.8.10.202             -   aabb.cc81.f000  ARPA   Vlan10
+Internet  10.8.10.254             2   0000.0000.cafe  ARPA   Vlan10
+
+dc2-vlx-s202#show ip arp vrf vlan20
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.20.202             -   aabb.cc81.f000  ARPA   Vlan20
+Internet  10.8.20.254             0   0000.0000.cafe  ARPA   Vlan20
+
+dc2-vlx-s202#show ip arp vrf vlan30
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.30.101             1   aabb.cc81.7000  ARPA   Vlan30
+Internet  10.8.30.201             2   aabb.cc81.5000  ARPA   Vlan30
+Internet  10.8.30.202             -   aabb.cc81.f000  ARPA   Vlan30
+Internet  10.8.30.254             0   0000.0000.cafe  ARPA   Vlan30
+
+dc2-vlx-s202#show ip arp vrf vlan40
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.8.40.202             -   aabb.cc81.f000  ARPA   Vlan40
+Internet  10.8.40.254             2   0000.0000.cafe  ARPA   Vlan40
 ```
 
-```
-
-- из VRF tenant-2 в VRF tenant-2 \
-_client-104 подключен к leaf-101, поэтому в трассировке еще leaf-103_
-```
-```
 </details>
 
+### Проверка взаимодействия хостов
 
 <details>
-  <summary>Трассировка внутри и между VRF</summary>
+  <summary>ping, tracert внутри и между VRF</summary>
 
-- из VRF tenant-1 в VRF tenant-2 \
-_client-102 подключен к leaf-103, поэтому в трассировке только leaf-103 и fw-199_
+-  ping из DC-1 с dc1-vl10-h151 в пределах tenant-1 (vlan 10,20)
+```
+dc1-vl10-h151#tclsh
+dc1-vl10-h151(tcl)#foreach address {
++>10.8.10.101
++>10.8.10.201
++>10.8.10.202
++>10.8.20.201
++>10.8.20.202
++>} { ping $address repeat 5 timeout 1}
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.10.101, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 36/70/117 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.10.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 9/14/27 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.10.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 79/130/212 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.20.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 13/16/21 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.20.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 70/97/167 ms
+```
+-  ping из DC-1 с dc1-vl10-h151 в другой tenant-2 (vlan 30,40)
+```
+dc1-vl10-h151(tcl)#tclsh
+dc1-vl10-h151(tcl)#foreach address {
++>10.8.30.101
++>10.8.30.201
++>10.8.40.202
++>10.8.40.201
++>10.8.40.202
++>} { ping $address repeat 5 timeout 1}
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.30.101, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 249/386/619 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.30.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 181/223/254 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.40.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 189/488/905 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.40.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 94/213/300 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.40.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 261/405/715 ms
 ```
 
+-  tracert из из DC-1 с dc1-vl10-h151 в другой tenant-2 (vlan 40) идет через МЭ DC1 (10.16)
+```
+dc1-vl10-h151#traceroute 10.8.40.202
+Type escape sequence to abort.
+Tracing the route to 10.8.40.202
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.8.10.254 28 msec 6 msec 7 msec
+  2 10.16.241.242 134 msec 55 msec 36 msec
+  3 10.16.241.244 171 msec 158 msec 126 msec
+  4 10.16.241.249 431 msec 599 msec 252 msec
+  5 10.8.30.254 268 msec 450 msec 265 msec
+  6 10.8.40.202 265 msec *  392 msec
+dc1-vl10-h151#
 ```
 
-- из VRF tenant-2 в VRF tenant-2 \
-_client-104 подключен к leaf-101, поэтому в трассировке еще leaf-103_
+-  ping из DC-2 с dc2-vl30-s202 в пределах tenant-2 (vlan 20,30)
 ```
+dc2-vlx-s202(tcl)#tclsh
+dc2-vlx-s202(tcl)#foreach address {
++>10.8.30.101
++>10.8.30.201
++>10.8.30.202
++>10.8.40.201
++>10.8.40.202
++>} { ping vrf vlan30 $address repeat 5 timeout 1}
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.30.101, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 79/121/251 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.30.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 85/136/272 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.30.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 4/4/5 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.40.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 77/107/158 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.40.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 12/14/19 ms
 ```
+
+-  ping из DC-2 с dc2-vl30-s202 в другой tenant-1 (vlan 10,20)
+```
+dc2-vlx-s202(tcl)#tclsh
+dc2-vlx-s202(tcl)#foreach address {
++>10.8.10.101
++>10.8.10.201
++>10.8.10.202
++>10.8.20.201
++>10.8.20.202
++>} { ping vrf vlan30 $address repeat 5 timeout 1}
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.10.101, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 206/649/1000 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.10.201, timeout is 1 seconds:
+!.!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 267/391/606 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.10.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 177/249/352 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.20.201, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 194/455/948 ms
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.8.20.202, timeout is 1 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 222/382/610 ms
+```
+
+-  tracert из DC-2 с dc2-vl30-s202 в другой tenant-1 (vlan 10) идет через МЭ DC1 (10.16)
+```
+dc2-vlx-s202#traceroute vrf vlan30 10.8.10.101
+Type escape sequence to abort.
+Tracing the route to 10.8.10.101
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.8.30.254 34 msec 9 msec 9 msec
+  2 10.16.241.249 70 msec 97 msec 72 msec
+  3 10.16.241.252 136 msec 138 msec 290 msec
+  4 10.16.241.241 501 msec 228 msec 373 msec
+  5 10.8.10.254 362 msec 175 msec 401 msec
+  6 10.8.10.101 267 msec *  271 msec
+dc2-vlx-s202#
+```
+
 </details>
 
 ### Масштабирование решение
