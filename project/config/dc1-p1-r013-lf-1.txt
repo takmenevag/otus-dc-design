@@ -1,4 +1,14 @@
 
+dc1-p1-r013-lf-1#sh run
+! Command: show running-config
+! device: dc1-p1-r013-lf-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
 service routing protocols model multi-agent
 !
 hostname dc1-p1-r013-lf-1
@@ -38,12 +48,29 @@ interface Ethernet2
    ip address 10.16.251.5/31
    bfd interval 3000 min-rx 3000 multiplier 3
 !
+interface Ethernet3
+   shutdown
+!
+interface Ethernet4
+   shutdown
+!
+interface Ethernet5
+   shutdown
+!
+interface Ethernet6
+   shutdown
+!
 interface Ethernet7
    description ### dc1-vlx-c101 ###
    channel-group 7 mode active
 !
+interface Ethernet8
+   shutdown
+!
 interface Loopback0
    ip address 10.16.254.13/32
+!
+interface Management1
 !
 interface Vlan10
    description ### client ###
@@ -118,3 +145,6 @@ router bgp 65113
       route-target import evpn 4002:4002
       route-target export evpn 4002:4002
       redistribute connected
+!
+end
+dc1-p1-r013-lf-1#
