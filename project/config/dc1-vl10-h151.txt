@@ -1,13 +1,61 @@
 
+dc1-vl10-h151#ter len 0
+dc1-vl10-h151#show run
+Building configuration...
+
+Current configuration : 1415 bytes
+!
+! Last configuration change at 05:31:26 UTC Sun Jul 14 2024
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
 hostname dc1-vl10-h151
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
 !
 vtp mode transparent
 !
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
 spanning-tree mode pvst
+spanning-tree extend system-id
 no spanning-tree vlan 10
+!
 !
 vlan 10
  name NET-10.8.10.0/24
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
 !
 interface Port-channel8
  description ### uplink ####
@@ -24,9 +72,43 @@ interface Ethernet0/1
  switchport mode trunk
  channel-group 8 mode active
 !
+interface Ethernet0/2
+ shutdown
+!
+interface Ethernet0/3
+ shutdown
+!
 interface Vlan10
  ip address 10.8.10.151 255.255.255.0
  arp timeout 250
 !
+ip forward-protocol nd
+!
+no ip http server
+!
 ip route 0.0.0.0 0.0.0.0 10.8.10.254
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 30 0
+ privilege level 15
+ logging synchronous
+ transport preferred none
+line aux 0
+line vty 0 4
+ login
+ transport preferred none
+!
+!
+!
+end
 
+dc1-vl10-h151#
