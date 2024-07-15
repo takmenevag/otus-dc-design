@@ -1,7 +1,11 @@
 # Итоговая работа по курсу
 [**Вернуться обратно**](https://github.com/takmenevag/otus-dc-design/tree/main/)
-## Задачи
+## Название работы
 - организация геораспределенной отказоустойчивой сети передачи данных центра обработки данных с использованием технологии VXLAN
+
+## Задачи
+- построение отказоустойчивой геораспеределенной СПД ЦОД с использованием современной архитектуры
+- обеспечение возможности взаимодействия между собой оконечного оборудования и сервисов площадок ЦОД на канальном и сетевом уровнях
 
 ## Решение
 
@@ -609,7 +613,6 @@ dcX-pX-rXXX-XX-X
 - настроено соседство между border leaf для BGP AFI/SFI l2vpn evpnt (eBGP)
 - команда neighbor XXX next-hop-unchanged используется для сохранения next-hop-адреса исходного leaf-коммутатора
 
-описание
 </details>
 
 ### Cхема решения
@@ -657,46 +660,1194 @@ dcX-pX-rXXX-XX-X
 
 - dc1-p1-r002-sp-1 (spine-1)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r002-sp-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-lf.11 ###
+   no switchport
+   ip address 10.16.250.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp1-lf.12 ###
+   no switchport
+   ip address 10.16.250.2/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet3
+   description ### sp1-lf.13 ###
+   no switchport
+   ip address 10.16.250.4/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet4
+   description ### sp1-lf.14 ###
+   no switchport
+   ip address 10.16.250.6/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet5
+   description ### sp1-blf.187 ###
+   no switchport
+   ip address 10.16.250.124/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet6
+   description ### sp1-blf.188 ###
+   no switchport
+   ip address 10.16.250.126/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Loopback0
+   ip address 10.16.254.1/32
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+peer-filter PF-DC1-LEAF
+   10 match as-range 65111-65190 result accept
+!
+router bgp 65101
+   router-id 10.16.254.1
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   bgp listen range 10.16.250.0/25 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
+   neighbor DC1-LEAF peer group
+   neighbor DC1-LEAF bfd
+   neighbor DC1-LEAF timers 3 9
+   neighbor DC1-LEAF password 7 IS09sfEdsucPgvWfPXx0cQ==
+   neighbor DC1-LEAF send-community extended
+   !
+   address-family evpn
+      neighbor DC1-LEAF activate
+      neighbor DC1-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC1-LEAF activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
 ```
 - dc1-p1-r012-sp-1 (spine-2)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r012-sp-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp2-lf.11 ###
+   no switchport
+   ip address 10.16.251.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.12 ###
+   no switchport
+   ip address 10.16.251.2/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet3
+   description ### sp2-lf.13 ###
+   no switchport
+   ip address 10.16.251.4/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet4
+   description ### sp2-lf.14 ###
+   no switchport
+   ip address 10.16.251.6/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet5
+   description ### sp2-blf.187 ###
+   no switchport
+   ip address 10.16.251.124/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet6
+   description ### sp2-blf.188 ###
+   no switchport
+   ip address 10.16.251.126/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Loopback0
+   ip address 10.16.254.2/32
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+peer-filter PF-DC1-LEAF
+   10 match as-range 65111-65190 result accept
+!
+router bgp 65101
+   router-id 10.16.254.2
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   bgp listen range 10.16.251.0/25 peer-group DC1-LEAF peer-filter PF-DC1-LEAF
+   neighbor DC1-LEAF peer group
+   neighbor DC1-LEAF bfd
+   neighbor DC1-LEAF timers 3 9
+   neighbor DC1-LEAF password 7 IS09sfEdsucPgvWfPXx0cQ==
+   neighbor DC1-LEAF send-community extended
+   !
+   address-family evpn
+      neighbor DC1-LEAF activate
+      neighbor DC1-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC1-LEAF activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
 ```
 
 - dc1-p1-r003-lf-1 (leaf-11)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r003-lf-1
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,20,30,40
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 20
+   name NET-10.8.20.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vlan 40
+   name NET-10.8.40.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc1-vlx-s201 ###
+   switchport trunk allowed vlan 10,20,30,40
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0011:0007:0000
+      route-target import 01:01:00:11:00:07
+   lacp system-id 0101.0011.0007
+!
+interface Port-Channel8
+   description ### dc1-vl10-h151 ###
+   switchport trunk allowed vlan 10
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0011:0008:0000
+      route-target import 01:01:00:11:00:08
+   lacp system-id 0101.0011.0008
+!
+interface Ethernet1
+   description ### sp1-lf.11 ###
+   no switchport
+   ip address 10.16.250.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.11 ###
+   no switchport
+   ip address 10.16.251.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc1-vlX-s201 ###
+   channel-group 7 mode active
+!
+interface Ethernet8
+   description ### dc1-vl10-h151 ###
+   channel-group 8 mode active
+!
+interface Loopback0
+   ip address 10.16.254.11/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan20
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.20.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vlan40
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.40.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vlan 40 vni 10040
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65111
+   router-id 10.16.254.11
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor 10.16.250.0 peer group DC1-SPINE
+   neighbor 10.16.250.0 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.0 peer group DC1-SPINE
+   neighbor 10.16.251.0 description ### dc1-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 20
+      rd auto
+      route-target both 10020:20
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   vlan 40
+      rd auto
+      route-target both 10040:40
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.11:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.11:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected
 ```
 
 - dc1-p1-r003-lf-2 (leaf-12)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r003-lf-2
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,20,30,40
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 20
+   name NET-10.8.20.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vlan 40
+   name NET-10.8.40.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc1-vlx-s201 ###
+   switchport trunk allowed vlan 10,20,30,40
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0011:0007:0000
+      route-target import 01:01:00:11:00:07
+   lacp system-id 0101.0011.0007
+!
+interface Port-Channel8
+   description ### dc1-vl10-h151 ###
+   switchport trunk allowed vlan 10
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0011:0008:0000
+      route-target import 01:01:00:11:00:08
+   lacp system-id 0101.0011.0008
+!
+interface Ethernet1
+   description ### sp1-lf.12 ###
+   no switchport
+   ip address 10.16.250.3/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.12 ###
+   no switchport
+   ip address 10.16.251.3/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc1-vlX-s201 ###
+   channel-group 7 mode active
+!
+interface Ethernet8
+   description ### dc1-vl10-h151 ###
+   channel-group 8 mode active
+!
+interface Loopback0
+   ip address 10.16.254.12/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan20
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.20.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vlan40
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.40.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vlan 40 vni 10040
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65112
+   router-id 10.16.254.12
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor 10.16.250.2 peer group DC1-SPINE
+   neighbor 10.16.250.2 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.2 peer group DC1-SPINE
+   neighbor 10.16.251.2 description ### dc1-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 20
+      rd auto
+      route-target both 10020:20
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   vlan 40
+      rd auto
+      route-target both 10040:40
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.12:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.12:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected
 ```
 
 - dc1-p1-r013-lf-1 (leaf-13)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r013-lf-1
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,30
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc1-vlx-c101 ###
+   switchport trunk allowed vlan 10,30
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0013:0007:0000
+      route-target import 01:01:00:13:00:07
+   lacp system-id 0101.0013.0007
+!
+interface Ethernet1
+   description ### sp1-lf.13 ###
+   no switchport
+   ip address 10.16.250.5/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.13 ###
+   no switchport
+   ip address 10.16.251.5/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc1-vlx-c101 ###
+   channel-group 7 mode active
+!
+interface Loopback0
+   ip address 10.16.254.13/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 30 vni 10030
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65113
+   router-id 10.16.254.13
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor 10.16.250.4 peer group DC1-SPINE
+   neighbor 10.16.250.4 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.4 peer group DC1-SPINE
+   neighbor 10.16.251.4 description ### dc1-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.13:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.13:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected
 ```
 
 - dc1-p1-r013-lf-1 (leaf-14)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r013-lf-2
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,30
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc1-vlx-c101 ###
+   switchport trunk allowed vlan 10,30
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0013:0007:0000
+      route-target import 01:01:00:13:00:07
+   lacp system-id 0101.0013.0007
+!
+interface Ethernet1
+   description ### sp1-lf.14 ###
+   no switchport
+   ip address 10.16.250.7/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.14 ###
+   no switchport
+   ip address 10.16.251.7/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc1-vlx-c101 ###
+   channel-group 7 mode active
+!
+interface Loopback0
+   ip address 10.16.254.14/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 30 vni 10030
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65114
+   router-id 10.16.254.14
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor 10.16.250.6 peer group DC1-SPINE
+   neighbor 10.16.250.6 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.6 peer group DC1-SPINE
+   neighbor 10.16.251.6 description ### dc1-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.14:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.14:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected
 ```
 
 - dc1-p1-r002-lf-1 (boleaf-187)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r002-blf-1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4093-4094
+!
+vlan 4081
+   name dc1-fw-01-cl-tenant-1
+!
+vlan 4082
+   name dc1-fw-01-cl-tenant-2
+!
+vlan 4093-4094
+   trunk group mlag_peer
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel1
+   description ### peer link ###
+   switchport mode trunk
+   switchport trunk group mlag_peer
+!
+interface Port-Channel7
+   description ### blf.187-fw1 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 7
+!
+interface Port-Channel8
+   description ### blf.187-fw2 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 8
+!
+interface Ethernet1
+   description ### sp1-blf.187 ###
+   no switchport
+   ip address 10.16.250.125/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-blf.187 ###
+   no switchport
+   ip address 10.16.251.125/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet3
+   description ### dc1-blf.187-dc1-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet4
+   description ### dc1-blf.187-dc1-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet5
+   description ### dc1-blf.187-dc2-blf.187 ###
+   no switchport
+   ip address 10.0.0.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### blf.187-fw1 ###
+   channel-group 7 mode active
+!
+interface Ethernet8
+   description ### blf.187-fw2 ###
+   channel-group 8 mode active
+!
+interface Loopback0
+   ip address 10.16.254.187/32
+!
+interface Vlan4081
+   description ### dc1-fw-01-cl-tenant-1 ###
+   vrf tenant-1
+   ip address 10.16.241.241/29
+   arp aging timeout 250
+!
+interface Vlan4082
+   description ### dc1-fw-01-cl-tenant-2 ###
+   vrf tenant-2
+   ip address 10.16.241.249/29
+   arp aging timeout 250
+!
+interface Vlan4093
+   description ### ibgp ###
+   ip address 10.16.241.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Vlan4094
+   description ### mlag ###
+   ip address 10.16.241.2/31
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+ip prefix-list PL-VXLAN-FW-OUT seq 100 permit 10.8.0.0/16 le 31
+!
+mlag configuration
+   domain-id dc1-p1-r002-blf-1
+   heartbeat-interval 3000
+   local-interface Vlan4094
+   peer-address 10.16.241.3
+   peer-link Port-Channel1
+   reload-delay 180
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+route-map RM-VXLAN-FW-OUT permit 100
+   match ip address prefix-list PL-VXLAN-FW-OUT
+!
+router bgp 65187
+   router-id 10.16.254.187
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-FW peer group
+   neighbor DC1-FW remote-as 65191
+   neighbor DC1-FW timers 3 9
+   neighbor DC1-FW password 7 n5uk4I9QUorSZi6ToxJeeg==
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor DC2-BORDER-LEAF peer group
+   neighbor DC2-BORDER-LEAF remote-as 65287
+   neighbor DC2-BORDER-LEAF bfd
+   neighbor DC2-BORDER-LEAF description ### dc2-p1-r002-blf-1 ###
+   neighbor DC2-BORDER-LEAF timers 3 9
+   neighbor DC2-BORDER-LEAF password 7 qxaQTd8lFX8Uz7oFIP+BNg==
+   neighbor DC2-BORDER-LEAF send-community extended
+   neighbor 10.0.0.1 peer group DC2-BORDER-LEAF
+   neighbor 10.0.0.1 description ### dc2-p1-r002-blf-1 ###
+   neighbor 10.16.241.1 remote-as 65187
+   neighbor 10.16.241.1 next-hop-self
+   neighbor 10.16.241.1 bfd
+   neighbor 10.16.241.1 description ### dc1-p1-r012-blf-1 ###
+   neighbor 10.16.241.1 timers 3 9
+   neighbor 10.16.241.1 password 7 TO66SYg2RzxuUfr2c/IMpQ==
+   neighbor 10.16.250.124 peer group DC1-SPINE
+   neighbor 10.16.250.124 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.124 peer group DC1-SPINE
+   neighbor 10.16.251.124 description ### dc1-p1-r012-sp-1 ###
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+      neighbor DC2-BORDER-LEAF activate
+      neighbor DC2-BORDER-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC1-FW activate
+      neighbor DC1-SPINE activate
+      neighbor DC2-BORDER-LEAF activate
+      neighbor 10.16.241.1 activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.187:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      neighbor 10.16.241.244 peer group DC1-FW
+      neighbor 10.16.241.244 description ### dc1-p1-r009-fw-1 ###
+      neighbor 10.16.241.244 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.187:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      neighbor 10.16.241.252 peer group DC1-FW
+      neighbor 10.16.241.252 description ### dc1-p1-r009-fw-1 ###
+      neighbor 10.16.241.252 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
 ```
 
 - dc1-p1-r012-lf-1 (boleaf-188)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r012-blf-1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4093-4094
+!
+vlan 4081
+   name dc1-fw-01-cl-tenant-1
+!
+vlan 4082
+   name dc1-fw-01-cl-tenant-2
+!
+vlan 4093-4094
+   trunk group mlag_peer
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel1
+   description ### peer link ###
+   switchport mode trunk
+   switchport trunk group mlag_peer
+!
+interface Port-Channel7
+   description ### blf.188-fw1 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 7
+!
+interface Port-Channel8
+   description ### blf.188-fw2 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 8
+!
+interface Ethernet1
+   description ### sp1-blf.188 ###
+   no switchport
+   ip address 10.16.250.127/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-blf.188 ###
+   no switchport
+   ip address 10.16.251.127/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet3
+   description ### dc1-blf.187-dc1-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet4
+   description ### dc1-blf.187-dc1-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet5
+   description ### dc1-blf.188-dc2-blf.188 ###
+   no switchport
+   ip address 10.0.0.2/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### blf.188-fw1 ###
+   channel-group 7 mode active
+!
+interface Ethernet8
+   description ### blf.188-fw2 ###
+   channel-group 8 mode active
+!
+interface Loopback0
+   ip address 10.16.254.188/32
+!
+interface Vlan4081
+   description ### dc1-fw-01-cl-tenant-1 ###
+   vrf tenant-1
+   ip address 10.16.241.242/29
+   arp aging timeout 250
+!
+interface Vlan4082
+   description ### dc1-fw-01-cl-tenant-2 ###
+   vrf tenant-2
+   ip address 10.16.241.250/29
+   arp aging timeout 250
+!
+interface Vlan4093
+   description ### ibgp ###
+   ip address 10.16.241.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Vlan4094
+   description ### mlag ###
+   ip address 10.16.241.3/31
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+ip prefix-list PL-VXLAN-FW-OUT seq 100 permit 10.8.0.0/16 le 31
+!
+mlag configuration
+   domain-id dc1-p1-r002-blf-1
+   heartbeat-interval 3000
+   local-interface Vlan4094
+   peer-address 10.16.241.2
+   peer-link Port-Channel1
+   reload-delay 180
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+route-map RM-VXLAN-FW-OUT permit 100
+   match ip address prefix-list PL-VXLAN-FW-OUT
+!
+router bgp 65187
+   router-id 10.16.254.188
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-FW peer group
+   neighbor DC1-FW remote-as 65191
+   neighbor DC1-FW timers 3 9
+   neighbor DC1-FW password 7 n5uk4I9QUorSZi6ToxJeeg==
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor DC2-BORDER-LEAF peer group
+   neighbor DC2-BORDER-LEAF remote-as 65287
+   neighbor DC2-BORDER-LEAF bfd
+   neighbor DC2-BORDER-LEAF description ### dc2-p1-r012-blf-1 ###
+   neighbor DC2-BORDER-LEAF timers 3 9
+   neighbor DC2-BORDER-LEAF password 7 qxaQTd8lFX8Uz7oFIP+BNg==
+   neighbor DC2-BORDER-LEAF send-community extended
+   neighbor 10.0.0.3 peer group DC2-BORDER-LEAF
+   neighbor 10.0.0.3 description ### dc2-p1-r012-blf-1 ###
+   neighbor 10.16.241.0 remote-as 65187
+   neighbor 10.16.241.0 next-hop-self
+   neighbor 10.16.241.0 bfd
+   neighbor 10.16.241.0 description ### dc1-p1-r002-blf-1 ###
+   neighbor 10.16.241.0 timers 3 9
+   neighbor 10.16.241.0 password 7 TO66SYg2RzxuUfr2c/IMpQ==
+   neighbor 10.16.250.126 peer group DC1-SPINE
+   neighbor 10.16.250.126 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.126 peer group DC1-SPINE
+   neighbor 10.16.251.126 description ### dc1-p1-r012-sp-1 ###
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+      neighbor DC2-BORDER-LEAF activate
+      neighbor DC2-BORDER-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC1-FW activate
+      neighbor DC1-SPINE activate
+      neighbor DC2-BORDER-LEAF activate
+      neighbor 10.16.241.0 activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.188:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      neighbor 10.16.241.244 peer group DC1-FW
+      neighbor 10.16.241.244 description ### dc1-p1-r009-fw-1 ###
+      neighbor 10.16.241.244 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.188:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      neighbor 10.16.241.252 peer group DC1-FW
+      neighbor 10.16.241.252 description ### dc1-p1-r009-fw-1 ###
+      neighbor 10.16.241.252 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
 ```
 
 - dc1-p1-r009-fw-1 (fw-1)
 ```
-
+hostname dc1-p1-r009-fw-1
+!
+interface Port-channel7
+ no ip address
+ no negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface Port-channel7.4081
+ description ### tenant-1 ###
+ encapsulation dot1Q 4081
+ ip address 10.16.241.244 255.255.255.248
+!
+interface Port-channel7.4082
+ description ### tenant-2 ###
+ encapsulation dot1Q 4082
+ ip address 10.16.241.252 255.255.255.248
+!
+interface Port-channel8
+ description ### fw2 (imitation) ###
+ no ip address
+ no negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet1
+ description ### blf.187-fw1 ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 7 mode active
+!
+interface GigabitEthernet2
+ description ### blf.188-fw1 ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 7 mode active
+!
+interface GigabitEthernet3
+ description ### blf.187-fw2 (imitation) ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 8 mode active
+!
+interface GigabitEthernet4
+ description ### blf.188-fw2 (imitation) ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 8 mode active
+!
+router bgp 65191
+ bgp router-id 10.16.254.191
+ bgp log-neighbor-changes
+ bgp bestpath as-path multipath-relax
+ aggregate-address 10.8.0.0 255.255.0.0 summary-only
+ neighbor DC1-BORDER-LEAF peer-group
+ neighbor DC1-BORDER-LEAF remote-as 65187
+ neighbor DC1-BORDER-LEAF password cisco
+ neighbor DC1-BORDER-LEAF timers 3 9
+ neighbor 10.16.241.241 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.241 description ### dc1-p1-r002-blf-1 tenant-1 ###
+ neighbor 10.16.241.242 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.242 description ### dc1-p1-r012-blf-1 tenant-1 ###
+ neighbor 10.16.241.249 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.249 description ### dc1-p1-r002-blf-1 tenant-2 ###
+ neighbor 10.16.241.250 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.250 description ### dc1-p1-r012-blf-1 tenant-2 ###
+ maximum-paths 8
 ```
 
 - dc1-p1-r019-fw-1 (fw-2)
@@ -706,16 +1857,173 @@ dcX-pX-rXXX-XX-X
 
 - dc1-vlX-s201
 ```
-
+hostname dc1-vlx-s201
+!
+vtp mode transparent
+!
+ip vrf vlan10
+ rd 10:10
+ route-target export 10:10
+ route-target import 10:10
+!
+ip vrf vlan20
+ rd 20:20
+ route-target export 20:20
+ route-target import 20:20
+!
+ip vrf vlan30
+ rd 30:30
+ route-target export 30:30
+ route-target import 30:30
+!
+ip vrf vlan40
+ rd 40:40
+ route-target export 40:40
+ route-target import 40:40
+!
+spanning-tree mode pvst
+no spanning-tree vlan 10,20,30,40
+!
+vlan 10
+ name NET-10.8.10.0/24
+!
+vlan 20
+ name NET-10.8.20.0/24
+!
+vlan 30
+ name NET-10.8.30.0/24
+!
+vlan 40
+ name NET-10.8.40.0/24
+!
+interface Port-channel7
+ description ### uplink ###
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Vlan10
+ ip vrf forwarding vlan10
+ ip address 10.8.10.201 255.255.255.0
+ arp timeout 250
+!
+interface Vlan20
+ ip vrf forwarding vlan20
+ ip address 10.8.20.201 255.255.255.0
+ arp timeout 250
+!
+interface Vlan30
+ ip vrf forwarding vlan30
+ ip address 10.8.30.201 255.255.255.0
+ arp timeout 250
+!
+interface Vlan40
+ ip vrf forwarding vlan40
+ ip address 10.8.40.201 255.255.255.0
+ arp timeout 250
+!
+ip route vrf vlan10 0.0.0.0 0.0.0.0 10.8.10.254
+ip route vrf vlan20 0.0.0.0 0.0.0.0 10.8.20.254
+ip route vrf vlan30 0.0.0.0 0.0.0.0 10.8.30.254
+ip route vrf vlan40 0.0.0.0 0.0.0.0 10.8.40.254
 ```
 
 - dc1-vlx-c101
 ```
-
+hostname dc1-vlx-c101
+!
+vtp mode transparent
+!
+ip vrf vlan10
+ rd 10:10
+ route-target export 10:10
+ route-target import 10:10
+!
+ip vrf vlan30
+ rd 30:30
+ route-target export 30:30
+ route-target import 30:30
+!
+!
+spanning-tree mode pvst
+no spanning-tree vlan 10,30
+!
+vlan 10
+ name NET-10.8.10.0/24
+!
+vlan 30
+ name NET-10.8.30.0/24
+!
+interface Port-channel7
+ description ### uplink ####
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Vlan10
+ ip vrf forwarding vlan10
+ ip address 10.8.10.101 255.255.255.0
+ arp timeout 250
+!
+interface Vlan30
+ ip vrf forwarding vlan30
+ ip address 10.8.30.101 255.255.255.0
+ arp timeout 250
+!
+ip route vrf vlan10 0.0.0.0 0.0.0.0 10.8.10.254
+ip route vrf vlan30 0.0.0.0 0.0.0.0 10.8.30.254
 ```
 
 - dc1-vl10-h151
 ```
+hostname dc1-vl10-h151
+!
+vtp mode transparent
+!
+spanning-tree mode pvst
+no spanning-tree vlan 10
+!
+vlan 10
+ name NET-10.8.10.0/24
+!
+interface Port-channel8
+ description ### uplink ####
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 8 mode active
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 8 mode active
+!
+interface Vlan10
+ ip address 10.8.10.151 255.255.255.0
+ arp timeout 250
+!
+ip route 0.0.0.0 0.0.0.0 10.8.10.254
 
 ```
 
@@ -726,46 +2034,906 @@ dcX-pX-rXXX-XX-X
 
 - dc2-p1-r002-sp-1 (spine-1)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r002-sp-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp1-lf.11 ###
+   no switchport
+   ip address 10.32.250.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp1-lf.12 ###
+   no switchport
+   ip address 10.32.250.2/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet5
+   description ### sp1-blf.187 ###
+   no switchport
+   ip address 10.32.250.124/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet6
+   description ### sp1-blf.188 ###
+   no switchport
+   ip address 10.32.250.126/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Loopback0
+   ip address 10.32.254.1/32
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+peer-filter PF-DC2-LEAF
+   10 match as-range 65211-65290 result accept
+!
+router bgp 65201
+   router-id 10.32.254.1
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   bgp listen range 10.32.250.0/25 peer-group DC2-LEAF peer-filter PF-DC2-LEAF
+   neighbor DC2-LEAF peer group
+   neighbor DC2-LEAF bfd
+   neighbor DC2-LEAF timers 3 9
+   neighbor DC2-LEAF password 7 jxDqu7630p5V557ZdwocCg==
+   neighbor DC2-LEAF send-community extended
+   !
+   address-family evpn
+      neighbor DC2-LEAF activate
+      neighbor DC2-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC2-LEAF activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
 ```
 - dc2-p1-r012-sp-1 (spine-2)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r012-sp-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp2-lf.11 ###
+   no switchport
+   ip address 10.32.251.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.12 ###
+   no switchport
+   ip address 10.32.251.2/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet5
+   description ### sp2-blf.187 ###
+   no switchport
+   ip address 10.32.251.124/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet6
+   description ### sp2-blf.188 ###
+   no switchport
+   ip address 10.32.251.126/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Loopback0
+   ip address 10.32.254.2/32
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+peer-filter PF-DC2-LEAF
+   10 match as-range 65211-65290 result accept
+!
+router bgp 65201
+   router-id 10.32.254.2
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   bgp listen range 10.32.251.0/25 peer-group DC2-LEAF peer-filter PF-DC2-LEAF
+   neighbor DC2-LEAF peer group
+   neighbor DC2-LEAF bfd
+   neighbor DC2-LEAF timers 3 9
+   neighbor DC2-LEAF password 7 jxDqu7630p5V557ZdwocCg==
+   neighbor DC2-LEAF send-community extended
+   !
+   address-family evpn
+      neighbor DC2-LEAF activate
+      neighbor DC2-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC2-LEAF activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
 ```
 
 - dc2-p1-r003-lf-1 (leaf-11)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r003-lf-1
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,20,30,40
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 20
+   name NET-10.8.20.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vlan 40
+   name NET-10.8.40.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc2-vlx-s202 ###
+   switchport trunk allowed vlan 10,20,30,40
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0201:0011:0007:0000
+      route-target import 02:01:00:11:00:07
+   lacp system-id 0201.0011.0007
+!
+interface Ethernet1
+   description ### sp1-lf.11 ###
+   no switchport
+   ip address 10.32.250.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.11 ###
+   no switchport
+   ip address 10.32.251.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc2-vlX-s202 ###
+   channel-group 7 mode active
+!
+interface Loopback0
+   ip address 10.32.254.11/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan20
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.20.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vlan40
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.40.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vlan 40 vni 10040
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65211
+   router-id 10.32.254.11
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC2-SPINE peer group
+   neighbor DC2-SPINE remote-as 65201
+   neighbor DC2-SPINE bfd
+   neighbor DC2-SPINE timers 3 9
+   neighbor DC2-SPINE password 7 qGRzumdncjjWUCaBzrxQSg==
+   neighbor DC2-SPINE send-community extended
+   neighbor 10.32.250.0 peer group DC2-SPINE
+   neighbor 10.32.250.0 description ### dc2-p1-r002-sp-1 ###
+   neighbor 10.32.251.0 peer group DC2-SPINE
+   neighbor 10.32.251.0 description ### dc2-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 20
+      rd auto
+      route-target both 10020:20
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   vlan 40
+      rd auto
+      route-target both 10040:40
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC2-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC2-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.32.254.11:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.32.254.11:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected
 ```
 
 - dc2-p1-r003-lf-2 (leaf-12)
 ```
-
-```
-
-- dc2-p1-r013-lf-1 (leaf-13)
-```
-
-```
-
-- dc2-p1-r013-lf-1 (leaf-14)
-```
-
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r003-lf-2
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,20,30,40
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 20
+   name NET-10.8.20.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vlan 40
+   name NET-10.8.40.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc2-vlx-s202 ###
+   switchport trunk allowed vlan 10,20,30,40
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0201:0011:0007:0000
+      route-target import 02:01:00:11:00:07
+   lacp system-id 0201.0011.0007
+!
+interface Ethernet1
+   description ### sp1-lf.12 ###
+   no switchport
+   ip address 10.32.250.3/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.12 ###
+   no switchport
+   ip address 10.32.251.3/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc2-vlX-s202 ###
+   channel-group 7 mode active
+!
+interface Loopback0
+   ip address 10.32.254.12/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan20
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.20.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vlan40
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.40.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vlan 40 vni 10040
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65212
+   router-id 10.32.254.12
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC2-SPINE peer group
+   neighbor DC2-SPINE remote-as 65201
+   neighbor DC2-SPINE bfd
+   neighbor DC2-SPINE timers 3 9
+   neighbor DC2-SPINE password 7 qGRzumdncjjWUCaBzrxQSg==
+   neighbor DC2-SPINE send-community extended
+   neighbor 10.32.250.2 peer group DC2-SPINE
+   neighbor 10.32.250.2 description ### dc2-p1-r002-sp-1 ###
+   neighbor 10.32.251.2 peer group DC2-SPINE
+   neighbor 10.32.251.2 description ### dc2-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 20
+      rd auto
+      route-target both 10020:20
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   vlan 40
+      rd auto
+      route-target both 10040:40
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC2-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC2-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.32.254.12:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.32.254.12:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected
 ```
 
 - dc2-p1-r002-lf-1 (boleaf-187)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r002-blf-1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4093-4094
+!
+vlan 4081
+   name dc2-fw-01-cl-tenant-1
+!
+vlan 4082
+   name dc2-fw-01-cl-tenant-2
+!
+vlan 4093-4094
+   trunk group mlag_peer
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel1
+   description ### peer link ###
+   switchport mode trunk
+   switchport trunk group mlag_peer
+!
+interface Port-Channel7
+   description ### blf.187-fw1 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 7
+!
+interface Port-Channel8
+   description ### blf.187-fw2 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 8
+!
+interface Ethernet1
+   description ### sp1-blf.187 ###
+   no switchport
+   ip address 10.32.250.125/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-blf.187 ###
+   no switchport
+   ip address 10.32.251.125/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet3
+   description ### dc2-blf.187-dc2-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet4
+   description ### dc2-blf.187-dc2-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet5
+   description ### dc1-blf.187-dc2-blf.187 ###
+   no switchport
+   ip address 10.0.0.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### blf.187-fw1 ###
+   channel-group 7 mode active
+!
+interface Ethernet8
+   description ### blf.187-fw2 ###
+   channel-group 8 mode active
+!
+interface Loopback0
+   ip address 10.32.254.187/32
+!
+interface Vlan4081
+   description ### dc2-fw-01-cl-tenant-1 ###
+   vrf tenant-1
+   ip address 10.32.241.241/29
+   arp aging timeout 250
+!
+interface Vlan4082
+   description ### dc2-fw-01-cl-tenant-2 ###
+   vrf tenant-2
+   ip address 10.32.241.249/29
+   arp aging timeout 250
+!
+interface Vlan4093
+   description ### ibgp ###
+   ip address 10.32.241.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Vlan4094
+   description ### mlag ###
+   ip address 10.32.241.2/31
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+ip prefix-list PL-VXLAN-FW-OUT seq 100 permit 10.8.0.0/16 le 31
+!
+mlag configuration
+   domain-id dc2-p1-r002-blf-1
+   heartbeat-interval 3000
+   local-interface Vlan4094
+   peer-address 10.32.241.3
+   peer-link Port-Channel1
+   reload-delay 180
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+route-map RM-VXLAN-FW-IN permit 100
+   set as-path prepend last-as 3
+!
+route-map RM-VXLAN-FW-OUT permit 100
+   match ip address prefix-list PL-VXLAN-FW-OUT
+!
+router bgp 65287
+   router-id 10.32.254.187
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-BORDER-LEAF peer group
+   neighbor DC1-BORDER-LEAF remote-as 65187
+   neighbor DC1-BORDER-LEAF bfd
+   neighbor DC1-BORDER-LEAF description ### dc1-p1-r002-blf-1 ###
+   neighbor DC1-BORDER-LEAF timers 3 9
+   neighbor DC1-BORDER-LEAF password 7 Kx5NnNr/1zILCleofGUzVQ==
+   neighbor DC1-BORDER-LEAF send-community extended
+   neighbor DC2-FW peer group
+   neighbor DC2-FW remote-as 65291
+   neighbor DC2-FW timers 3 9
+   neighbor DC2-FW password 7 nD1/U+tg5FIefxSaPDGDLg==
+   neighbor DC2-SPINE peer group
+   neighbor DC2-SPINE remote-as 65201
+   neighbor DC2-SPINE bfd
+   neighbor DC2-SPINE timers 3 9
+   neighbor DC2-SPINE password 7 qGRzumdncjjWUCaBzrxQSg==
+   neighbor DC2-SPINE send-community extended
+   neighbor 10.0.0.0 peer group DC1-BORDER-LEAF
+   neighbor 10.0.0.0 description ### dc1-p1-r002-blf-1 ###
+   neighbor 10.32.241.1 remote-as 65287
+   neighbor 10.32.241.1 next-hop-self
+   neighbor 10.32.241.1 bfd
+   neighbor 10.32.241.1 description ### dc2-p1-r012-blf-1 ###
+   neighbor 10.32.241.1 timers 3 9
+   neighbor 10.32.241.1 password 7 0OFfVb94pKTz3qtaFJaYxQ==
+   neighbor 10.32.250.124 peer group DC2-SPINE
+   neighbor 10.32.250.124 description ### dc2-p1-r002-sp-1 ###
+   neighbor 10.32.251.124 peer group DC2-SPINE
+   neighbor 10.32.251.124 description ### dc2-p1-r012-sp-1 ###
+   !
+   address-family evpn
+      neighbor DC1-BORDER-LEAF activate
+      neighbor DC1-BORDER-LEAF next-hop-unchanged
+      neighbor DC2-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-BORDER-LEAF activate
+      neighbor DC2-FW activate
+      neighbor DC2-SPINE activate
+      neighbor 10.32.241.1 activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.32.254.187:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      neighbor 10.32.241.244 peer group DC2-FW
+      neighbor 10.32.241.244 description ### dc2-p1-r009-fw-1 ###
+      neighbor 10.32.241.244 route-map RM-VXLAN-FW-IN in
+      neighbor 10.32.241.244 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.32.254.187:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      neighbor 10.32.241.252 peer group DC2-FW
+      neighbor 10.32.241.252 description ### dc2-p1-r009-fw-1 ###
+      neighbor 10.32.241.252 route-map RM-VXLAN-FW-IN in
+      neighbor 10.32.241.252 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
 ```
 
 - dc2-p1-r012-lf-1 (boleaf-188)
 ```
-
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r012-blf-1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4093-4094
+!
+vlan 4081
+   name dc2-fw-01-cl-tenant-1
+!
+vlan 4082
+   name dc2-fw-01-cl-tenant-2
+!
+vlan 4093-4094
+   trunk group mlag_peer
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel1
+   description ### peer link ###
+   switchport mode trunk
+   switchport trunk group mlag_peer
+!
+interface Port-Channel7
+   description ### blf.188-fw1 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 7
+!
+interface Port-Channel8
+   description ### blf.188-fw2 ###
+   switchport trunk allowed vlan 4081-4082
+   switchport mode trunk
+   mlag 8
+!
+interface Ethernet1
+   description ### sp1-blf.188 ###
+   no switchport
+   ip address 10.32.250.127/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-blf.188 ###
+   no switchport
+   ip address 10.32.251.127/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet3
+   description ### dc2-blf.187-dc2-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet4
+   description ### dc2-blf.187-dc2-blf.188 ###
+   channel-group 1 mode active
+!
+interface Ethernet5
+   description ### dc1-blf.188-dc2-blf.188 ###
+   no switchport
+   ip address 10.0.0.3/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### blf.188-fw1 ###
+   channel-group 7 mode active
+!
+interface Ethernet8
+   description ### blf.188-fw2 ###
+   channel-group 8 mode active
+!
+interface Loopback0
+   ip address 10.32.254.188/32
+!
+interface Vlan4081
+   description ### client ###
+   vrf tenant-1
+   ip address 10.32.241.242/29
+   arp aging timeout 250
+!
+interface Vlan4082
+   description ### client ###
+   vrf tenant-2
+   ip address 10.32.241.250/29
+   arp aging timeout 250
+!
+interface Vlan4093
+   description ### ibgp ###
+   ip address 10.32.241.1/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Vlan4094
+   description ### mlag ###
+   ip address 10.32.241.3/31
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+ip prefix-list PL-VXLAN-FW-OUT seq 100 permit 10.8.0.0/16 le 31
+!
+mlag configuration
+   domain-id dc2-p1-r002-blf-1
+   heartbeat-interval 3000
+   local-interface Vlan4094
+   peer-address 10.32.241.2
+   peer-link Port-Channel1
+   reload-delay 180
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+route-map RM-VXLAN-FW-IN permit 100
+   set as-path prepend last-as 3
+!
+route-map RM-VXLAN-FW-OUT permit 100
+   match ip address prefix-list PL-VXLAN-FW-OUT
+!
+router bgp 65287
+   router-id 10.32.254.188
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-BORDER-LEAF peer group
+   neighbor DC1-BORDER-LEAF remote-as 65187
+   neighbor DC1-BORDER-LEAF bfd
+   neighbor DC1-BORDER-LEAF description ### dc1-p1-r012-blf-1 ###
+   neighbor DC1-BORDER-LEAF timers 3 9
+   neighbor DC1-BORDER-LEAF password 7 Kx5NnNr/1zILCleofGUzVQ==
+   neighbor DC1-BORDER-LEAF send-community extended
+   neighbor DC2-FW peer group
+   neighbor DC2-FW remote-as 65291
+   neighbor DC2-FW timers 3 9
+   neighbor DC2-FW password 7 nD1/U+tg5FIefxSaPDGDLg==
+   neighbor DC2-SPINE peer group
+   neighbor DC2-SPINE remote-as 65201
+   neighbor DC2-SPINE bfd
+   neighbor DC2-SPINE timers 3 9
+   neighbor DC2-SPINE password 7 qGRzumdncjjWUCaBzrxQSg==
+   neighbor DC2-SPINE send-community extended
+   neighbor 10.0.0.2 peer group DC1-BORDER-LEAF
+   neighbor 10.0.0.2 description ### dc1-p1-r012-blf-1 ###
+   neighbor 10.32.241.0 remote-as 65287
+   neighbor 10.32.241.0 next-hop-self
+   neighbor 10.32.241.0 bfd
+   neighbor 10.32.241.0 description ### dc2-p1-r002-blf-1 ###
+   neighbor 10.32.241.0 timers 3 9
+   neighbor 10.32.241.0 password 7 0OFfVb94pKTz3qtaFJaYxQ==
+   neighbor 10.32.250.126 peer group DC2-SPINE
+   neighbor 10.32.250.126 description ### dc2-p1-r002-sp-1 ###
+   neighbor 10.32.251.126 peer group DC2-SPINE
+   neighbor 10.32.251.126 description ### dc2-p1-r012-sp-1 ###
+   !
+   address-family evpn
+      neighbor DC1-BORDER-LEAF activate
+      neighbor DC1-BORDER-LEAF next-hop-unchanged
+      neighbor DC2-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-BORDER-LEAF activate
+      neighbor DC2-FW activate
+      neighbor DC2-SPINE activate
+      neighbor 10.32.241.0 activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.32.254.188:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      neighbor 10.32.241.244 peer group DC2-FW
+      neighbor 10.32.241.244 description ### dc2-p1-r009-fw-1 ###
+      neighbor 10.32.241.244 route-map RM-VXLAN-FW-IN in
+      neighbor 10.32.241.244 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.32.254.188:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      neighbor 10.32.241.252 peer group DC2-FW
+      neighbor 10.32.241.252 description ### dc2-p1-r009-fw-1 ###
+      neighbor 10.32.241.252 route-map RM-VXLAN-FW-IN in
+      neighbor 10.32.241.252 route-map RM-VXLAN-FW-OUT out
+      redistribute connected
 ```
 
 - dc2-p1-r009-fw-1 (fw-1)
 ```
-
+hostname dc2-p1-r009-fw-1
+!
+interface Port-channel7
+ no ip address
+ no negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface Port-channel7.4081
+ description ### tenant-1 ###
+ encapsulation dot1Q 4081
+ ip address 10.32.241.244 255.255.255.248
+!
+interface Port-channel7.4082
+ description ### tenant-2 ###
+ encapsulation dot1Q 4082
+ ip address 10.32.241.252 255.255.255.248
+!
+interface Port-channel8
+ description ### fw2 (imitation) ###
+ no ip address
+ no negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet1
+ description ### blf.187-fw1 ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 7 mode active
+!
+interface GigabitEthernet2
+ description ### blf.188-fw1 ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 7 mode active
+!
+interface GigabitEthernet3
+ description ### blf.187-fw2 (imitation) ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 8 mode active
+!
+interface GigabitEthernet4
+ description ### blf.188-fw2 (imitation) ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 8 mode active
+!
+router bgp 65291
+ bgp router-id 10.32.254.191
+ bgp log-neighbor-changes
+ bgp bestpath as-path multipath-relax
+ aggregate-address 10.8.0.0 255.255.0.0 summary-only
+ neighbor DC2-BORDER-LEAF peer-group
+ neighbor DC2-BORDER-LEAF remote-as 65287
+ neighbor DC2-BORDER-LEAF password cisco
+ neighbor DC2-BORDER-LEAF timers 3 9
+ neighbor 10.32.241.241 peer-group DC2-BORDER-LEAF
+ neighbor 10.32.241.241 description ### dc2-p1-r002-blf-1 tenant-1 ###
+ neighbor 10.32.241.242 peer-group DC2-BORDER-LEAF
+ neighbor 10.32.241.242 description ### dc2-p1-r012-blf-1 tenant-1 ###
+ neighbor 10.32.241.249 peer-group DC2-BORDER-LEAF
+ neighbor 10.32.241.249 description ### dc2-p1-r002-blf-1 tenant-2 ###
+ neighbor 10.32.241.250 peer-group DC2-BORDER-LEAF
+ neighbor 10.32.241.250 description ### dc2-p1-r012-blf-1 tenant-2 ###
+ maximum-paths 8
 ```
 
 - dc2-p1-r019-fw-1 (fw-2)
@@ -773,19 +2941,86 @@ dcX-pX-rXXX-XX-X
 по факту отсутствует, т.к. кластер эмулируется одним устройством
 ```
 
-- dc2-vlX-s201
+- dc2-vlX-s202
 ```
-
-```
-
-- dc2-vlx-c101
-```
-
-```
-
-- dc2-vl10-h151
-```
-
+hostname dc2-vlx-s202
+!
+vtp mode transparent
+!
+ip vrf vlan10
+ rd 10:10
+ route-target export 10:10
+ route-target import 10:10
+!
+ip vrf vlan20
+ rd 20:20
+ route-target export 20:20
+ route-target import 20:20
+!
+ip vrf vlan30
+ rd 30:30
+ route-target export 30:30
+ route-target import 30:30
+!
+ip vrf vlan40
+ rd 40:40
+ route-target export 40:40
+ route-target import 40:40
+!
+spanning-tree mode pvst
+no spanning-tree vlan 10,20,30,40
+!
+vlan 10
+ name NET-10.8.10.0/24
+!
+vlan 20
+ name NET-10.8.20.0/24
+!
+vlan 30
+ name NET-10.8.30.0/24
+!
+vlan 40
+ name NET-10.8.40.0/24
+!
+interface Port-channel7
+ description ### uplink ###
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Vlan10
+ ip vrf forwarding vlan10
+ ip address 10.8.10.202 255.255.255.0
+ arp timeout 250
+!
+interface Vlan20
+ ip vrf forwarding vlan20
+ ip address 10.8.20.202 255.255.255.0
+ arp timeout 250
+!
+interface Vlan30
+ ip vrf forwarding vlan30
+ ip address 10.8.30.202 255.255.255.0
+ arp timeout 250
+!
+interface Vlan40
+ ip vrf forwarding vlan40
+ ip address 10.8.40.202 255.255.255.0
+ arp timeout 250
+!
+ip route vrf vlan10 0.0.0.0 0.0.0.0 10.8.10.254
+ip route vrf vlan20 0.0.0.0 0.0.0.0 10.8.20.254
+ip route vrf vlan30 0.0.0.0 0.0.0.0 10.8.30.254
+ip route vrf vlan40 0.0.0.0 0.0.0.0 10.8.40.254
 ```
 
 </details>
@@ -794,9 +3029,58 @@ dcX-pX-rXXX-XX-X
 
 <details>
   <summary>Вывод ip/mac хостов </summary>
-  
+
+- dc1-vlx-s201 
+```
+dc1-vlx-s201#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.10.201/24
+Vlan20 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.20.201/24
+Vlan30 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.30.201/24
+Vlan40 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.5000 (bia aabb.cc81.5000)
+  Internet address is 10.8.40.201/24
 ```
 
+- dc1-vlx-с101 
+```
+dc1-vlx-c101#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.7000 (bia aabb.cc81.7000)
+  Internet address is 10.8.10.101/24
+Vlan30 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.7000 (bia aabb.cc81.7000)
+  Internet address is 10.8.30.101/24
+```
+
+- dc1-vl10-h151 
+```
+dc1-vl10-h151#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.6000 (bia aabb.cc81.6000)
+  Internet address is 10.8.10.151/24
+```
+
+- dc2-vlx-s202 
+```
+dc2-vlx-s202#show interfaces | i address|Vlan
+Vlan10 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.10.202/24
+Vlan20 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.20.202/24
+Vlan30 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.30.202/24
+Vlan40 is up, line protocol is up 
+  Hardware is Ethernet SVI, address is aabb.cc81.f000 (bia aabb.cc81.f000)
+  Internet address is 10.8.40.202/24
 ```
 
 </details>
