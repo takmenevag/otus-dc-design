@@ -1,0 +1,79 @@
+
+hostname dc1-vlx-s201
+!
+vtp mode transparent
+!
+ip vrf vlan10
+ rd 10:10
+ route-target export 10:10
+ route-target import 10:10
+!
+ip vrf vlan20
+ rd 20:20
+ route-target export 20:20
+ route-target import 20:20
+!
+ip vrf vlan30
+ rd 30:30
+ route-target export 30:30
+ route-target import 30:30
+!
+ip vrf vlan40
+ rd 40:40
+ route-target export 40:40
+ route-target import 40:40
+!
+spanning-tree mode pvst
+no spanning-tree vlan 10,20,30,40
+!
+vlan 10
+ name NET-10.8.10.0/24
+!
+vlan 20
+ name NET-10.8.20.0/24
+!
+vlan 30
+ name NET-10.8.30.0/24
+!
+vlan 40
+ name NET-10.8.40.0/24
+!
+interface Port-channel7
+ description ### uplink ###
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 7 mode active
+!
+interface Vlan10
+ ip vrf forwarding vlan10
+ ip address 10.8.10.201 255.255.255.0
+ arp timeout 250
+!
+interface Vlan20
+ ip vrf forwarding vlan20
+ ip address 10.8.20.201 255.255.255.0
+ arp timeout 250
+!
+interface Vlan30
+ ip vrf forwarding vlan30
+ ip address 10.8.30.201 255.255.255.0
+ arp timeout 250
+!
+interface Vlan40
+ ip vrf forwarding vlan40
+ ip address 10.8.40.201 255.255.255.0
+ arp timeout 250
+!
+ip route vrf vlan10 0.0.0.0 0.0.0.0 10.8.10.254
+ip route vrf vlan20 0.0.0.0 0.0.0.0 10.8.20.254
+ip route vrf vlan30 0.0.0.0 0.0.0.0 10.8.30.254
+ip route vrf vlan40 0.0.0.0 0.0.0.0 10.8.40.254

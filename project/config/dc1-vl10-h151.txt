@@ -1,0 +1,32 @@
+
+hostname dc1-vl10-h151
+!
+vtp mode transparent
+!
+spanning-tree mode pvst
+no spanning-tree vlan 10
+!
+vlan 10
+ name NET-10.8.10.0/24
+!
+interface Port-channel8
+ description ### uplink ####
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 8 mode active
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 8 mode active
+!
+interface Vlan10
+ ip address 10.8.10.151 255.255.255.0
+ arp timeout 250
+!
+ip route 0.0.0.0 0.0.0.0 10.8.10.254
+

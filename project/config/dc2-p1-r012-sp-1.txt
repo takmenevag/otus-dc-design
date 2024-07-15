@@ -1,0 +1,61 @@
+
+service routing protocols model multi-agent
+!
+hostname dc2-p1-r012-sp-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description ### sp2-lf.11 ###
+   no switchport
+   ip address 10.32.251.0/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.12 ###
+   no switchport
+   ip address 10.32.251.2/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet5
+   description ### sp2-blf.187 ###
+   no switchport
+   ip address 10.32.251.124/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet6
+   description ### sp2-blf.188 ###
+   no switchport
+   ip address 10.32.251.126/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Loopback0
+   ip address 10.32.254.2/32
+!
+ip routing
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+peer-filter PF-DC2-LEAF
+   10 match as-range 65211-65290 result accept
+!
+router bgp 65201
+   router-id 10.32.254.2
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   bgp listen range 10.32.251.0/25 peer-group DC2-LEAF peer-filter PF-DC2-LEAF
+   neighbor DC2-LEAF peer group
+   neighbor DC2-LEAF bfd
+   neighbor DC2-LEAF timers 3 9
+   neighbor DC2-LEAF password 7 jxDqu7630p5V557ZdwocCg==
+   neighbor DC2-LEAF send-community extended
+   !
+   address-family evpn
+      neighbor DC2-LEAF activate
+      neighbor DC2-LEAF next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor DC2-LEAF activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP

@@ -1,0 +1,120 @@
+
+service routing protocols model multi-agent
+!
+hostname dc1-p1-r013-lf-2
+!
+spanning-tree mode rapid-pvst
+no spanning-tree vlan-id 10,30
+!
+vlan 10
+   name NET-10.8.10.0/24
+!
+vlan 30
+   name NET-10.8.30.0/24
+!
+vrf instance tenant-1
+!
+vrf instance tenant-2
+!
+interface Port-Channel7
+   description ### dc1-vlx-c101 ###
+   switchport trunk allowed vlan 10,30
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0101:0013:0007:0000
+      route-target import 01:01:00:13:00:07
+   lacp system-id 0101.0013.0007
+!
+interface Ethernet1
+   description ### sp1-lf.14 ###
+   no switchport
+   ip address 10.16.250.7/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet2
+   description ### sp2-lf.14 ###
+   no switchport
+   ip address 10.16.251.7/31
+   bfd interval 3000 min-rx 3000 multiplier 3
+!
+interface Ethernet7
+   description ### dc1-vlx-c101 ###
+   channel-group 7 mode active
+!
+interface Loopback0
+   ip address 10.16.254.14/32
+!
+interface Vlan10
+   description ### client ###
+   vrf tenant-1
+   arp aging timeout 250
+   ip address virtual 10.8.10.254/24
+!
+interface Vlan30
+   description ### client ###
+   vrf tenant-2
+   arp aging timeout 250
+   ip address virtual 10.8.30.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 30 vni 10030
+   vxlan vrf tenant-1 vni 4001
+   vxlan vrf tenant-2 vni 4002
+!
+ip virtual-router mac-address 00:00:00:00:ca:fe
+!
+ip routing
+ip routing vrf tenant-1
+ip routing vrf tenant-2
+!
+route-map RM-CONNECTED-TO-BGP permit 100
+   match interface Loopback0
+!
+router bgp 65114
+   router-id 10.16.254.14
+   no bgp default ipv4-unicast
+   distance bgp 20 200 200
+   maximum-paths 8
+   neighbor DC1-SPINE peer group
+   neighbor DC1-SPINE remote-as 65101
+   neighbor DC1-SPINE bfd
+   neighbor DC1-SPINE timers 3 9
+   neighbor DC1-SPINE password 7 txq0MZ/aCqwJ+sp2WtntdQ==
+   neighbor DC1-SPINE send-community extended
+   neighbor 10.16.250.6 peer group DC1-SPINE
+   neighbor 10.16.250.6 description ### dc1-p1-r002-sp-1 ###
+   neighbor 10.16.251.6 peer group DC1-SPINE
+   neighbor 10.16.251.6 description ### dc1-p1-r012-sp-1 ###
+   !
+   vlan 10
+      rd auto
+      route-target both 10010:10
+      redistribute learned
+   !
+   vlan 30
+      rd auto
+      route-target both 10030:30
+      redistribute learned
+   !
+   address-family evpn
+      neighbor DC1-SPINE activate
+   !
+   address-family ipv4
+      neighbor DC1-SPINE activate
+      redistribute connected route-map RM-CONNECTED-TO-BGP
+   !
+   vrf tenant-1
+      rd 10.16.254.14:4001
+      route-target import evpn 4001:4001
+      route-target export evpn 4001:4001
+      redistribute connected
+   !
+   vrf tenant-2
+      rd 10.16.254.14:4002
+      route-target import evpn 4002:4002
+      route-target export evpn 4002:4002
+      redistribute connected

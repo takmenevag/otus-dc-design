@@ -1,0 +1,76 @@
+
+hostname dc1-p1-r009-fw-1
+!
+interface Port-channel7
+ no ip address
+ no negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface Port-channel7.4081
+ description ### tenant-1 ###
+ encapsulation dot1Q 4081
+ ip address 10.16.241.244 255.255.255.248
+!
+interface Port-channel7.4082
+ description ### tenant-2 ###
+ encapsulation dot1Q 4082
+ ip address 10.16.241.252 255.255.255.248
+!
+interface Port-channel8
+ description ### fw2 (imitation) ###
+ no ip address
+ no negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet1
+ description ### blf.187-fw1 ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 7 mode active
+!
+interface GigabitEthernet2
+ description ### blf.188-fw1 ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 7 mode active
+!
+interface GigabitEthernet3
+ description ### blf.187-fw2 (imitation) ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 8 mode active
+!
+interface GigabitEthernet4
+ description ### blf.188-fw2 (imitation) ###
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ channel-group 8 mode active
+!
+router bgp 65191
+ bgp router-id 10.16.254.191
+ bgp log-neighbor-changes
+ bgp bestpath as-path multipath-relax
+ aggregate-address 10.8.0.0 255.255.0.0 summary-only
+ neighbor DC1-BORDER-LEAF peer-group
+ neighbor DC1-BORDER-LEAF remote-as 65187
+ neighbor DC1-BORDER-LEAF password cisco
+ neighbor DC1-BORDER-LEAF timers 3 9
+ neighbor 10.16.241.241 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.241 description ### dc1-p1-r002-blf-1 tenant-1 ###
+ neighbor 10.16.241.242 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.242 description ### dc1-p1-r012-blf-1 tenant-1 ###
+ neighbor 10.16.241.249 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.249 description ### dc1-p1-r002-blf-1 tenant-2 ###
+ neighbor 10.16.241.250 peer-group DC1-BORDER-LEAF
+ neighbor 10.16.241.250 description ### dc1-p1-r012-blf-1 tenant-2 ###
+ maximum-paths 8
