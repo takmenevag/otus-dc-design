@@ -624,7 +624,7 @@ dcX-pX-rXXX-XX-X
 </details>
 
 
-### Параметы VXLAN в Overlay-сети 
+### Параметры VXLAN в Overlay-сети 
 <details>
   <summary>Описание параметров</summary>
   
