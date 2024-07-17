@@ -1,6 +1,7 @@
 # Итоговая работа по курсу
 [**Вернуться обратно**](https://github.com/takmenevag/otus-dc-design/tree/main/)
 
+## Презентация проекта
 [**Презентация проекта**](https://github.com/takmenevag/otus-dc-design/blob/main/project/other/takmenev%20presentation.pdf)
 
 ## Название проекта
