@@ -1,6 +1,9 @@
 # Итоговая работа по курсу
 [**Вернуться обратно**](https://github.com/takmenevag/otus-dc-design/tree/main/)
-## Название работы
+
+[**Презентация проекта**](https://github.com/takmenevag/otus-dc-design/blob/main/project/other/takmenev%20presentation.pdf)
+
+## Название проекта
 - организация геораспределенной отказоустойчивой сети передачи данных центра обработки данных с использованием технологии VXLAN
 
 ## Задачи
@@ -14112,6 +14115,7 @@ dc2-vlx-s202#
 - [dc2-p1-r009-fw-1](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-p1-r009-fw-1.txt)
 - [dc2-vlx-s202](https://github.com/takmenevag/otus-dc-design/blob/main/project/config/dc2-vlx-s202.txt)
 
+[**Презентация проекта**](https://github.com/takmenevag/otus-dc-design/blob/main/project/other/takmenev%20presentation.pdf)
 
 ---
 
